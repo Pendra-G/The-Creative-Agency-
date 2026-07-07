@@ -1,0 +1,3 @@
+import gsap from "gsap";
+export const split=(el)=>{ if(!el) return []; const t=el.textContent; el.textContent=""; const a=[]; [...t].forEach(c=>{ const s=document.createElement("span"); s.style.display="inline-block"; s.style.willChange="transform,opacity"; s.textContent=c===" "?"\u00A0":c; el.appendChild(s); a.push(s); }); return a; };
+export const reveal=(chars,opts={})=>{ const {y=70,stagger=.025,d=1,delay=0}=opts; gsap.from(chars,{opacity:0,y,stagger,duration:d,delay,ease:"power3.out"}); };
