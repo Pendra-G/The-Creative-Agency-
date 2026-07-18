@@ -17,7 +17,7 @@ export default function TopBar(){
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 text-bone text-[9px] xs:text-[10px] sm:text-[11px] uppercase tracking-[0.18em] bg-ink/85 backdrop-blur-sm">
-      <div className="grid grid-cols-2 sm:grid-cols-3 items-center px-3 xs:px-4 sm:px-6 py-2 xs:py-3 border-b border-white/5">
+      <div className="relative grid grid-cols-3 items-center px-3 xs:px-4 sm:px-6 py-2 xs:py-3 border-b border-white/5">
         <button
           type="button"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -34,7 +34,7 @@ export default function TopBar(){
           <a href="#contact" data-cursor className="hover:text-paper text-[8px] xs:text-[10px] sm:text-[11px]">Contact</a>
         </div>
 
-        <div className="flex justify-center min-w-0">
+        <div className="absolute left-1/2 -translate-x-1/2 sm:static sm:translate-x-0 flex justify-center min-w-0">
           <a href="#" data-cursor className="font-bold hover:text-paper text-[8px] xs:text-[9px] sm:text-[11px] truncate">THE CREATIVE AGENCY.</a>
         </div>
 

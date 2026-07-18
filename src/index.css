@@ -3,7 +3,7 @@
 @tailwind utilities;
 :root{ --ink:#000; --bone:#F4F1EA; --paper:#FFFFFF; --carbon:#0C0C0C; --navy:#0A1A3A; }
 html,body{ background:var(--ink); color:var(--bone); -webkit-font-smoothing:antialiased; scroll-behavior:smooth; }
-body{ min-height:100vh; overflow-x:hidden; cursor:none; font-family:'Inter',sans-serif; touch-action:manipulation; }
+body{ min-height:100vh; overflow-x:hidden; cursor:none; font-family:'Roboto',sans-serif; touch-action:manipulation; }
 img,picture,video{ max-width:100%; height:auto; }
 button,input,a{ touch-action:manipulation; }
 @media (hover:none){ body{ cursor:auto; } }
@@ -16,10 +16,10 @@ button,input,a{ touch-action:manipulation; }
 .app{ opacity:0; transition:opacity .8s ease; } .app.ready{ opacity:1; }
 .marquee-tile{ width:420px; height:270px; border-radius:1rem; object-fit:cover; flex-shrink:0; background:#1a1a1a; }
 @media (max-width:640px){ .marquee-tile{ width:280px; height:180px; } }
-@media (max-width:480px){ .marquee-tile{ width:200px; height:130px; border-radius:0.5rem; } }@media (max-width: 640px){ .hero-topbar-fix { padding-top: 52px !important; } }.link-btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.55rem 1rem; border-radius:9999px; border:1px solid currentColor; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; will-change:transform; transition:background .3s,color .3s; min-height:44px; }
+@media (max-width:480px){ .marquee-tile{ width:200px; height:130px; border-radius:0.5rem; } }@media (max-width: 640px){ .hero-topbar-fix { padding-top: 52px !important; } }.link-btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.55rem 1rem; border-radius:9999px; border:1px solid currentColor; font-family:'Roboto',sans-serif; font-weight:500; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; will-change:transform; transition:background .3s,color .3s; min-height:44px; }
 .link-btn:hover{ background:currentColor; } .link-btn:hover span{ color:var(--ink); }
 .link-btn.outline{ background:transparent; color:var(--bone); }
-.wordmark{ font-family:'Lilita One',sans-serif; font-weight:400; letter-spacing:-.02em; }
+.wordmark{ font-family:'Roboto',sans-serif; font-weight:400; letter-spacing:-.02em; }
 @media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation-duration:.001ms!important; transition-duration:.001ms!important; } .cursor-dot,.cursor-follower{ display:none; } body{ cursor:auto; } }
 
 /* Simple floating animations for decorative images */

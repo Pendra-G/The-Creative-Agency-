@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { split } from "../utils/anim.js";
@@ -20,7 +20,7 @@ export default function Hero(){
     <section className="relative w-full min-h-screen bg-carbon text-bone overflow-hidden pt-[44px]">
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <video
-            className="relative h-[32vh] sm:h-[70vh] max-h-[80vh] w-full max-w-[1200px] object-cover opacity-10"
+            className="relative h-[32vh] sm:h-[70vh] max-h-[80vh] w-full max-w-[1200px] object-cover opacity-50"
             src={HeroVideo}
             autoPlay
             muted
@@ -37,10 +37,10 @@ export default function Hero(){
           <div className="w-full max-w-full">
             <h1
               ref={h1}
-              className="font-display font-bold uppercase break-words leading-[1.05] sm:leading-[0.95] tracking-tightest text-bone text-center text-[clamp(2.6rem,12vw,5.5rem)] sm:text-[clamp(3.2rem,8vw,7rem)] max-w-[22ch] xs:max-w-[18ch] mx-auto"
+              className="font-display font-bold uppercase break-normal leading-[1.05] sm:leading-[0.95] tracking-tightest text-bone text-center text-[clamp(2.6rem,12vw,5.5rem)] sm:text-[clamp(3.2rem,8vw,7rem)] max-w-[22ch] xs:max-w-[18ch] mx-auto"
               style={{ wordSpacing: '0.0001em' }}
             >
-              <span className="block">The</span>
+              <span className="block">The Creative Agency</span>
             </h1>
           </div>
           <p className="max-w-[38ch] text-sm sm:text-base text-bone/80 leading-relaxed px-2 sm:px-0">
