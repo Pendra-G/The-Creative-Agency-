@@ -35,13 +35,13 @@ export default function EditorialHero(){
         <h1 ref={h1} className="font-display font-bold uppercase leading-[0.9] tracking-tightest text-white text-[clamp(1.75rem,7vw,8rem)]">
           Digital Fijian Artists. 
         </h1>
-        <div className="mt-8 xs:mt-10 sm:mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 items-start">
-          <div className="max-w-md">
+        <div className="mt-8 xs:mt-10 sm:mt-10 grid grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-2 items-start">
+          <div className="max-w-full lg:max-w-md">
             <p ref={pRef} className="text-white/80 text-sm xs:text-base sm:text-lg leading-relaxed mb-6">We partner with the most ambitious brands on the planet to develop original content that their audiences know and love.</p>
             <img src={pointerGlass} alt="Pointer glass" loading="lazy"
               className="w-16 xs:w-20 sm:w-24 lg:w-40 will-change-transform float-fast" />
           </div>
-          <div className="relative h-[280px] xs:h-[320px] sm:h-[420px] lg:h-[640px] -mt-0 lg:-mt-32">
+          <div className="relative h-[240px] xs:h-[280px] sm:h-[360px] lg:h-[640px] -mt-0 lg:-mt-32">
             {/* Floating images placed around the hero — replace video with framerglass */}
             <img src={framerglass} alt="Framer glass" loading="lazy"
               className="absolute right-0 xs:right-3 sm:right-6 top-1/4 w-28 xs:w-32 sm:w-56 lg:w-72 will-change-transform float-slow" />

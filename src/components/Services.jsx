@@ -26,7 +26,7 @@ export default function Services(){
         <h2 className="svc-title font-display font-bold uppercase leading-[0.85] tracking-tightest text-[clamp(2rem,8vw,18rem)]">Services</h2>
         <div className="svc-rows mt-8 xs:mt-10 sm:mt-12 border-t border-black/10">
           {ITEMS.map((s,i)=>(
-            <div key={i} className={`svc-row group flex flex-col gap-3 py-6 xs:py-8 sm:py-12 border-b border-black/10 items-start text-left`}>
+            <div key={i} className={`svc-row group flex flex-col gap-3 py-6 xs:py-8 sm:py-12 border-b border-black/10 items-start text-left sm:px-2`}>
               <div className="flex items-center gap-3 xs:gap-4">
                 <span className="inline-block w-2 xs:w-2.5 h-2 xs:h-2.5 rounded-full bg-black/80 group-hover:bg-black transition-colors flex-shrink-0"/>
                 <h3 className="font-display font-bold uppercase text-lg xs:text-2xl sm:text-5xl md:text-7xl tracking-tightest">{s.label}</h3>

@@ -71,7 +71,7 @@ export default function FeaturedWork(){
         <h2 className="fw-title font-display font-bold uppercase leading-[0.9] tracking-tightest text-[clamp(2rem,9vw,11rem)]">Featured Work</h2>
         <div className="mt-10 xs:mt-12 sm:mt-14 grid grid-cols-1 md:grid-cols-2 gap-4 xs:gap-5 sm:gap-6">
           {PROJECTS.map((p,i)=>(
-            <button key={i} type="button" onClick={()=>setOpen(p)} data-cursor className="fw-card group block text-left w-full">
+            <button key={i} type="button" onClick={()=>setOpen(p)} data-cursor className="fw-card group block text-left w-full rounded-2xl transition-transform duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white/20">
               <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-carbon">
                 <img src={p.img} alt={p.title} loading="lazy" decoding="async" className="w-full h-full object-contain transition-transform duration-[1200ms] ease-out group-hover:scale-105"/>
               </div>
