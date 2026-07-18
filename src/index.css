@@ -14,8 +14,25 @@ body{ overflow-x:hidden; cursor:none; font-family:'Inter',sans-serif; }
 .app{ opacity:0; transition:opacity .8s ease; } .app.ready{ opacity:1; }
 .marquee-tile{ width:420px; height:270px; border-radius:1rem; object-fit:cover; flex-shrink:0; background:#1a1a1a; }
 @media (max-width:640px){ .marquee-tile{ width:280px; height:180px; } }
-.link-btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.55rem 1rem; border-radius:9999px; border:1px solid currentColor; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; will-change:transform; transition:background .3s,color .3s; }
+@media (max-width:480px){ .marquee-tile{ width:200px; height:130px; border-radius:0.5rem; } }
+.link-btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.55rem 1rem; border-radius:9999px; border:1px solid currentColor; font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; will-change:transform; transition:background .3s,color .3s; min-height:44px; }
 .link-btn:hover{ background:currentColor; } .link-btn:hover span{ color:var(--ink); }
 .link-btn.outline{ background:transparent; color:var(--bone); }
 .wordmark{ font-family:'Lilita One',sans-serif; font-weight:400; letter-spacing:-.02em; }
 @media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation-duration:.001ms!important; transition-duration:.001ms!important; } .cursor-dot,.cursor-follower{ display:none; } body{ cursor:auto; } }
+
+/* Simple floating animations for decorative images */
+@keyframes floatY { 0% { transform: translateY(0); } 50% { transform: translateY(-14px); } 100% { transform: translateY(0); } }
+@keyframes floatYSlow { 0% { transform: translateY(0); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
+.float { animation: floatY 3.6s ease-in-out infinite; }
+.float-slow { animation: floatYSlow 5s ease-in-out infinite; }
+.float-fast { animation: floatY 2.6s ease-in-out infinite; }
+
+/* Mobile-first breakpoint support */
+@layer components {
+  @media (max-width: 374px) {
+    input, button, a {
+      min-height: 44px;
+    }
+  }
+}

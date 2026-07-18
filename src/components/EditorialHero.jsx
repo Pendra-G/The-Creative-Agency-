@@ -3,6 +3,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { split } from "../utils/anim.js";
 import BullScene from "../three/BullScene.jsx";
+import framerglass from "../assets/framerglass.png";
+import escGlass from "../assets/esc button glass.png";
+import pointerGlass from "../assets/pointer glass.png";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function EditorialHero(){
@@ -27,19 +30,26 @@ export default function EditorialHero(){
   },[]);
 
   return (
-    <section ref={sectionRef} className="relative bg-ink text-bone py-16 sm:py-24 overflow-hidden">
-      <div className="mx-auto max-w-[1500px] px-5 sm:px-8">
-        <h1 ref={h1} className="font-display font-bold uppercase leading-[0.9] tracking-tightest text-bone text-[clamp(2.6rem,9vw,8rem)]">
-          Fijian Creative Agency. 
+    <section ref={sectionRef} className="relative bg-black text-white py-12 xs:py-16 sm:py-24 overflow-hidden">
+      <div className="mx-auto max-w-[1500px] px-4 xs:px-5 sm:px-8">
+        <h1 ref={h1} className="font-display font-bold uppercase leading-[0.9] tracking-tightest text-white text-[clamp(1.75rem,7vw,8rem)]">
+          Digital Fijian Artists. 
         </h1>
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div className="mt-8 xs:mt-10 sm:mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 items-start">
           <div className="max-w-md">
-            <p ref={pRef} className="text-bone/80 text-base sm:text-lg leading-relaxed">We partner with the most ambitious brands on the planet to develop original content that their audiences know and love.</p>
+            <p ref={pRef} className="text-white/80 text-sm xs:text-base sm:text-lg leading-relaxed mb-6">We partner with the most ambitious brands on the planet to develop original content that their audiences know and love.</p>
+            <img src={pointerGlass} alt="Pointer glass" loading="lazy"
+              className="w-16 xs:w-20 sm:w-24 lg:w-40 will-change-transform float-fast" />
           </div>
-          <div className="relative h-[420px] sm:h-[520px] lg:h-[640px] -mt-2 lg:-mt-32">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <video className="w-full h-full object-contain" src="/admilk-milkball.webm" autoPlay muted loop playsInline aria-hidden="true" />
-              </div>
+          <div className="relative h-[280px] xs:h-[320px] sm:h-[420px] lg:h-[640px] -mt-0 lg:-mt-32">
+            {/* Floating images placed around the hero — replace video with framerglass */}
+            <img src={framerglass} alt="Framer glass" loading="lazy"
+              className="absolute right-0 xs:right-3 sm:right-6 top-1/4 w-28 xs:w-32 sm:w-56 lg:w-72 will-change-transform float-slow" />
+
+            {/*<img src={escGlass} alt="Esc key glass" loading="lazy"
+              className="absolute left-6 top-6 w-16 sm:w-20 lg:w-24 will-change-transform float" />*/}
+
+            
           </div>
         </div>
       </div>

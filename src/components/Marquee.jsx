@@ -24,9 +24,10 @@ const GIFS=[
 const R1=GIFS.slice(0,11), R2=GIFS.slice(11,21);
 export default function Marquee(){
   return (
-    <section className="relative bg-black text-bone pt-24 sm:pt-32 lg:pt-40 pb-10 overflow-hidden">
+    <section className="relative bg-black text-bone pt-16 xs:pt-20 sm:pt-24 md:pt-32 lg:pt-40 pb-8 sm:pb-10 overflow-hidden">
       <style>{`
-        .marquee-row { display: flex; gap: 1rem; align-items: center; width: max-content; }
+        .marquee-row { display: flex; gap: 0.5rem; align-items: center; width: max-content; }
+        @media (min-width: 640px) { .marquee-row { gap: 1rem; } }
         .marquee-right { animation: marquee-right 62s linear infinite; }
         .marquee-left { animation: marquee-left 62s linear infinite; }
         .marquee-row:hover { animation-play-state: paused; }
@@ -34,7 +35,7 @@ export default function Marquee(){
         @keyframes marquee-left { from { transform: translate3d(0,0,0); } to { transform: translate3d(-33.333%,0,0); } }
         @media (prefers-reduced-motion: reduce) { .marquee-right, .marquee-left { animation: none; } }
       `}</style>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2 xs:gap-2.5 sm:gap-3">
         <div className="marquee-row marquee-right">
           {[...R1,...R1,...R1].map((src,i)=>(<img key={`r1-${i}`} src={src} alt="" loading="lazy" decoding="async" className="marquee-tile"/>))}
         </div>

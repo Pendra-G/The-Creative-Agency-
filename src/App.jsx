@@ -16,12 +16,12 @@ export default function App(){
     <SmoothScroll>
       <Cursor/>
       <TopBar/>
-      <main className={`app ${ready?"ready":""} pt-[44px]`}>
+      <main className={`app ${ready?"ready":""}`}>
         <Hero/>
         <Marquee/>
         <EditorialHero/>
-        <FeaturedWork/>
         <Services/>
+        <FeaturedWork/>       
         <WorkWithUs/>
         <Footer/>
       </main>
