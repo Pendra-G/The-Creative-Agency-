@@ -9,8 +9,16 @@ export default function Footer(){
             <div>
               <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.2em] text-ink/50 mb-3">Socials</p>
               <ul className="space-y-2">
-                {["Facebook","Instagram","LinkedIn"].map(s=>(
-                  <li key={s}><a href="#" data-cursor className="inline-flex items-center gap-2 border border-black/30 rounded-full px-3 py-1.5 xs:py-2 uppercase tracking-[0.15em] text-[9px] xs:text-[10px] hover:bg-black hover:text-white transition-colors whitespace-nowrap">{s} <span>→</span></a></li>
+                {[
+                  { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61565173942247" },
+                  { name: "Instagram", url: "#" },
+                  { name: "LinkedIn", url: "#" }
+                ].map(s=>(
+                  <li key={s.name}>
+                    <a href={s.url} target={s.url !== "#" ? "_blank" : undefined} rel={s.url !== "#" ? "noopener noreferrer" : undefined} data-cursor className="inline-flex items-center gap-2 border border-black/30 rounded-full px-3 py-1.5 xs:py-2 uppercase tracking-[0.15em] text-[9px] xs:text-[10px] hover:bg-black hover:text-white transition-colors whitespace-nowrap">
+                      {s.name} <span>→</span>
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>
