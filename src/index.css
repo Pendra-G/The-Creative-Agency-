@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 :root{ --ink:#000; --bone:#F4F1EA; --paper:#FFFFFF; --carbon:#0C0C0C; --navy:#0A1A3A; }
-html,body{ background:var(--ink); color:var(--bone); -webkit-font-smoothing:antialiased; scroll-behavior:smooth; }
+/* No scroll-behavior:smooth — Lenis drives scrolling and the two fight.
+   Reduced-motion users fall back to native instant jumps, which is correct. */
+html,body{ background:var(--ink); color:var(--bone); -webkit-font-smoothing:antialiased; }
 body{ min-height:100vh; overflow-x:hidden; cursor:none; font-family:'Roboto',sans-serif; touch-action:manipulation; }
 img,picture,video{ max-width:100%; height:auto; }
 button,input,a{ touch-action:manipulation; }
