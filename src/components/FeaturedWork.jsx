@@ -6,7 +6,7 @@ import TropicXImage from "../assets/TropicX.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const PROJECTS = [
-  { title:"TropicX", url:"https://tropicx-design-studio.framer.website/", type:"Architecture Studio", year:"2026", location:"Nadi, Fiji",
+  { title:"TropicX", url:"https://www.tropicxdesignstudio.com/", type:"Architecture Studio", year:"2026", location:"Nadi, Fiji",
     img:TropicXImage,
     description:"TropicX is a contemporary architecture and design studio based in Nadi, Fiji. Their site needed to feel as considered as the buildings they ship — a cinematic homepage, project index and case-study template that puts their portfolio centre stage while keeping the experience fast on island-mobile networks.",
     scope:["Brand Direction","Web Design","Framer Development","Motion"] },

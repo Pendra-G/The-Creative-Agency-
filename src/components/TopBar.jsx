@@ -30,7 +30,9 @@ export default function TopBar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 text-bone text-[9px] xs:text-[10px] sm:text-[11px] uppercase tracking-[0.18em] bg-ink/85 backdrop-blur-sm">
-      <div className="relative grid grid-cols-3 items-center px-3 xs:px-4 sm:px-6 py-2 xs:py-3 border-b border-white/5">
+      {/* auto-width centre column: equal 1fr sides keep the wordmark centred
+          while giving the nav enough room not to wrap onto a second line */}
+      <div className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-3 xs:px-4 sm:px-6 py-2 xs:py-3 border-b border-white/5">
         <button
           type="button"
           onClick={() => setMenuOpen((v) => !v)}
@@ -43,10 +45,15 @@ export default function TopBar() {
 
         <nav
           aria-label="Primary"
-          className="hidden sm:flex flex-wrap items-center justify-start gap-3 sm:gap-5"
+          className="hidden sm:flex items-center justify-start gap-3 lg:gap-5"
         >
           {NAV.map(([label, href]) => (
-            <a key={href} href={href} data-cursor className="hover:text-paper text-[10px] sm:text-[11px]">
+            <a
+              key={href}
+              href={href}
+              data-cursor
+              className="hover:text-paper text-[10px] sm:text-[11px] whitespace-nowrap"
+            >
               {label}
             </a>
           ))}
