@@ -97,10 +97,12 @@ export default function PageLoader({ onDone }) {
       </div>
 
       <div className="flex w-[min(22rem,72vw)] flex-col gap-3">
-        <div className="h-px w-full bg-paper/15">
+        {/* scaleX rather than width: this runs while the page is still parsing
+            JS and fetching fonts, so it must not trigger layout each tick. */}
+        <div className="h-px w-full overflow-hidden bg-paper/15">
           <div
-            className="h-full bg-accent-from"
-            style={{ width: `${progress}%`, transition: "width .1s ease-out" }}
+            className="h-full w-full origin-left bg-accent-from"
+            style={{ transform: `scaleX(${progress / 100})`, transition: "transform .1s ease-out" }}
           />
         </div>
         <div className="flex items-center justify-between text-xs font-medium uppercase tracking-[0.05em] text-paper/45">
