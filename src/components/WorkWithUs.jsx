@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Magnetic from "./Magnetic.jsx";
+import { PillButton, Eyebrow } from "./ui.jsx";
 import { SITE, telHref, mailtoHref } from "../config.js";
 import GlobeImg from "../assets/3D Globe.png";
 gsap.registerPlugin(ScrollTrigger);
@@ -44,29 +44,32 @@ export default function WorkWithUs() {
     <section
       id="contact"
       ref={ref}
-      className="relative bg-ink text-bone py-16 xs:py-20 sm:py-28 md:py-36 overflow-hidden"
+      className="relative overflow-hidden bg-surface py-16 text-foreground xs:py-20 sm:py-28 md:py-36"
       aria-labelledby="contact-heading"
     >
-      <div className="mx-auto max-w-[1500px] px-4 xs:px-5 sm:px-8">
+      <div className="mx-auto max-w-shell px-5 sm:px-8">
+        <div className="wwu-text">
+          <Eyebrow>Get in touch</Eyebrow>
+        </div>
         <h2
           id="contact-heading"
-          className="wwu-text font-display font-bold uppercase leading-[0.88] tracking-tightest text-[clamp(2rem,9vw,11rem)]"
+          className="wwu-text mt-5 font-display text-[clamp(2rem,9vw,9rem)] font-semibold leading-[0.92] tracking-tightest"
         >
           Start a project.
         </h2>
 
-        <div className="mt-10 xs:mt-12 sm:mt-14 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 items-center">
-          <div className="relative order-2 lg:order-1 flex items-center justify-center">
-            <div className="wwu-globe w-full max-w-[28rem] px-3 xs:px-4 sm:px-6 py-4 sm:py-6 will-change-transform">
-              <img src={GlobeImg} alt="" aria-hidden="true" className="w-full h-auto object-contain" />
+        <div className="mt-10 grid grid-cols-1 items-center gap-8 sm:gap-10 lg:mt-14 lg:grid-cols-2">
+          <div className="relative order-2 flex items-center justify-center lg:order-1">
+            <div className="wwu-globe w-full max-w-[28rem] px-4 py-4 will-change-transform sm:px-6 sm:py-6">
+              <img src={GlobeImg} alt="" aria-hidden="true" className="h-auto w-full object-contain" />
             </div>
           </div>
 
           <div className="order-1 lg:order-2 lg:pl-8">
-            <h3 className="wwu-text font-display font-medium text-2xl xs:text-3xl sm:text-5xl tracking-tightest leading-[0.95] mb-4 xs:mb-6">
+            <h3 className="wwu-text mb-5 font-display text-2xl font-medium leading-[0.98] tracking-tightest xs:text-3xl sm:text-5xl">
               Tell us what it has to do.
             </h3>
-            <p className="wwu-text text-bone/75 text-sm xs:text-base sm:text-lg leading-relaxed max-w-md mb-6 xs:mb-8">
+            <p className="wwu-text mb-7 max-w-md text-sm leading-relaxed text-foreground/70 xs:text-base sm:text-lg">
               One call, thirty minutes, no charge. You'll get a straight answer on which package
               fits — and if a one-pager isn't right for you, we'll say that on the call rather than
               sell you one.
@@ -83,20 +86,15 @@ export default function WorkWithUs() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email"
+                  placeholder="you@company.com"
                   autoComplete="email"
-                  className="w-full min-w-0 h-12 rounded-full border border-white/30 bg-transparent px-4 text-sm text-bone placeholder:text-bone/50 outline-none transition focus:border-white focus:ring-2 focus:ring-white/15"
+                  className="h-12 w-full min-w-0 rounded-control border border-line bg-paper/60 px-4 text-sm text-foreground outline-none transition placeholder:text-foreground/40 focus:border-foreground/30 focus:bg-paper"
                 />
-                <Magnetic
-                  as="button"
-                  type="submit"
-                  className="link-btn outline w-full xs:w-auto justify-center xs:justify-start whitespace-nowrap"
-                  data-cursor
-                >
-                  Send enquiry <span aria-hidden="true">→</span>
-                </Magnetic>
+                <PillButton as="button" type="submit" variant="dark" withArrow className="self-start">
+                  Send enquiry
+                </PillButton>
               </div>
-              <p className="mt-3 text-[10px] xs:text-[11px] text-bone/40 leading-relaxed">
+              <p className="mt-3 text-xs leading-relaxed text-foreground/45">
                 Opens your mail app with the details filled in.
               </p>
             </form>
@@ -107,7 +105,7 @@ export default function WorkWithUs() {
                   key={p}
                   href={telHref(p)}
                   data-cursor
-                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-bone/25 px-4 text-[10px] uppercase tracking-[0.18em] text-bone/80 hover:bg-bone hover:text-ink transition-colors whitespace-nowrap"
+                  className="inline-flex min-h-[44px] items-center gap-2 whitespace-nowrap rounded-pill border border-line bg-paper/50 px-4 text-xs text-foreground/75 transition-colors hover:bg-ink hover:text-paper"
                 >
                   {p} <span aria-hidden="true">→</span>
                 </a>

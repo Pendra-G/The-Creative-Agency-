@@ -1,41 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root{ --ink:#000; --bone:#F4F1EA; --paper:#FFFFFF; --carbon:#0C0C0C; --navy:#0A1A3A; }
+
+:root{
+  --paper:#FFFFFF; --foreground:#111111; --surface:#F1F0EE; --surface-2:#E3E2DF;
+  --line:#E6E5E2; --muted:#8D8D8D; --subtle:#B6B6B6;
+  --ink:#0A0A0A; --carbon:#111111;
+  --accent:#B15F2C; --accent-from:#CF8047; --accent-to:#97501F;
+}
+
 /* No scroll-behavior:smooth — Lenis drives scrolling and the two fight.
    Reduced-motion users fall back to native instant jumps, which is correct. */
-html,body{ background:var(--ink); color:var(--bone); -webkit-font-smoothing:antialiased; }
-body{ min-height:100vh; overflow-x:hidden; cursor:none; font-family:'Roboto',sans-serif; touch-action:manipulation; }
+html,body{ background:var(--paper); color:var(--foreground); -webkit-font-smoothing:antialiased; }
+body{ min-height:100vh; overflow-x:hidden; cursor:none; font-family:'Onest',sans-serif; touch-action:manipulation; }
 img,picture,video{ max-width:100%; height:auto; }
 button,input,a{ touch-action:manipulation; }
 @media (hover:none){ body{ cursor:auto; } }
-::selection{ background:var(--bone); color:var(--ink); }
-.cursor-dot,.cursor-follower{ position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:9999px; transform:translate3d(-100px,-100px,0); will-change:transform; }
-.cursor-dot{ width:6px; height:6px; background:var(--bone); }
-.cursor-follower{ width:36px; height:36px; border:1px solid var(--bone); mix-blend-mode:difference; transition:width .3s,height .3s,background .3s; }
-.cursor-follower.hovering{ width:70px; height:70px; background:var(--bone); }
-@media (hover:none){ .cursor-dot,.cursor-follower{ display:none; } }
-.app{ opacity:0; transition:opacity .8s ease; } .app.ready{ opacity:1; }
-.marquee-tile{ width:420px; height:270px; border-radius:1rem; object-fit:cover; flex-shrink:0; background:#1a1a1a; }
-@media (max-width:640px){ .marquee-tile{ width:280px; height:180px; } }
-@media (max-width:480px){ .marquee-tile{ width:200px; height:130px; border-radius:0.5rem; } }@media (max-width: 640px){ .hero-topbar-fix { padding-top: 52px !important; } }.link-btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.55rem 1rem; border-radius:9999px; border:1px solid currentColor; font-family:'Roboto',sans-serif; font-weight:500; font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; will-change:transform; transition:background .3s,color .3s; min-height:44px; }
-.link-btn:hover{ background:currentColor; } .link-btn:hover span{ color:var(--ink); }
-.link-btn.outline{ background:transparent; color:var(--bone); }
-.wordmark{ font-family:'Roboto',sans-serif; font-weight:400; letter-spacing:-.02em; }
-@media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation-duration:.001ms!important; transition-duration:.001ms!important; } .cursor-dot,.cursor-follower{ display:none; } body{ cursor:auto; } }
+::selection{ background:var(--accent); color:#fff; }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
-/* Simple floating animations for decorative images */
-@keyframes floatY { 0% { transform: translateY(0); } 50% { transform: translateY(-14px); } 100% { transform: translateY(0); } }
-@keyframes floatYSlow { 0% { transform: translateY(0); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
+/* Scroll lock used by the intro loader. */
+html.is-locked{ position:relative; overflow:hidden; height:100%; }
+
+/* Custom cursor. Both layers are white with difference blending, so the ring
+   reads black on light sections and white on the dark anchors — one cursor,
+   both worlds. */
+.cursor-dot,.cursor-follower{ position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:9999px; transform:translate3d(-100px,-100px,0); will-change:transform; mix-blend-mode:difference; }
+.cursor-dot{ width:6px; height:6px; background:#fff; }
+.cursor-follower{ width:36px; height:36px; border:1px solid #fff; transition:width .3s,height .3s,background .3s; }
+.cursor-follower.hovering{ width:70px; height:70px; background:#fff; }
+@media (hover:none){ .cursor-dot,.cursor-follower{ display:none; } }
+
+.app{ opacity:0; transition:opacity .8s ease; } .app.ready{ opacity:1; }
+
+.marquee-tile{ width:420px; height:270px; border-radius:1.25rem; object-fit:cover; flex-shrink:0; background:var(--carbon); }
+@media (max-width:640px){ .marquee-tile{ width:280px; height:180px; } }
+@media (max-width:480px){ .marquee-tile{ width:200px; height:130px; border-radius:0.75rem; } }
+
+/* Pill button, the reference's primary control. */
+.link-btn{ display:inline-flex; align-items:center; gap:.75rem; border-radius:9999px; font-family:'Onest',sans-serif; font-weight:500; font-size:.875rem; padding:.875rem 1.75rem; min-height:44px; will-change:transform; transition:background .3s,color .3s,border-color .3s; }
+.link-btn.outline{ border:1px solid var(--line); background:transparent; color:var(--foreground); }
+.link-btn.outline:hover{ background:var(--surface); }
+
+/* Floating decorative renders */
+@keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes floatYSlow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 .float { animation: floatY 3.6s ease-in-out infinite; }
 .float-slow { animation: floatYSlow 5s ease-in-out infinite; }
 .float-fast { animation: floatY 2.6s ease-in-out infinite; }
 
-/* Mobile-first breakpoint support */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:.001ms!important; transition-duration:.001ms!important; }
+  .cursor-dot,.cursor-follower{ display:none; }
+  body{ cursor:auto; }
+}
+
 @layer components {
   @media (max-width: 374px) {
-    input, button, a {
-      min-height: 44px;
-    }
+    input, button, a { min-height: 44px; }
   }
 }

@@ -36,7 +36,7 @@ const BEATS = [
 function PageCard({ label, primary }) {
   return (
     <div
-      className="offer-card absolute left-1/2 top-1/2 w-[min(70%,300px)] sm:w-[min(64%,330px)] aspect-[3/4] rounded-xl border border-white/15 bg-carbon shadow-[0_24px_60px_-20px_rgba(0,0,0,0.9)] overflow-hidden"
+      className="offer-card absolute left-1/2 top-1/2 w-[min(70%,300px)] sm:w-[min(64%,330px)] aspect-[3/4] rounded-card-sm bg-ink shadow-[0_24px_60px_-24px_rgba(10,10,10,0.45)] overflow-hidden"
       aria-hidden="true"
     >
       <div className="flex items-center gap-1.5 px-3 h-7 border-b border-white/10 bg-white/[0.04]">
@@ -189,7 +189,7 @@ export default function Offer() {
     <section
       id="offer"
       ref={root}
-      className="relative bg-ink text-bone"
+      className="relative bg-paper text-foreground"
       aria-labelledby="offer-heading"
     >
       {/* The scrubbed sequence owns its own tall scroll region; anything that
@@ -198,8 +198,8 @@ export default function Offer() {
         <div className="lg:sticky lg:top-0 lg:h-screen lg:flex lg:items-center overflow-hidden">
           <div className="mx-auto w-full max-w-[1500px] px-4 xs:px-5 sm:px-8 pt-16 xs:pt-20 sm:pt-24 lg:pt-0">
           <div className="flex items-center gap-3 mb-8 lg:mb-10">
-            <span className="inline-block w-2 h-2 rounded-full bg-bone" />
-            <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-bone/50">
+            <span className="inline-block w-2 h-2 rounded-full bg-foreground/50" />
+            <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-foreground/50">
               What we build
             </p>
           </div>
@@ -222,13 +222,13 @@ export default function Offer() {
                     key={b.kicker}
                     className={`offer-beat offer-beat-${i} lg:absolute lg:inset-0 mb-8 lg:mb-0`}
                   >
-                    <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-bone/40 mb-3">
+                    <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-foreground/40 mb-3">
                       {b.kicker}
                     </p>
                     <h3 className="font-display font-medium text-xl xs:text-2xl sm:text-3xl tracking-tightest leading-[1.05] mb-3">
                       {b.title}
                     </h3>
-                    <p className="text-bone/70 text-sm xs:text-base leading-relaxed max-w-md">
+                    <p className="text-foreground/70 text-sm xs:text-base leading-relaxed max-w-md">
                       {b.body}
                     </p>
                   </div>
@@ -245,9 +245,9 @@ export default function Offer() {
                 <PageCard key={label} label={i === 0 ? "One page" : label} primary={i === 0} />
               ))}
 
-              <div className="offer-price absolute left-1/2 -translate-x-1/2 bottom-0 lg:bottom-4 flex items-baseline gap-2 rounded-full border border-bone/25 bg-ink/90 backdrop-blur-sm px-5 py-2.5 whitespace-nowrap">
-                <span className="text-[9px] uppercase tracking-[0.24em] text-bone/50">From</span>
-                <span className="font-display font-bold text-xl xs:text-2xl tracking-tightest">
+              <div className="offer-price absolute left-1/2 -translate-x-1/2 bottom-0 lg:bottom-4 flex items-baseline gap-2 rounded-pill bg-ink px-5 py-2.5 text-paper whitespace-nowrap">
+                <span className="text-[9px] uppercase tracking-[0.24em] text-paper/50">From</span>
+                <span className="font-display font-semibold text-xl xs:text-2xl tracking-tightest">
                   FJ$499
                 </span>
               </div>
@@ -260,7 +260,7 @@ export default function Offer() {
 
       {/* Kept outside the sticky panel so a short laptop viewport can't clip it. */}
       <div className="mx-auto w-full max-w-[1500px] px-4 xs:px-5 sm:px-8 pb-16 xs:pb-20 sm:pb-24">
-        <ul className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6 border-t border-white/10 pt-8">
+        <ul className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6 border-t border-line pt-8">
           {[
             ["Animated end to end", "Every section earns its motion. No stock templates."],
             ["Depth where it counts", "Real 3D moments, tuned to stay fast on mobile."],
@@ -271,7 +271,7 @@ export default function Offer() {
               <p className="font-display font-bold uppercase text-[11px] xs:text-xs tracking-[0.12em] mb-2">
                 {t}
               </p>
-              <p className="text-bone/55 text-xs xs:text-sm leading-relaxed">{d}</p>
+              <p className="text-foreground/55 text-xs xs:text-sm leading-relaxed">{d}</p>
             </li>
           ))}
         </ul>

@@ -24,7 +24,7 @@ const GIFS=[
 const R1=GIFS.slice(0,11), R2=GIFS.slice(11,21);
 export default function Marquee(){
   return (
-    <section className="relative bg-black text-bone pt-16 xs:pt-20 sm:pt-24 md:pt-32 lg:pt-40 pb-8 sm:pb-10 overflow-hidden">
+    <section className="relative bg-ink text-paper rounded-b-card pt-12 xs:pt-16 sm:pt-20 pb-16 sm:pb-20 overflow-hidden">
       <style>{`
         .marquee-row { display: flex; gap: 0.5rem; align-items: center; width: max-content; }
         @media (min-width: 640px) { .marquee-row { gap: 1rem; } }

@@ -114,21 +114,38 @@ These are the ones that create real liability if broken.
 
 Already implemented; documented here so it stays consistent.
 
+The site runs a **light palette with dark anchors** — near-white surfaces
+punctuated by deep ink panels, and a single burnt-orange accent.
+
 | Token | Value | Role |
 |---|---|---|
-| `ink` | `#000000` | Primary dark surface |
-| `carbon` | `#0C0C0C` | Raised dark surface, cards |
-| `bone` | `#F4F1EA` | Warm light surface + text on dark |
-| `paper` | `#FFFFFF` | Bright light surface |
-| `navy` | `#0A1A3A` | Reserved accent, largely unused |
+| `paper` | `#FFFFFF` | Page background |
+| `foreground` | `#111111` | Body text on light |
+| `surface` | `#F1F0EE` | Light fill, alternating sections |
+| `surface2` | `#E3E2DF` | Raised light fill |
+| `line` | `#E6E5E2` | Hairline borders |
+| `muted` / `subtle` | `#8D8D8D` / `#B6B6B6` | Secondary text |
+| `ink` | `#0A0A0A` | Dark anchors: hero, showcase, work, footer, cards |
+| `carbon` | `#111111` | Raised surface on dark |
+| `accent` | `#B15F2C` | The only accent. Use sparingly. |
+| `accent-from` / `accent-to` | `#CF8047` / `#97501F` | Accent gradient |
 
-**Type:** Roboto only — 300/400/500/700/900. Display headings are
-`uppercase`, `font-bold`, `tracking-tightest` (-0.045em), `leading-[0.88]`,
-sized with `clamp()` so they scale with viewport.
+**Radii:** pill `9999px`, card `2rem`, card-sm `1.25rem`, control `0.875rem`.
+Shell max-width `88rem`.
 
-**Section rhythm:** alternate dark and light. Current order runs
-carbon → black → ink → bone → ink → white → ink → ink → white. Every section
-opens with a dot + uppercase kicker, then an oversized display heading.
+**Type:** Onest only — 400/500/600/700. Display headings are `uppercase`,
+`font-semibold`, `tracking-tightest` (-0.02em), `leading-[0.9]`, sized with
+`clamp()` so they scale with viewport. Body copy is Onest 400.
+
+**Section rhythm:** dark → light → dark. Hero and marquee form one ink block
+with a rounded bottom; Offer and Packages are white; Marquee, Process and
+Contact are `surface`; Showcase, Work and Footer are ink anchors with rounded
+corners. Most sections open with an Eyebrow (dot + label), then an oversized
+display heading.
+
+**Controls:** every CTA is a `PillButton` from `src/components/ui.jsx` —
+variants `dark`, `light`, `outline`, `accent`, optionally `withArrow`. Don't
+hand-roll buttons; extend that component.
 
 **Motion:** GSAP + ScrollTrigger, Lenis for smooth scroll. Reveals are
 `power3.out`, 0.8–1s, y-offset 40–80px, stagger 0.06–0.15. Scrubbed sequences

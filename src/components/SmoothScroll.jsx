@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { setLenis } from "../lib/scroll.js";
 gsap.registerPlugin(ScrollTrigger);
 
-// Height of the fixed TopBar, so anchored sections don't land underneath it.
-const NAV_OFFSET = -56;
+// Anchored sections must not land underneath the fixed TopBar. Measure it at
+// click time rather than hardcoding — the bar's height changes with breakpoint.
+const navOffset = () => -((document.querySelector("header")?.offsetHeight ?? 56) + 12);
 
 export default function SmoothScroll({ children }) {
   useEffect(() => {
@@ -22,6 +24,7 @@ export default function SmoothScroll({ children }) {
         smoothWheel: true,
       });
 
+      setLenis(lenis);
       lenis.on("scroll", ScrollTrigger.update);
 
       tick = (t) => lenis.raf(t * 1000);
@@ -46,7 +49,7 @@ export default function SmoothScroll({ children }) {
         const target = document.querySelector(hash);
         if (!target) return;
         e.preventDefault();
-        lenis.scrollTo(target, { offset: NAV_OFFSET });
+        lenis.scrollTo(target, { offset: navOffset() });
         history.pushState(null, "", hash);
       };
       document.addEventListener("click", onClick);
@@ -54,6 +57,7 @@ export default function SmoothScroll({ children }) {
       return () => {
         document.removeEventListener("click", onClick);
         gsap.ticker.remove(tick);
+        setLenis(null);
         lenis.destroy();
       };
     } catch (err) {

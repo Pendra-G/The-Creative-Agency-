@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Magnetic from "./Magnetic.jsx";
+import { PillButton, Eyebrow } from "./ui.jsx";
 import { mailtoHref } from "../config.js";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,100 +59,92 @@ export default function Packages() {
     <section
       id="packages"
       ref={ref}
-      className="bg-ink text-bone py-16 xs:py-20 sm:py-28 md:py-36"
+      className="bg-paper text-foreground py-16 xs:py-20 sm:py-28 md:py-36"
       aria-labelledby="packages-heading"
     >
-      <div className="mx-auto max-w-[1500px] px-4 xs:px-5 sm:px-8">
+      <div className="mx-auto max-w-shell px-5 sm:px-8">
         <div className="pk-head">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="inline-block w-2 h-2 rounded-full bg-bone" />
-            <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-bone/50">
-              Pricing
-            </p>
-          </div>
+          <Eyebrow>Pricing</Eyebrow>
           <h2
             id="packages-heading"
-            className="font-display font-bold uppercase leading-[0.88] tracking-tightest text-[clamp(2rem,8.5vw,7rem)]"
+            className="mt-5 font-display text-[clamp(2rem,8vw,6rem)] font-semibold leading-[0.92] tracking-tightest"
           >
             One price. One page.
           </h2>
         </div>
 
-        <div className="pk-grid mt-12 xs:mt-14 sm:mt-16 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-5 xs:gap-6 items-stretch">
-          {/* The offer */}
-          <div className="pk-panel flex flex-col rounded-2xl bg-bone text-ink p-6 xs:p-8 sm:p-10">
-            <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-ink/50">
+        <div className="pk-grid mt-12 grid grid-cols-1 items-stretch gap-5 sm:mt-16 sm:gap-6 lg:grid-cols-[1.05fr_1fr]">
+          {/* The offer — the ink card */}
+          <div className="pk-panel flex flex-col rounded-card bg-ink p-6 text-paper xs:p-8 sm:p-10">
+            <p className="text-xs font-medium uppercase tracking-[0.08em] text-paper/45">
               The one-pager
             </p>
 
             <p className="mt-5 flex items-baseline gap-2">
-              <span className="text-sm xs:text-base font-display font-semibold text-ink/50">FJ$</span>
+              <span className="font-display text-base font-medium text-paper/50">FJ$</span>
               <span
-                className="pk-price-num font-display font-bold text-6xl xs:text-7xl sm:text-8xl tracking-tightest leading-none"
+                className="pk-price-num font-display text-6xl font-semibold leading-none tracking-tightest xs:text-7xl sm:text-8xl"
                 data-value={499}
               >
                 499
               </span>
             </p>
 
-            <p className="mt-4 text-ink/70 text-sm xs:text-base sm:text-lg leading-relaxed max-w-md">
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-paper/70 xs:text-base sm:text-lg">
               One-off, not a retainer. Everything that earns the enquiry, in a single animated
               scroll — live in about two weeks.
             </p>
 
-            <ul className="mt-7 space-y-3 flex-1">
+            <ul className="mt-7 flex-1 space-y-3">
               {INCLUDED.map((f) => (
-                <li key={f} className="flex gap-3 text-sm xs:text-base leading-relaxed">
-                  <span aria-hidden="true" className="mt-[0.55em] h-1 w-1 flex-shrink-0 rounded-full bg-ink/40" />
-                  <span className="text-ink/80">{f}</span>
+                <li key={f} className="flex gap-3 text-sm leading-relaxed xs:text-base">
+                  <span aria-hidden="true" className="mt-[0.55em] h-1 w-1 shrink-0 rounded-pill bg-accent-from" />
+                  <span className="text-paper/80">{f}</span>
                 </li>
               ))}
             </ul>
 
-            <Magnetic
-              as="a"
-              href={mailtoHref("Website enquiry — one page, FJ$499")}
-              data-cursor
-              className="mt-8 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-ink px-7 text-[10px] font-semibold uppercase tracking-[0.2em] text-bone hover:bg-carbon transition-colors self-start"
-            >
-              Start a one-pager <span aria-hidden="true">→</span>
-            </Magnetic>
+            <div className="mt-8">
+              <PillButton
+                as="a"
+                href={mailtoHref("Website enquiry — one page, FJ$499")}
+                variant="light"
+                withArrow
+              >
+                Start a one-pager
+              </PillButton>
+            </div>
           </div>
 
           {/* Anything larger is quoted, not packaged */}
-          <div className="pk-panel flex flex-col rounded-2xl border border-white/12 bg-carbon p-6 xs:p-8 sm:p-10">
-            <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-bone/45">
+          <div className="pk-panel flex flex-col rounded-card border border-line bg-surface p-6 xs:p-8 sm:p-10">
+            <p className="text-xs font-medium uppercase tracking-[0.08em] text-foreground/45">
               Everything else
             </p>
 
-            <h3 className="mt-5 font-display font-bold uppercase text-2xl xs:text-3xl sm:text-4xl tracking-tightest leading-[0.95]">
+            <h3 className="mt-5 font-display text-2xl font-semibold leading-[0.98] tracking-tightest xs:text-3xl sm:text-4xl">
               Quoted, not packaged.
             </h3>
 
-            <p className="mt-5 text-bone/70 text-sm xs:text-base sm:text-lg leading-relaxed">
+            <p className="mt-5 text-sm leading-relaxed text-foreground/70 xs:text-base sm:text-lg">
               Extra pages, booking systems, online stores, custom workflows, branding, domain and
               hosting — all real work with real costs, and none of it fits a tidy tier. So we don't
               pretend it does.
             </p>
 
-            <p className="mt-4 text-bone/70 text-sm xs:text-base sm:text-lg leading-relaxed">
+            <p className="mt-4 text-sm leading-relaxed text-foreground/70 xs:text-base sm:text-lg">
               Tell us what the site has to do and we'll send back a fixed price for exactly that.
               The quote is free and there's nothing to sign.
             </p>
 
-            <div className="mt-auto pt-8 flex flex-col xs:flex-row gap-3">
-              <Magnetic
-                as="a"
-                href={mailtoHref("Free custom quote")}
-                data-cursor
-                className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-bone/35 px-6 text-[10px] font-semibold uppercase tracking-[0.2em] text-bone hover:bg-bone hover:text-ink transition-colors whitespace-nowrap"
-              >
-                Get a free quote <span aria-hidden="true">→</span>
-              </Magnetic>
+            <div className="mt-auto flex flex-col gap-3 pt-8 xs:flex-row xs:items-center">
+              <PillButton as="a" href={mailtoHref("Free custom quote")} variant="dark" withArrow>
+                Get a free quote
+              </PillButton>
               <a
                 href="#services"
                 data-cursor
-                className="inline-flex min-h-[48px] items-center justify-center px-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-bone/55 hover:text-bone transition-colors whitespace-nowrap"
+                className="inline-flex min-h-[44px] items-center px-2 text-sm font-medium text-foreground/55 transition-colors hover:text-foreground"
               >
                 See what else we build
               </a>
