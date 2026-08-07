@@ -29,7 +29,7 @@ function ProjectModal({ project, onClose }){
   return (
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center sm:p-4 xs:p-3 p-0 bg-ink/85 backdrop-blur-md" onClick={onClose} data-cursor>
       <div
-        className="relative w-full sm:max-w-4xl bg-carbon border border-white/10 rounded-t-2xl sm:rounded-2xl overflow-hidden flex flex-col max-h-[90vh] sm:max-h-[calc(100vh-48px)]"
+        className="relative w-full sm:max-w-4xl bg-carbon border border-white/10 overflow-hidden flex flex-col max-h-[90vh] sm:max-h-[calc(100vh-48px)]"
         onClick={(e) => e.stopPropagation()}
       >
         <button onClick={onClose} aria-label="Close" data-cursor className="absolute top-3 xs:top-4 right-3 xs:right-4 z-10 w-10 h-10 rounded-full border border-paper/30 text-paper hover:bg-paper hover:text-ink transition-colors text-xl leading-none">×</button>
@@ -66,13 +66,13 @@ export default function FeaturedWork(){
     return ()=>ctx.revert();
   },[]);
   return (
-    <section id="work" ref={ref} className="bg-ink text-paper rounded-card py-16 xs:py-20 sm:py-28 md:py-36">
+    <section id="work" ref={ref} className="bg-ink text-paper py-16 xs:py-20 sm:py-28 md:py-36">
       <div className="mx-auto max-w-[1500px] px-4 xs:px-5 sm:px-8">
         <h2 className="fw-title font-display font-bold uppercase leading-[0.9] tracking-tightest text-[clamp(2rem,9vw,11rem)]">Featured Work</h2>
         <div className="mt-10 xs:mt-12 sm:mt-14 grid grid-cols-1 md:grid-cols-2 gap-4 xs:gap-5 sm:gap-6">
           {PROJECTS.map((p,i)=>(
-            <button key={i} type="button" onClick={()=>setOpen(p)} data-cursor className="fw-card group block text-left w-full rounded-2xl transition-transform duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white/20">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-carbon">
+            <button key={i} type="button" onClick={()=>setOpen(p)} data-cursor className="fw-card group block text-left w-full transition-transform duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white/20">
+              <div className="relative aspect-[16/10] overflow-hidden bg-carbon">
                 <img src={p.img} alt={p.title} loading="lazy" decoding="async" className="w-full h-full object-contain transition-transform duration-[1200ms] ease-out group-hover:scale-105"/>
               </div>
               <div className="mt-2 xs:mt-3 flex flex-col xs:flex-row items-start xs:items-end justify-between gap-2 xs:gap-4">

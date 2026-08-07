@@ -75,7 +75,7 @@ export default function PageLoader({ onDone }) {
       role="status"
       aria-live="polite"
       aria-label="Loading"
-      className="fixed inset-0 z-[120] flex flex-col items-center justify-center gap-8 rounded-b-card bg-ink text-paper"
+      className="fixed inset-0 z-[120] flex flex-col items-center justify-center gap-8 bg-ink text-paper"
       style={{
         transform: exiting ? "translateY(-100%)" : "translateY(0%)",
         transition: `transform ${EXIT_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,

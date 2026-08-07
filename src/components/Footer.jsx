@@ -27,7 +27,7 @@ export default function Footer() {
   const socials = Object.entries(SITE.socials).filter(([, url]) => Boolean(url));
 
   return (
-    <footer id="footer" className="relative overflow-hidden rounded-t-card bg-ink text-paper">
+    <footer id="footer" className="relative overflow-hidden bg-ink text-paper">
       <div className="relative z-10 mx-auto max-w-shell px-5 pb-10 pt-20 sm:px-8 lg:pt-24">
         {/* CTA */}
         <div className="flex flex-col gap-8 border-b border-paper/10 pb-16 lg:flex-row lg:items-end lg:justify-between">

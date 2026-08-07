@@ -88,7 +88,7 @@ export default function WorkWithUs() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
                   autoComplete="email"
-                  className="h-12 w-full min-w-0 rounded-control border border-line bg-paper/60 px-4 text-sm text-foreground outline-none transition placeholder:text-foreground/40 focus:border-foreground/30 focus:bg-paper"
+                  className="h-12 w-full min-w-0 border border-line bg-paper/60 px-4 text-sm text-foreground outline-none transition placeholder:text-foreground/40 focus:border-foreground/30 focus:bg-paper"
                 />
                 <PillButton as="button" type="submit" variant="dark" withArrow className="self-start">
                   Send enquiry

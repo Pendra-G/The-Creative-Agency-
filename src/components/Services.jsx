@@ -26,7 +26,7 @@ const WEBSITE_TYPES = [
 function SitePreview({ src, alt }) {
   const [failed, setFailed] = useState(false);
   return (
-    <div className="relative w-full aspect-[3/2] overflow-hidden rounded-md bg-black/[0.03]">
+    <div className="relative w-full aspect-[3/2] overflow-hidden bg-black/[0.03]">
       {/* browser chrome */}
       <div className="absolute top-0 inset-x-0 h-5 bg-black/5 flex items-center gap-1.5 px-2.5 z-10">
         <span className="w-2 h-2 rounded-full bg-black/15" />
@@ -113,7 +113,7 @@ export default function Services() {
           {WEBSITE_TYPES.map((t) => (
             <div
               key={t.key}
-              className="svc-type-card rounded-card-sm border border-line overflow-hidden hover:border-foreground/25 transition-colors"
+              className="svc-type-card border border-line overflow-hidden hover:border-foreground/25 transition-colors"
             >
               <SitePreview src={t.img} alt={`${t.name} website example`} />
               <div className="px-2.5 xs:px-3 py-2 xs:py-3 border-t border-line">
@@ -127,7 +127,7 @@ export default function Services() {
         </div>
 
         {/* The quote route: anything past the one-pager is priced individually. */}
-        <div className="svc-tail mt-12 xs:mt-16 rounded-card bg-ink text-paper p-6 xs:p-8 sm:p-12">
+        <div className="svc-tail mt-12 xs:mt-16 bg-ink text-paper p-6 xs:p-8 sm:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-center">
             <div className="max-w-2xl">
               <h3 className="font-display font-bold uppercase text-2xl xs:text-3xl sm:text-5xl tracking-tightest leading-[0.92]">

@@ -36,7 +36,7 @@ const BEATS = [
 function PageCard({ label, primary }) {
   return (
     <div
-      className="offer-card absolute left-1/2 top-1/2 w-[min(70%,300px)] sm:w-[min(64%,330px)] aspect-[3/4] rounded-card-sm bg-ink shadow-[0_24px_60px_-24px_rgba(10,10,10,0.45)] overflow-hidden"
+      className="offer-card absolute left-1/2 top-1/2 w-[min(70%,300px)] sm:w-[min(64%,330px)] aspect-[3/4] bg-ink shadow-[0_24px_60px_-24px_rgba(10,10,10,0.45)] overflow-hidden"
       aria-hidden="true"
     >
       <div className="flex items-center gap-1.5 px-3 h-7 border-b border-white/10 bg-white/[0.04]">
@@ -51,20 +51,20 @@ function PageCard({ label, primary }) {
       {primary ? (
         // The surviving page: a whole site condensed into one scroll.
         <div className="p-3 sm:p-4 flex flex-col gap-2.5 h-[calc(100%-1.75rem)]">
-          <div className="offer-block h-[34%] rounded-md bg-gradient-to-br from-white/25 to-white/[0.06]" />
+          <div className="offer-block h-[34%] bg-gradient-to-br from-white/25 to-white/[0.06]" />
           <div className="offer-block h-1.5 w-4/5 rounded-full bg-white/20" />
           <div className="offer-block h-1.5 w-3/5 rounded-full bg-white/12" />
           <div className="offer-block grid grid-cols-2 gap-2 flex-1">
-            <div className="rounded-md bg-white/[0.10]" />
-            <div className="rounded-md bg-white/[0.10]" />
-            <div className="rounded-md bg-white/[0.10]" />
-            <div className="rounded-md bg-white/[0.10]" />
+            <div className="bg-white/[0.10]" />
+            <div className="bg-white/[0.10]" />
+            <div className="bg-white/[0.10]" />
+            <div className="bg-white/[0.10]" />
           </div>
           <div className="offer-block h-5 w-24 rounded-full bg-bone/85" />
         </div>
       ) : (
         <div className="p-3 flex flex-col gap-2 h-[calc(100%-1.75rem)]">
-          <div className="h-[26%] rounded-md bg-white/[0.07]" />
+          <div className="h-[26%] bg-white/[0.07]" />
           <div className="h-1.5 w-3/4 rounded-full bg-white/10" />
           <div className="h-1.5 w-1/2 rounded-full bg-white/10" />
           <div className="h-1.5 w-2/3 rounded-full bg-white/10" />
