@@ -93,7 +93,7 @@ export default function Services() {
         <div className="svc-head">
           <div className="flex items-center gap-3 mb-6">
             <span className="inline-block w-2 h-2 rounded-full bg-foreground/50" />
-            <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-foreground/50">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-foreground/50">
               Beyond one page
             </p>
           </div>
@@ -113,7 +113,7 @@ export default function Services() {
           {WEBSITE_TYPES.map((t) => (
             <div
               key={t.key}
-              className="svc-type-card border border-line overflow-hidden hover:border-foreground/25 transition-colors"
+              className="svc-type-card rounded-card-sm border border-line overflow-hidden hover:border-foreground/25 transition-colors"
             >
               <SitePreview src={t.img} alt={`${t.name} website example`} />
               <div className="px-2.5 xs:px-3 py-2 xs:py-3 border-t border-line">
@@ -127,7 +127,7 @@ export default function Services() {
         </div>
 
         {/* The quote route: anything past the one-pager is priced individually. */}
-        <div className="svc-tail mt-12 xs:mt-16 bg-ink text-paper p-6 xs:p-8 sm:p-12">
+        <div className="svc-tail mt-12 xs:mt-16 rounded-card bg-ink text-paper p-6 xs:p-8 sm:p-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-center">
             <div className="max-w-2xl">
               <h3 className="font-display font-bold uppercase text-2xl xs:text-3xl sm:text-5xl tracking-tightest leading-[0.92]">
@@ -159,7 +159,7 @@ export default function Services() {
             <a
               href={mailtoHref("Marketing enquiry")}
               data-cursor
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-bone/30 px-5 text-[10px] font-semibold uppercase tracking-[0.18em] text-paper/80 hover:bg-bone hover:text-ink transition-colors whitespace-nowrap self-start"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-pill border border-paper/30 px-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-paper/80 hover:bg-paper hover:text-ink transition-colors whitespace-nowrap self-start"
             >
               Ask about marketing <span aria-hidden="true">→</span>
             </a>

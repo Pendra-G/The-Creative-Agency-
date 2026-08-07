@@ -33,7 +33,7 @@ html.is-locked{ position:relative; overflow:hidden; height:100%; }
 
 .app{ opacity:0; transition:opacity .8s ease; } .app.ready{ opacity:1; }
 
-.marquee-tile{ width:420px; height:270px; object-fit:cover; flex-shrink:0; background:var(--carbon); }
+.marquee-tile{ width:420px; height:270px; border-radius:1.25rem; object-fit:cover; flex-shrink:0; background:var(--carbon); }
 @media (max-width:640px){ .marquee-tile{ width:280px; height:180px; } }
 @media (max-width:480px){ .marquee-tile{ width:200px; height:130px;  } }
 

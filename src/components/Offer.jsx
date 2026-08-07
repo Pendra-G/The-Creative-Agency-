@@ -1,10 +1,26 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import bookingImg from "../assets/services/booking.jpg";
+import portfolioImg from "../assets/services/portfolio.jpg";
+import rentalImg from "../assets/services/rental.jpg";
+import businessImg from "../assets/services/business.jpg";
+import ecommerceImg from "../assets/services/ecommerce.jpg";
+import restaurantImg from "../assets/services/restaurant.jpg";
 gsap.registerPlugin(ScrollTrigger);
 
-// The six pages a conventional site splits itself across — the thing we argue against.
-const PAGES = ["Home", "About", "Services", "Portfolio", "Journal", "Contact"];
+// Real screenshots rather than grey skeletons: each fanned card is one page of
+// a conventional site, and the survivor stacks all of them into a single scroll.
+const SHOTS = [businessImg, portfolioImg, bookingImg, rentalImg, ecommerceImg, restaurantImg];
+
+const PAGES = [
+  { label: "One page", primary: true },
+  { label: "About", img: portfolioImg },
+  { label: "Services", img: bookingImg },
+  { label: "Portfolio", img: rentalImg },
+  { label: "Journal", img: ecommerceImg },
+  { label: "Contact", img: restaurantImg },
+];
 
 const BEATS = [
   {
@@ -33,10 +49,12 @@ const BEATS = [
   },
 ];
 
-function PageCard({ label, primary }) {
+function PageCard({ label, img, primary }) {
   return (
+    // Sized from its HEIGHT so the card can never compute taller than the stage
+    // that holds it — width-first sizing overflowed between ~500px and 640px.
     <div
-      className="offer-card absolute left-1/2 top-1/2 w-[min(70%,300px)] sm:w-[min(64%,330px)] aspect-[3/4] bg-ink shadow-[0_24px_60px_-24px_rgba(10,10,10,0.45)] overflow-hidden"
+      className="offer-card absolute left-1/2 top-1/2 h-[86%] aspect-[3/4] rounded-card-sm bg-ink shadow-[0_24px_60px_-24px_rgba(10,10,10,0.45)] overflow-hidden"
       aria-hidden="true"
     >
       <div className="flex items-center gap-1.5 px-3 h-7 border-b border-white/10 bg-white/[0.04]">
@@ -48,28 +66,32 @@ function PageCard({ label, primary }) {
         </span>
       </div>
 
-      {primary ? (
-        // The surviving page: a whole site condensed into one scroll.
-        <div className="p-3 sm:p-4 flex flex-col gap-2.5 h-[calc(100%-1.75rem)]">
-          <div className="offer-block h-[34%] bg-gradient-to-br from-white/25 to-white/[0.06]" />
-          <div className="offer-block h-1.5 w-4/5 rounded-full bg-white/20" />
-          <div className="offer-block h-1.5 w-3/5 rounded-full bg-white/12" />
-          <div className="offer-block grid grid-cols-2 gap-2 flex-1">
-            <div className="bg-white/[0.10]" />
-            <div className="bg-white/[0.10]" />
-            <div className="bg-white/[0.10]" />
-            <div className="bg-white/[0.10]" />
+      <div className="relative h-[calc(100%-1.75rem)] overflow-hidden bg-carbon">
+        {primary ? (
+          // Every page, stacked into one long scroll. The strip is driven by the
+          // scroll timeline so you watch the whole site pass through one page.
+          <div className="offer-strip absolute inset-x-0 top-0">
+            {SHOTS.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="block w-full"
+              />
+            ))}
           </div>
-          <div className="offer-block h-5 w-24 rounded-full bg-bone/85" />
-        </div>
-      ) : (
-        <div className="p-3 flex flex-col gap-2 h-[calc(100%-1.75rem)]">
-          <div className="h-[26%] bg-white/[0.07]" />
-          <div className="h-1.5 w-3/4 rounded-full bg-white/10" />
-          <div className="h-1.5 w-1/2 rounded-full bg-white/10" />
-          <div className="h-1.5 w-2/3 rounded-full bg-white/10" />
-        </div>
-      )}
+        ) : (
+          <img
+            src={img}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover object-top"
+          />
+        )}
+      </div>
     </div>
   );
 }
@@ -101,7 +123,7 @@ export default function Offer() {
 
         gsap.set(".offer-beat", { opacity: 0, y: 24 });
         gsap.set(".offer-beat-0", { opacity: 1, y: 0 });
-        gsap.set(".offer-block", { opacity: 0, y: 14 });
+        gsap.set(".offer-strip", { yPercent: 0 });
         gsap.set(".offer-price", { opacity: 0, y: 18, scale: 0.94 });
 
         const tl = gsap.timeline({
@@ -136,8 +158,8 @@ export default function Offer() {
         tl.to(others, { opacity: 0, duration: 0.5, stagger: 0.04 }, 2.2);
         tl.to(primary, { scale: 1.06, duration: 0.8 }, 2.3);
 
-        // 3 — the surviving page fills in, block by block.
-        tl.to(".offer-block", { opacity: 1, y: 0, duration: 0.5, stagger: 0.12 }, 2.7);
+        // 3 — the surviving page scrolls: every page, passing through one.
+        tl.to(".offer-strip", { yPercent: -74, duration: 1.4, ease: "none" }, 2.6);
 
         // 4 — the number lands.
         tl.to(".offer-price", { opacity: 1, y: 0, scale: 1, duration: 0.6 }, 3.7);
@@ -165,14 +187,22 @@ export default function Offer() {
         ease: "power3.out",
         scrollTrigger: { trigger: ".offer-beats", start: "top 80%", once: true },
       });
-      gsap.from(".offer-block", {
-        opacity: 0,
-        y: 16,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: { trigger: stage.current, start: "top 75%", once: true },
-      });
+      // The strip still scrolls on mobile, driven by the section passing the
+      // viewport rather than by a pinned stage.
+      gsap.fromTo(
+        ".offer-strip",
+        { yPercent: 0 },
+        {
+          yPercent: -74,
+          ease: "none",
+          scrollTrigger: {
+            trigger: stage.current,
+            start: "top 85%",
+            end: "bottom 15%",
+            scrub: 0.6,
+          },
+        }
+      );
       gsap.from(".offer-price", {
         opacity: 0,
         y: 16,
@@ -199,7 +229,7 @@ export default function Offer() {
           <div className="mx-auto w-full max-w-[1500px] px-4 xs:px-5 sm:px-8 pt-16 xs:pt-20 sm:pt-24 lg:pt-0">
           <div className="flex items-center gap-3 mb-8 lg:mb-10">
             <span className="inline-block w-2 h-2 rounded-full bg-foreground/50" />
-            <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-foreground/50">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-foreground/50">
               What we build
             </p>
           </div>
@@ -222,7 +252,7 @@ export default function Offer() {
                     key={b.kicker}
                     className={`offer-beat offer-beat-${i} lg:absolute lg:inset-0 mb-8 lg:mb-0`}
                   >
-                    <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-foreground/40 mb-3">
+                    <p className="text-[11px] uppercase tracking-[0.24em] text-foreground/40 mb-3">
                       {b.kicker}
                     </p>
                     <h3 className="font-display font-medium text-xl xs:text-2xl sm:text-3xl tracking-tightest leading-[1.05] mb-3">
@@ -241,8 +271,8 @@ export default function Offer() {
               ref={stage}
               className="relative h-[380px] xs:h-[440px] sm:h-[520px] lg:h-[500px] [perspective:1400px]"
             >
-              {PAGES.map((label, i) => (
-                <PageCard key={label} label={i === 0 ? "One page" : label} primary={i === 0} />
+              {PAGES.map((p) => (
+                <PageCard key={p.label} label={p.label} img={p.img} primary={p.primary} />
               ))}
 
               <div className="offer-price absolute left-1/2 -translate-x-1/2 bottom-0 lg:bottom-4 flex items-baseline gap-2 rounded-pill bg-ink px-5 py-2.5 text-paper whitespace-nowrap">

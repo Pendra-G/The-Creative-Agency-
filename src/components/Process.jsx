@@ -109,7 +109,7 @@ export default function Process() {
         <div className="pr-head">
           <div className="flex items-center gap-3 mb-6">
             <span className="inline-block w-2 h-2 rounded-full bg-foreground/50" />
-            <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.24em] text-foreground/50">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-foreground/50">
               The process
             </p>
           </div>

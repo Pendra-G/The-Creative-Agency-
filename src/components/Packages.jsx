@@ -75,7 +75,7 @@ export default function Packages() {
 
         <div className="pk-grid mt-12 grid grid-cols-1 items-stretch gap-5 sm:mt-16 sm:gap-6 lg:grid-cols-[1.05fr_1fr]">
           {/* The offer — the ink card */}
-          <div className="pk-panel flex flex-col bg-ink p-6 text-paper xs:p-8 sm:p-10">
+          <div className="pk-panel flex flex-col rounded-card bg-ink p-6 text-paper xs:p-8 sm:p-10">
             <p className="text-xs font-medium uppercase tracking-[0.08em] text-paper/45">
               The one-pager
             </p>
@@ -117,7 +117,7 @@ export default function Packages() {
           </div>
 
           {/* Anything larger is quoted, not packaged */}
-          <div className="pk-panel flex flex-col border border-line bg-surface p-6 xs:p-8 sm:p-10">
+          <div className="pk-panel flex flex-col rounded-card border border-line bg-surface p-6 xs:p-8 sm:p-10">
             <p className="text-xs font-medium uppercase tracking-[0.08em] text-foreground/45">
               Everything else
             </p>

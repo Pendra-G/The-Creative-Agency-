@@ -57,7 +57,7 @@ export default function TopBar({ ready = false }) {
         <a
           href="#home"
           data-cursor
-          className="flex shrink-0 items-center gap-2 text-base font-semibold tracking-[-0.01em] text-foreground transition-transform duration-300 ease-snap hover:scale-[1.04]"
+          className="flex shrink-0 items-center gap-2 py-3 -my-3 text-base font-semibold tracking-[-0.01em] text-foreground transition-transform duration-300 ease-snap hover:scale-[1.04]"
         >
           <LogoMark className="text-lg text-accent" />
           <span className="hidden xs:inline">The Creative Agency</span>
@@ -78,7 +78,7 @@ export default function TopBar({ ready = false }) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="hidden items-center gap-3 border border-line/80 bg-paper/40 px-3 py-2 text-xs text-foreground/70 backdrop-blur-sm md:flex">
+          <div className="hidden items-center gap-3 rounded-control border border-line/80 bg-paper/40 px-3 py-2 text-xs text-foreground/70 backdrop-blur-sm md:flex">
             <span className="text-foreground/45">Local time</span>
             <span className="min-w-[3.5rem] font-medium tabular-nums text-foreground">{time || "—"}</span>
             <span className="text-foreground/30">•</span>
@@ -91,7 +91,7 @@ export default function TopBar({ ready = false }) {
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             data-cursor
-            className="inline-flex min-h-[40px] items-center gap-2 border border-line/80 bg-paper/40 px-4 text-xs font-medium uppercase tracking-[0.05em] text-foreground backdrop-blur-sm transition-colors hover:bg-paper lg:hidden"
+            className="inline-flex min-h-[40px] items-center gap-2 rounded-control border border-line/80 bg-paper/40 px-4 text-xs font-medium uppercase tracking-[0.05em] text-foreground backdrop-blur-sm transition-colors hover:bg-paper lg:hidden"
           >
             <GridIcon className="text-sm" />
             <span className="hidden xs:inline">{menuOpen ? "Close" : "Menu"}</span>
