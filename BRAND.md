@@ -95,15 +95,16 @@ optimise.* Keep it consistent; the site currently uses it throughout.
 
 These are the ones that create real liability if broken.
 
-- **Prices are one-off, in FJD, and stated as "from."** Never imply a retainer.
-- **Every package includes 30 days of small edits.** Say it once, plainly.
-- **Domain and hosting on the Complete tier are first-year only.** Any mention
-  of hosting must carry the renewal caveat. Never let "includes hosting" stand
-  alone.
-- **Timelines are "about two/three/four weeks."** Keep the hedge — it is honest
-  and it protects us.
-- **The one-pager is the motion showcase.** Multi-page tiers get considered
-  motion, not the full treatment. Don't imply otherwise on the bigger tiers.
+- **There is exactly one price: FJ$499, one-off, in FJD.** No tiers, no
+  packages, no retainer. Everything else is quoted individually.
+- **The one-pager includes 30 days of small edits.** Say it once, plainly.
+- **Never invent a second price.** If work falls outside the one-pager, the
+  answer is "we'll quote it" — never a number guessed on the spot.
+- **Quotes are free and carry no obligation.** Say both.
+- **Timelines are "about two weeks."** Keep the hedge — it is honest and it
+  protects us.
+- **The 3D showcase demos are ours, and they are demos.** They prove capability;
+  they are not client work and must never be captioned as if they were.
 - **Never present other studios' work as ours.** See the open item on the
   marquee in `HANDOVER.md`.
 

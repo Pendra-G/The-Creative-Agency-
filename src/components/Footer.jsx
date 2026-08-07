@@ -5,8 +5,9 @@ const PILL =
 
 const LINKS = [
   ["What we build", "#offer"],
+  ["3D showcase", "#showcase"],
   ["Process", "#process"],
-  ["Packages", "#packages"],
+  ["Pricing", "#packages"],
   ["Work", "#work"],
   ["Start a project", "#contact"],
 ];

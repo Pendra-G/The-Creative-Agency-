@@ -5,6 +5,7 @@ import TopBar from "./components/TopBar.jsx";
 import Hero from "./components/Hero.jsx";
 import Marquee from "./components/Marquee.jsx";
 import Offer from "./components/Offer.jsx";
+import Showcase from "./components/Showcase.jsx";
 import Process from "./components/Process.jsx";
 import Packages from "./components/Packages.jsx";
 import Services from "./components/Services.jsx";
@@ -24,10 +25,11 @@ export default function App() {
       <Cursor />
       <TopBar />
       <main className={`app ${ready ? "ready" : ""}`}>
-        {/* What → why → how → how much → what else → proof → contact */}
+        {/* What → proof it's real → how → how much → what else → clients → contact */}
         <Hero />
         <Marquee />
         <Offer />
+        <Showcase />
         <Process />
         <Packages />
         <Services />

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Magnetic from "./Magnetic.jsx";
 import { mailtoHref } from "../config.js";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,7 +19,7 @@ const WEBSITE_TYPES = [
   { key: "portfolio", name: "Portfolio", desc: "Case studies and visual work, built to be browsed.", img: portfolioImg },
   { key: "rental", name: "Rental", desc: "Listings, filters, and enquiries that reach you.", img: rentalImg },
   { key: "business", name: "Business", desc: "Service pages with a clear next step on every one.", img: businessImg },
-  { key: "ecommerce", name: "E-Commerce", desc: "Catalogue, cart, checkout. Quoted separately from the packages.", img: ecommerceImg },
+  { key: "ecommerce", name: "E-Commerce", desc: "Catalogue, cart, checkout. Quoted individually.", img: ecommerceImg },
   { key: "restaurant", name: "Restaurant", desc: "Menus, hours, and table bookings.", img: restaurantImg },
 ];
 
@@ -125,19 +126,40 @@ export default function Services() {
           ))}
         </div>
 
-        <div className="svc-tail mt-12 xs:mt-16 grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6 lg:gap-12 items-start border-t border-black/10 pt-8 xs:pt-10">
-          <h3 className="font-display font-bold uppercase text-xl xs:text-2xl sm:text-4xl tracking-tightest leading-[0.95] whitespace-nowrap">
-            Also: marketing.
-          </h3>
-          <div className="max-w-2xl">
-            <p className="text-ink/65 text-sm xs:text-base sm:text-lg leading-relaxed">
-              Performance, social and content campaigns. We take these on for clients whose sites we
-              built — we'd rather not run ads at a page we don't rate.
+        {/* The quote route: anything past the one-pager is priced individually. */}
+        <div className="svc-tail mt-12 xs:mt-16 rounded-2xl bg-ink text-bone p-6 xs:p-8 sm:p-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-center">
+            <div className="max-w-2xl">
+              <h3 className="font-display font-bold uppercase text-2xl xs:text-3xl sm:text-5xl tracking-tightest leading-[0.92]">
+                Tell us what you need.
+              </h3>
+              <p className="mt-5 text-bone/70 text-sm xs:text-base sm:text-lg leading-relaxed">
+                Anything on this page — or something that isn't — gets a fixed price, quoted for
+                exactly what you're after. It's free, there's nothing to sign, and if a one-pager
+                would do the job for less we'll tell you that instead.
+              </p>
+            </div>
+
+            <Magnetic
+              as="a"
+              href={mailtoHref("Free custom quote")}
+              data-cursor
+              className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full bg-bone px-8 text-[11px] font-semibold uppercase tracking-[0.2em] text-ink hover:bg-white transition-colors whitespace-nowrap self-start lg:self-auto"
+            >
+              Get a free quote <span aria-hidden="true">→</span>
+            </Magnetic>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col xs:flex-row xs:items-center gap-3 xs:gap-5">
+            <p className="text-bone/55 text-xs xs:text-sm leading-relaxed max-w-xl">
+              <span className="text-bone/85 font-medium">Also: marketing.</span> Performance, social
+              and content campaigns — for clients whose sites we built. We'd rather not run ads at a
+              page we don't rate.
             </p>
             <a
               href={mailtoHref("Marketing enquiry")}
               data-cursor
-              className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-full border border-black/30 px-5 text-[10px] font-semibold uppercase tracking-[0.2em] hover:bg-black hover:text-white transition-colors"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-bone/30 px-5 text-[10px] font-semibold uppercase tracking-[0.18em] text-bone/80 hover:bg-bone hover:text-ink transition-colors whitespace-nowrap self-start"
             >
               Ask about marketing <span aria-hidden="true">→</span>
             </a>

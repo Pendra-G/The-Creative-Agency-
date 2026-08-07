@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { SITE } from "../config.js";
 
+// Kept to four short labels — a fifth wraps the bar onto a second line.
 const NAV = [
   ["Work", "#work"],
-  ["Packages", "#packages"],
-  ["Process", "#process"],
+  ["3D", "#showcase"],
+  ["Pricing", "#packages"],
   ["Contact", "#contact"],
 ];
 
@@ -33,10 +34,11 @@ export default function TopBar() {
       {/* auto-width centre column: equal 1fr sides keep the wordmark centred
           while giving the nav enough room not to wrap onto a second line */}
       <div className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-3 px-3 xs:px-4 sm:px-6 py-2 xs:py-3 border-b border-white/5">
+        {/* py/-my pair grows the touch target without growing the bar */}
         <button
           type="button"
           onClick={() => setMenuOpen((v) => !v)}
-          className="sm:hidden text-left text-[8px] xs:text-[10px] font-semibold uppercase tracking-[0.18em] min-h-[32px]"
+          className="sm:hidden text-left text-[8px] xs:text-[10px] font-semibold uppercase tracking-[0.18em] py-3 -my-3"
           aria-expanded={menuOpen}
           aria-controls="mobile-nav"
         >

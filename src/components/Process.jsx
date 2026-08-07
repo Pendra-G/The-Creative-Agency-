@@ -167,10 +167,11 @@ export default function Process() {
             What FJ$499 doesn't get you.
           </h3>
           <p className="text-ink/70 text-sm xs:text-base sm:text-lg leading-relaxed">
-            An online store. Fifty blog posts and a CMS to manage them. FJ$499 is one page, done
-            well — nothing more, and we won't pretend otherwise. Bookings, custom workflows and
-            branding sit in the packages below. Anything none of them cover, we'll quote properly on
-            the first call, not slip into an invoice later.
+            An online store. A booking system wired to your calendar. Fifty blog posts and a CMS to
+            manage them. FJ$499 is one page, done well — nothing more, and we won't pretend
+            otherwise. Everything past that is real work with a real cost, so we quote it
+            individually instead of dressing it up as a package. You'll hear the number on the first
+            call, not in an invoice later.
           </p>
         </div>
       </div>
