@@ -99,9 +99,14 @@ export default function PageLoader({ onDone }) {
 
       <div className="flex w-[min(22rem,72vw)] flex-col gap-3">
         <div className="h-px w-full bg-cream/15">
+          {/* scaleX rather than width: this updates every frame while loading,
+              and transforms stay off the layout path. */}
           <div
-            className="h-full bg-gold"
-            style={{ width: `${progress}%`, transition: "width .1s ease-out" }}
+            className="h-full w-full origin-left bg-gold"
+            style={{
+              transform: `scaleX(${progress / 100})`,
+              transition: "transform .1s ease-out",
+            }}
           />
         </div>
         <div className="flex items-center justify-between micro text-cream/45">
