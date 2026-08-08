@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import About from "../components/About.jsx";
 import Process from "../components/Process.jsx";
-import { Pill } from "../components/ui.jsx";
+import { CallCtas } from "../components/ui.jsx";
 
 export default function AboutPage() {
   useEffect(() => {
@@ -38,9 +37,7 @@ export default function AboutPage() {
             <p className="max-w-md text-lg text-white/70">
               If that sounds like the way you'd rather work, let's talk.
             </p>
-            <Pill as={Link} to="/contact" variant="white">
-              Start a project
-            </Pill>
+            <CallCtas />
           </div>
         </div>
       </section>

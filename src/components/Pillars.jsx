@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { telHref } from "../config.js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MaskHeading } from "./Reveal.jsx";
@@ -156,13 +156,7 @@ export default function Pillars() {
                 No tiers, no add-ons, nothing held back. If it suits you, the next step is a
                 half-hour call.
               </p>
-              <Link
-                to="/contact"
-                data-cursor
-                className="mt-6 inline-flex min-h-[48px] items-center rounded-pill bg-ink px-6 micro text-white transition-transform duration-300 ease-snap hover:scale-[1.04]"
-              >
-                Start a project
-              </Link>
+              <a href={telHref()} data-cursor className="mt-6 inline-flex min-h-[48px] items-center rounded-pill bg-ink px-6 micro text-white transition-transform duration-300 ease-snap hover:scale-[1.04]">Call now</a>
             </div>
           </article>
         </div>

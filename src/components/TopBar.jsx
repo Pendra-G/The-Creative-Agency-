@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { telHref } from "../config.js";
 import NavPanel from "./NavPanel.jsx";
 
 export default function TopBar({ ready = false }) {
@@ -44,13 +45,7 @@ export default function TopBar({ ready = false }) {
 
           <div className="flex items-center gap-4 sm:gap-6">
             {/* A way to act at any scroll position, not just at the CTA blocks */}
-            <Link
-              to="/contact"
-              data-cursor
-              className="hidden min-h-[40px] items-center rounded-pill bg-white px-5 micro text-ink transition-colors hover:bg-accent xs:inline-flex"
-            >
-              Start a project
-            </Link>
+            <a href={telHref()} data-cursor className="hidden min-h-[40px] items-center rounded-pill bg-white px-5 micro text-ink transition-colors hover:bg-accent xs:inline-flex">Call now</a>
 
             <button
               type="button"

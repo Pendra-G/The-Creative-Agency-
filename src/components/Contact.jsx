@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Marquee } from "./Strips.jsx";
-import { Pill } from "./ui.jsx";
+import { CallCtas, TextLink } from "./ui.jsx";
 import { SITE, telHref, mailtoHref } from "../config.js";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,21 +39,10 @@ export default function Contact() {
           One call, thirty minutes, free. You'll get a straight answer on what your site actually needs, and an honest one if that turns out to be less than you expected.
         </p>
 
-        <div className="ct-reveal mt-10 flex flex-wrap items-center gap-4">
-          <Pill as="a" href={mailtoHref()} variant="white">
-            Email me
-          </Pill>
-          {SITE.phones.map((p) => (
-            <a
-              key={p}
-              href={telHref(p)}
-              data-cursor
-              className="inline-flex min-h-[52px] items-center rounded-pill border border-white/25 px-6 micro text-white/75 transition-colors hover:bg-white hover:text-ink"
-            >
-              {p}
-            </a>
-          ))}
-        </div>
+        <CallCtas className="ct-reveal mt-10" showNumber />
+        <p className="ct-reveal mt-6">
+          <TextLink as="a" href={mailtoHref()}>Prefer email?</TextLink>
+        </p>
       </div>
 
       <div className="ct-reveal mt-16 border-y border-line py-4 sm:mt-24">

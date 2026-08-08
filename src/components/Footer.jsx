@@ -104,10 +104,12 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* The oversized sign-off, bled to the edges like the reference's. */}
+      {/* Oversized sign-off, kept on one line and bled to the edges — the
+          footer clips it, so any overhang reads as deliberate rather than
+          as a heading that wrapped badly. */}
       <p
         aria-hidden="true"
-        className="select-none px-2 text-center display leading-[0.8] text-white/[0.07] text-[clamp(3.5rem,19vw,17rem)]"
+        className="mt-6 select-none whitespace-nowrap text-center display leading-[0.78] text-white/[0.09] text-[clamp(2.4rem,13.5vw,15rem)]"
       >
         Website Portfolio
       </p>

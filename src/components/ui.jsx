@@ -1,6 +1,7 @@
 // Shared primitives. The reference leans on two controls only: a small
 // underlined text link with an arrow, and a solid pill. Everything else is
 // typography doing the work.
+import { PRIMARY_PHONE, telHref, viberHref } from "../config.js";
 
 export function ArrowUpRight({ className = "" }) {
   return (
@@ -61,6 +62,36 @@ export function Pill({ as: Tag = "a", variant = "white", className = "", childre
       {children}
       <ArrowRight className="transition-transform duration-300 ease-snap group-hover:translate-x-1" />
     </Tag>
+  );
+}
+
+/**
+ * The site's primary action. Calling is the main path; Viber sits alongside
+ * because the deep link does nothing on a desktop without the app installed.
+ */
+export function CallCtas({ className = "", variant = "white", showNumber = false }) {
+  return (
+    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
+      <Pill as="a" href={telHref()} variant={variant}>
+        Call now
+      </Pill>
+      <a
+        href={viberHref()}
+        data-cursor
+        className="group inline-flex min-h-[52px] items-center gap-2 rounded-pill border border-accent px-6 text-sm font-semibold uppercase tracking-[0.08em] text-accent transition-all duration-300 ease-snap hover:scale-[1.03] hover:bg-accent hover:text-ink"
+      >
+        Message on Viber
+      </a>
+      {showNumber && (
+        <a
+          href={telHref()}
+          data-cursor
+          className="inline-flex min-h-[44px] items-center font-display text-lg font-semibold tracking-tighter text-white/70 transition-colors hover:text-white"
+        >
+          {PRIMARY_PHONE}
+        </a>
+      )}
+    </div>
   );
 }
 

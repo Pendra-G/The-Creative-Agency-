@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import Hero from "../components/Hero.jsx";
 import { WordRule, Marquee } from "../components/Strips.jsx";
 import Pillars from "../components/Pillars.jsx";
@@ -8,7 +7,7 @@ import Work from "../components/Work.jsx";
 import Process from "../components/Process.jsx";
 import Pricing from "../components/Pricing.jsx";
 import Faq from "../components/Faq.jsx";
-import { Pill } from "../components/ui.jsx";
+import { CallCtas } from "../components/ui.jsx";
 
 export default function Home({ ready = false }) {
   // Every other route sets its own title, so home has to restore the default
@@ -47,11 +46,7 @@ export default function Home({ ready = false }) {
                 Tell me what the site needs to do. Half an hour on a call, no charge, and a straight
                 answer on whether this is right for you.
               </p>
-              <div className="mt-8">
-                <Pill as={Link} to="/contact" variant="white">
-                  Start a project
-                </Pill>
-              </div>
+              <CallCtas className="mt-8" showNumber />
             </div>
           </div>
         </div>

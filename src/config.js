@@ -19,7 +19,18 @@ export const SITE = {
   },
 };
 
-export const telHref = (phone) => `tel:${phone.replace(/[^\d+]/g, "")}`;
+// The number every call-to-action points at.
+export const PRIMARY_PHONE = SITE.phones[0];
+
+export const telHref = (phone = PRIMARY_PHONE) => `tel:${phone.replace(/[^\d+]/g, "")}`;
+
+/**
+ * Viber deep link. Opens the chat directly on a device with Viber installed;
+ * on desktop without it the OS simply does nothing, which is why calling is
+ * always offered alongside rather than instead.
+ */
+export const viberHref = (phone = PRIMARY_PHONE) =>
+  `viber://chat?number=${encodeURIComponent(phone.replace(/[^\d+]/g, ""))}`;
 
 // Enquiry links open the visitor's mail client with the subject pre-filled.
 // Swap this for a real form endpoint (Formspree, Netlify Forms, etc.) when

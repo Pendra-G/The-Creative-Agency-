@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { split } from "../utils/anim.js";
-import { Pill, TextLink } from "./ui.jsx";
+import { CallCtas, TextLink } from "./ui.jsx";
 import { SITE } from "../config.js";
 // TODO(owner): swap this for a screen recording of finished sites scrolling.
 import ReelVideo from "../assets/Developer_coding_creative_agency…_202607071835.mp4";
@@ -49,15 +48,19 @@ export default function Hero({ ready = false }) {
 
       // Exit parallax: the copy and the frame leave at different rates, so the
       // hero feels like layered depth rather than one flat block sliding away.
-      const exit = {
-        trigger: root.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: 0.8,
-      };
-      gsap.to(".hero-copy", { yPercent: -16, opacity: 0.25, ease: "none", scrollTrigger: exit });
-      gsap.to(".hero-frame", { yPercent: 12, ease: "none", scrollTrigger: exit });
-      gsap.to(".hero-glow", { yPercent: 24, opacity: 0.2, ease: "none", scrollTrigger: exit });
+      // Desktop only — three scrubbed layers is real per-frame work, and on a
+      // phone the hero is off screen in one flick anyway.
+      gsap.matchMedia().add("(min-width: 1024px)", () => {
+        const exit = {
+          trigger: root.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.8,
+        };
+        gsap.to(".hero-copy", { yPercent: -16, opacity: 0.25, ease: "none", scrollTrigger: exit });
+        gsap.to(".hero-frame", { yPercent: 12, ease: "none", scrollTrigger: exit });
+        gsap.to(".hero-glow", { yPercent: 24, opacity: 0.2, ease: "none", scrollTrigger: exit });
+      });
     }, root);
 
     return () => ctx.revert();
@@ -100,14 +103,10 @@ export default function Hero({ ready = false }) {
             <span className="text-white">{SITE.price}</span>.
           </p>
 
-          {/* Primary CTA is the money action; browsing the work is secondary. */}
-          <div className="hero-fade mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <Pill as={Link} to="/contact" variant="white">
-              Start a project
-            </Pill>
-            <TextLink as="a" href="#work">
-              See the work
-            </TextLink>
+          {/* Calling is the action; browsing the work is secondary. */}
+          <CallCtas className="hero-fade mt-9" />
+          <div className="hero-fade mt-6">
+            <TextLink as="a" href="#work">See the work</TextLink>
           </div>
 
           <dl className="hero-fade mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6">

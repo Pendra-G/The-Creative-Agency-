@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Pill } from "./ui.jsx";
+import { CallCtas } from "./ui.jsx";
 import { SITE, mailtoHref } from "../config.js";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,11 +71,7 @@ export default function Pricing() {
               this number where it is.
             </p>
 
-            <div className="pc-reveal mt-8">
-              <Pill as="a" href={mailtoHref(`One-page website — ${SITE.price}`)} variant="accent">
-                Start a project
-              </Pill>
-            </div>
+            <CallCtas className="pc-reveal mt-8" variant="accent" />
           </div>
 
           <div className="pc-reveal">
