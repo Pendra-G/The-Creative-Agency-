@@ -34,8 +34,8 @@ export function TextLink({ as: Tag = "a", className = "", children, ...rest }) {
     <Tag
       {...rest}
       data-cursor
-      className={`group inline-flex min-h-[44px] items-end gap-2 border-b border-cream/30 pb-1 micro text-cream
-        transition-colors hover:border-gold hover:text-gold ${className}`}
+      className={`group inline-flex min-h-[44px] items-end gap-2 border-b border-white/30 pb-1 micro text-white
+        transition-colors hover:border-accent hover:text-accent ${className}`}
     >
       {children}
       <ArrowUpRight className="text-[0.9em] transition-transform duration-300 ease-snap group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
@@ -44,12 +44,12 @@ export function TextLink({ as: Tag = "a", className = "", children, ...rest }) {
 }
 
 const PILL = {
-  cream: "bg-cream text-ink hover:bg-gold",
-  gold: "bg-gold text-ink hover:bg-cream",
-  outline: "border border-cream/35 text-cream hover:bg-cream hover:text-ink",
+  white: "bg-white text-ink hover:bg-accent",
+  accent: "bg-accent text-ink hover:bg-white",
+  outline: "border border-white/35 text-white hover:bg-white hover:text-ink",
 };
 
-export function Pill({ as: Tag = "a", variant = "cream", className = "", children, ...rest }) {
+export function Pill({ as: Tag = "a", variant = "white", className = "", children, ...rest }) {
   return (
     <Tag
       {...rest}
@@ -66,5 +66,5 @@ export function Pill({ as: Tag = "a", variant = "cream", className = "", childre
 
 /** Numbered micro label — 001 / 002 / 003. */
 export function Index({ n }) {
-  return <span className="micro text-cream/40">{String(n).padStart(3, "0")}</span>;
+  return <span className="micro text-white/40">{String(n).padStart(3, "0")}</span>;
 }

@@ -1,20 +1,35 @@
+import { Link } from "react-router-dom";
 import { SITE, telHref, mailtoHref } from "../config.js";
 
 const LINKS = [
-  ["What you get", "#what"],
-  ["Work", "#work"],
-  ["How it works", "#process"],
-  ["Pricing", "#pricing"],
-  ["Questions", "#faq"],
+  ["Home", "/"],
+  ["What we build", "/#build"],
+  ["Work", "/#work"],
+  ["Pricing", "/#pricing"],
+  ["About", "/about"],
+  ["Contact", "/contact"],
 ];
 
+const CLS =
+  "inline-flex min-h-[44px] items-center micro text-white/60 transition-all duration-300 ease-snap hover:translate-x-1 hover:text-accent";
+
 function FooterLink({ href, children, external = false }) {
+  // Internal routes go through the router; a plain <a> would trigger a full
+  // page reload and throw away the smooth-scroll instance.
+  const internal = !external && href.startsWith("/");
+  if (internal) {
+    return (
+      <Link to={href} data-cursor className={CLS}>
+        {children}
+      </Link>
+    );
+  }
   return (
     <a
       href={href}
       data-cursor
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="inline-flex min-h-[44px] items-center micro text-cream/60 transition-all duration-300 ease-snap hover:translate-x-1 hover:text-gold"
+      className={CLS}
     >
       {children}
     </a>
@@ -29,19 +44,19 @@ export default function Footer() {
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="grid grid-cols-2 gap-8 border-b border-line pb-14 sm:gap-10 lg:grid-cols-4">
           <div className="col-span-2 lg:col-span-1">
-            <p className="micro text-cream/45">Get in touch</p>
+            <p className="micro text-white/45">Get in touch</p>
             <a
               href={mailtoHref()}
               data-cursor
-              className="mt-3 inline-flex min-h-[44px] items-center display text-[clamp(1.1rem,3.2vw,1.6rem)] text-cream transition-colors hover:text-gold"
+              className="mt-3 inline-flex min-h-[44px] items-center display text-[clamp(1.1rem,3.2vw,1.6rem)] text-white transition-colors hover:text-accent"
             >
               {SITE.email}
             </a>
-            <p className="mt-4 micro text-cream/45">{SITE.location}</p>
+            <p className="mt-4 micro text-white/45">{SITE.location}</p>
           </div>
 
           <div>
-            <p className="mb-2 micro text-cream/45">Site</p>
+            <p className="mb-2 micro text-white/45">Site</p>
             <ul>
               {LINKS.map(([label, href]) => (
                 <li key={href}>
@@ -52,7 +67,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="mb-2 micro text-cream/45">Contact</p>
+            <p className="mb-2 micro text-white/45">Contact</p>
             <ul>
               <li>
                 <FooterLink href="#contact">Start a project</FooterLink>
@@ -67,7 +82,7 @@ export default function Footer() {
 
           {socials.length > 0 && (
             <div>
-              <p className="mb-2 micro text-cream/45">Social</p>
+              <p className="mb-2 micro text-white/45">Social</p>
               <ul>
                 {socials.map(([name, url]) => (
                   <li key={name}>
@@ -82,17 +97,17 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-start justify-between gap-3 py-6 sm:flex-row sm:items-center">
-          <p className="micro text-cream/40">
+          <p className="micro text-white/40">
             © {new Date().getFullYear()} {SITE.name}
           </p>
-          <p className="micro text-cream/40">Designed &amp; built in Fiji</p>
+          <p className="micro text-white/40">Designed &amp; built in Fiji</p>
         </div>
       </div>
 
       {/* The oversized sign-off, bled to the edges like the reference's. */}
       <p
         aria-hidden="true"
-        className="select-none px-2 text-center display leading-[0.8] text-cream/[0.07] text-[clamp(3.5rem,19vw,17rem)]"
+        className="select-none px-2 text-center display leading-[0.8] text-white/[0.07] text-[clamp(3.5rem,19vw,17rem)]"
       >
         Website Portfolio
       </p>

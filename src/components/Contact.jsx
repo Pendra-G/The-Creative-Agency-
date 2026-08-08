@@ -27,21 +27,20 @@ export default function Contact() {
   return (
     <section id="contact" ref={root} className="bg-ink pt-20 sm:pt-28 lg:pt-36">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-        <p className="ct-reveal micro text-cream/45">Start a project</p>
+        <p className="ct-reveal micro text-white/45">Start a project</p>
 
-        <h2 className="ct-reveal mt-6 display text-cream text-[clamp(2.4rem,9vw,7rem)]">
+        <h2 className="ct-reveal mt-6 display text-white text-[clamp(2.4rem,9vw,7rem)]">
           Tell me what
           <br />
           it needs to do.
         </h2>
 
-        <p className="ct-reveal mt-6 max-w-xl text-base leading-relaxed text-cream/65 sm:text-lg">
-          One call, thirty minutes, free. You'll get a straight answer on whether one page suits
-          you — and if it doesn't, I'll say so rather than sell you one.
+        <p className="ct-reveal mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
+          One call, thirty minutes, free. You'll get a straight answer on what your site actually needs, and an honest one if that turns out to be less than you expected.
         </p>
 
         <div className="ct-reveal mt-10 flex flex-wrap items-center gap-4">
-          <Pill as="a" href={mailtoHref()} variant="cream">
+          <Pill as="a" href={mailtoHref()} variant="white">
             Email me
           </Pill>
           {SITE.phones.map((p) => (
@@ -49,7 +48,7 @@ export default function Contact() {
               key={p}
               href={telHref(p)}
               data-cursor
-              className="inline-flex min-h-[52px] items-center rounded-pill border border-cream/25 px-6 micro text-cream/75 transition-colors hover:bg-cream hover:text-ink"
+              className="inline-flex min-h-[52px] items-center rounded-pill border border-white/25 px-6 micro text-white/75 transition-colors hover:bg-white hover:text-ink"
             >
               {p}
             </a>

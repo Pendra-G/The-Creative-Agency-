@@ -74,8 +74,8 @@ export default function Work() {
     <section id="work" ref={root} className="bg-ink py-20 sm:py-28 lg:py-36">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="wk-head flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
-          <h2 className="display text-cream text-[clamp(2.4rem,10vw,8rem)]">Selected work</h2>
-          <p className="micro text-cream/50">Two projects · Fiji</p>
+          <h2 className="display text-white text-[clamp(2.4rem,10vw,8rem)]">Selected work</h2>
+          <p className="micro text-white/50">Two projects · Fiji</p>
         </div>
 
         <div className="mt-10 flex flex-col gap-16 sm:mt-14 sm:gap-24">
@@ -102,25 +102,25 @@ export default function Work() {
                 <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
                   <div>
                     <div className="flex items-baseline gap-4">
-                      <span className="micro text-cream/40">{String(p.n).padStart(3, "0")}</span>
-                      <h3 className="display text-cream text-[clamp(2rem,7vw,5rem)] transition-colors group-hover:text-gold">
+                      <span className="micro text-white/40">{String(p.n).padStart(3, "0")}</span>
+                      <h3 className="display text-white text-[clamp(2rem,7vw,5rem)] transition-colors group-hover:text-accent">
                         {p.title}
                       </h3>
                     </div>
-                    <p className="mt-3 max-w-xl text-sm leading-relaxed text-cream/60 sm:text-base">
+                    <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/60 sm:text-base">
                       {p.line}
                     </p>
                   </div>
 
                   <div className="flex flex-col items-start gap-4 lg:items-end">
-                    <p className="micro text-cream/45">
+                    <p className="micro text-white/45">
                       {p.type} · {p.year} · {p.location}
                     </p>
                     <ul className="flex flex-wrap gap-2">
                       {p.scope.map((s) => (
                         <li
                           key={s}
-                          className="rounded-pill border border-cream/20 px-3 py-1.5 micro text-cream/70"
+                          className="rounded-pill border border-white/20 px-3 py-1.5 micro text-white/70"
                         >
                           {s}
                         </li>

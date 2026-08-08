@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { split } from "../utils/anim.js";
-import { Star, Pill, TextLink } from "./ui.jsx";
+import { Pill, TextLink } from "./ui.jsx";
 import { SITE } from "../config.js";
-import HeroVideo from "../assets/Developer_coding_creative_agency…_202607071835.mp4";
-
-const LINES = ["Website", "Portfolio"];
+// TODO(owner): swap this for a screen recording of finished sites scrolling.
+import ReelVideo from "../assets/Developer_coding_creative_agency…_202607071835.mp4";
 
 export default function Hero({ ready = false }) {
   const root = useRef(null);
@@ -17,30 +17,35 @@ export default function Hero({ ready = false }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
-      // Per-character rise, line by line — the reference's wordmark entrance.
       [l1.current, l2.current].forEach((el, i) => {
         const chars = split(el);
-        gsap.set(chars, { yPercent: 115 });
+        gsap.set(chars, { yPercent: 112 });
         gsap.to(chars, {
           yPercent: 0,
-          duration: 1.1,
+          duration: 1.05,
           ease: "power3.out",
-          stagger: 0.026,
-          delay: 0.15 + i * 0.12,
+          stagger: 0.02,
+          delay: 0.1 + i * 0.1,
         });
       });
 
       gsap.from(".hero-fade", {
         opacity: 0,
-        y: 16,
+        y: 18,
         duration: 0.9,
         ease: "power3.out",
-        stagger: 0.12,
-        delay: 0.7,
+        stagger: 0.1,
+        delay: 0.55,
       });
 
-      // The frame settles back as the type arrives.
-      gsap.from(".hero-media", { scale: 1.12, duration: 1.8, ease: "power3.out" });
+      gsap.from(".hero-frame", {
+        opacity: 0,
+        y: 40,
+        scale: 0.97,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: 0.35,
+      });
     }, root);
 
     return () => ctx.revert();
@@ -50,69 +55,83 @@ export default function Hero({ ready = false }) {
     <section
       id="home"
       ref={root}
-      className="relative isolate flex min-h-[100svh] flex-col justify-between overflow-hidden bg-ink pt-24 pb-6"
+      className="relative isolate overflow-hidden bg-ink pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-36"
     >
-      <div className="pointer-events-none absolute inset-0">
-        <video
-          className="hero-media h-full w-full object-cover opacity-50"
-          src={HeroVideo}
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink" />
-      </div>
+      {/* Purple wash instead of a full-bleed video behind the type */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-1/4 left-1/2 h-[70rem] w-[70rem] -translate-x-1/2 bg-accent-glow opacity-70"
+      />
 
-      <div className="relative z-10 flex flex-1 items-center justify-center px-3 sm:px-6">
-        <h1
-          aria-label={`${SITE.name} — one-page animated websites from ${SITE.price}`}
-          className="w-full text-center"
-        >
-          {/* Two lines, each clipped so the characters rise into view */}
-          <span className="block overflow-hidden">
-            <span
-              ref={l1}
-              className="display block text-cream text-[clamp(3.2rem,17vw,15rem)]"
-            >
-              {LINES[0]}
-            </span>
-          </span>
-          <span className="block overflow-hidden">
-            <span
-              ref={l2}
-              className="display block text-cream text-[clamp(3.2rem,17vw,15rem)]"
-            >
-              {LINES[1]}
-            </span>
-          </span>
-        </h1>
-      </div>
+      <div className="relative mx-auto grid w-full max-w-shell grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+        <div>
+          <p className="hero-fade micro text-accent">Websites for small businesses in Fiji</p>
 
-      <div className="relative z-10 mx-auto w-full max-w-shell px-4 sm:px-6">
-        <p className="hero-fade flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center micro text-cream/70">
-          <span>One page</span>
-          <Star className="text-gold" />
-          <span>Fully animated</span>
-          <Star className="text-gold" />
-          <span>Launched fast</span>
-        </p>
-        <div className="hero-fade mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Pill as="a" href="#work" variant="cream">
-            See the work
-          </Pill>
-          <TextLink as="a" href="#pricing">
-            What it costs
-          </TextLink>
+          <h1
+            aria-label="Everything you need. Nothing you don't."
+            className="mt-6"
+          >
+            <span className="block overflow-hidden">
+              <span ref={l1} className="display block text-white text-[clamp(2.6rem,8.5vw,6.5rem)]">
+                Everything you need.
+              </span>
+            </span>
+            <span className="block overflow-hidden">
+              <span ref={l2} className="display block text-accent text-[clamp(2.6rem,8.5vw,6.5rem)]">
+                Nothing you don't.
+              </span>
+            </span>
+          </h1>
+
+          <p className="hero-fade mt-7 max-w-lg text-lg leading-relaxed text-white/70 sm:text-xl">
+            Two to three page websites, properly designed and animated. Live in 14 days, from{" "}
+            <span className="text-white">{SITE.price}</span>.
+          </p>
+
+          {/* Primary CTA is the money action; browsing the work is secondary. */}
+          <div className="hero-fade mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <Pill as={Link} to="/contact" variant="white">
+              Start a project
+            </Pill>
+            <TextLink as="a" href="#work">
+              See the work
+            </TextLink>
+          </div>
+
+          <dl className="hero-fade mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6">
+            {[
+              ["14", "days to live"],
+              ["2–3", "pages"],
+              ["1", "flat price"],
+            ].map(([big, small]) => (
+              <div key={small}>
+                <dt className="display text-2xl text-white sm:text-3xl">{big}</dt>
+                <dd className="mt-1 micro text-white/45">{small}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
-        <div className="hero-fade mt-10 flex items-center justify-between border-t border-cream/15 pt-4 micro text-cream/55">
-          <span>{SITE.location}</span>
-          <span className="hidden sm:inline">Built &amp; launched in two weeks</span>
-          <span className="inline-flex items-center gap-2">
-            Scroll <span aria-hidden="true">↓</span>
-          </span>
+        {/* The reel, in a browser frame */}
+        <div className="hero-frame relative">
+          <div className="absolute -inset-6 -z-10 bg-accent-grad opacity-20 blur-3xl" aria-hidden="true" />
+          <div className="overflow-hidden rounded-card border border-line bg-carbon shadow-[0_40px_120px_-40px_rgba(139,92,246,0.5)]">
+            <div className="flex items-center gap-1.5 border-b border-line px-4 py-3">
+              <span className="h-2.5 w-2.5 rounded-pill bg-white/15" />
+              <span className="h-2.5 w-2.5 rounded-pill bg-white/15" />
+              <span className="h-2.5 w-2.5 rounded-pill bg-white/15" />
+              <span className="ml-3 micro text-white/30">yourbusiness.com.fj</span>
+            </div>
+            <video
+              className="block aspect-[4/3] w-full object-cover sm:aspect-[16/11]"
+              src={ReelVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-label="Preview of a finished website"
+            />
+          </div>
         </div>
       </div>
     </section>

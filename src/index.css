@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 :root{
-  --ink:#010101; --carbon:#0C0C0C; --cream:#FEF9E7; --gold:#F5C518; --line:#242424;
+  --ink:#010101; --carbon:#0C0C0C; --white:#FEF9E7; --accent:#F5C518; --line:#242424;
 }
 
 /* No scroll-behavior:smooth — Lenis drives scrolling and the two fight. */
-html,body{ background:var(--ink); color:var(--cream); -webkit-font-smoothing:antialiased; }
+html,body{ background:var(--ink); color:var(--white); -webkit-font-smoothing:antialiased; }
 body{ min-height:100vh; overflow-x:hidden; cursor:none; font-family:'Archivo',sans-serif; touch-action:manipulation; }
 img,picture,video{ max-width:100%; height:auto; }
 button,input,a{ touch-action:manipulation; }
 @media (hover:none){ body{ cursor:auto; } }
-::selection{ background:var(--gold); color:var(--ink); }
-:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+::selection{ background:var(--accent); color:var(--ink); }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
 
 html.is-locked{ position:relative; overflow:hidden; height:100%; }
 
@@ -27,7 +27,7 @@ html.is-locked{ position:relative; overflow:hidden; height:100%; }
   font-size:0.6875rem; font-weight:500; text-transform:uppercase; letter-spacing:0.14em;
 }
 
-/* Cursor: cream with difference blending so it inverts over the cream panels. */
+/* Cursor: white with difference blending so it inverts over the white panels. */
 .cursor-dot,.cursor-follower{ position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:9999px; transform:translate3d(-100px,-100px,0); will-change:transform; mix-blend-mode:difference; }
 .cursor-dot{ width:6px; height:6px; background:#fff; }
 .cursor-follower{ width:34px; height:34px; border:1px solid #fff; transition:width .3s,height .3s,background .3s; }

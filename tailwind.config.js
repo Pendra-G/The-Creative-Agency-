@@ -4,22 +4,22 @@ export default {
     extend: {
       screens: { xs: '375px' },
       colors: {
-        // Near-black page, cream type, one gold accent. Not pure white/black —
-        // the warmth is what stops it reading as a default dark theme.
         ink: '#010101',
-        carbon: '#0C0C0C',
-        cream: '#FEF9E7',
-        gold: '#F5C518',
-        // legacy aliases so nothing half-migrated explodes mid-build
-        paper: '#FEF9E7',
-        foreground: '#FEF9E7',
-        surface: '#0C0C0C',
-        line: '#242424',
+        carbon: '#0B0B0C',
+        line: '#1F1F22',
+        // Purple carries every accent and gradient on the site.
+        accent: '#A78BFA',
+        'accent-mid': '#8B5CF6',
+        'accent-deep': '#5B21B6',
       },
       fontFamily: { display: ['Archivo', 'sans-serif'], body: ['Archivo', 'sans-serif'] },
       letterSpacing: { tightest: '-0.05em', tighter: '-0.03em' },
       borderRadius: { pill: '9999px', card: '1.25rem', control: '0.75rem' },
       maxWidth: { shell: '96rem' },
+      backgroundImage: {
+        'accent-grad': 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 45%, #5B21B6 100%)',
+        'accent-glow': 'radial-gradient(60% 60% at 50% 40%, rgba(139,92,246,0.35) 0%, rgba(1,1,1,0) 70%)',
+      },
       transitionTimingFunction: {
         reveal: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
         spring: 'cubic-bezier(0.22, 1, 0.36, 1)',

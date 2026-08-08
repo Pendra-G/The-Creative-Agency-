@@ -9,7 +9,7 @@ export function WordRule({ words, className = "" }) {
     <div className={`border-y border-line py-3 ${className}`}>
       <ul className="mx-auto flex max-w-shell items-center justify-between gap-2 px-4 sm:px-6">
         {words.map((w, i) => (
-          <li key={`${w}-${i}`} className="micro whitespace-nowrap text-cream/60">
+          <li key={`${w}-${i}`} className="micro whitespace-nowrap text-white/60">
             {w}
           </li>
         ))}
@@ -27,7 +27,7 @@ export function Marquee({
   direction = "left",
   duration = 38,
   className = "",
-  tone = "cream",
+  tone = "white",
   repeat = 6,
 }) {
   const items = Array.from({ length: repeat }, (_, i) => i);
@@ -43,7 +43,7 @@ export function Marquee({
               <span className="display px-4 text-[clamp(1.6rem,4.6vw,3.4rem)] whitespace-nowrap">
                 {text}
               </span>
-              <Star className={tone === "ink" ? "text-ink/50" : "text-gold"} />
+              <Star className={tone === "ink" ? "text-ink/50" : "text-accent"} />
             </span>
           ))}
         </div>
@@ -53,7 +53,7 @@ export function Marquee({
 
   return (
     <div
-      className={`overflow-hidden ${tone === "ink" ? "text-ink" : "text-cream"} ${className}`}
+      className={`overflow-hidden ${tone === "ink" ? "text-ink" : "text-white"} ${className}`}
       role="presentation"
     >
       {Track}

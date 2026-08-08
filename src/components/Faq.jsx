@@ -9,8 +9,12 @@ const QA = [
     a: "Yes. The site, the files and the domain are yours. There's no lock-in and no monthly fee just to keep it online — you can take it elsewhere any time you like.",
   },
   {
-    q: "What if I need more than one page?",
-    a: "Then a one-pager isn't the right buy, and I'll tell you that on the first call. Extra pages, online shops and booking systems are real work with real costs, so I quote those individually. The quote is free.",
+    q: "Why only two or three pages?",
+    a: "Because it's what most small businesses actually need, and it's the reason the price is what it is. Two or three pages is enough to say who you are, show your work and let people contact you. Beyond that you're usually paying for pages nobody visits.",
+  },
+  {
+    q: "What if I need more than three?",
+    a: "Then I'll say so on the first call rather than squeeze it in. Extra pages, online shops and booking systems are real work with real costs, so I quote those on their own. The quote is free.",
   },
   {
     q: "Who writes the words?",
@@ -18,11 +22,11 @@ const QA = [
   },
   {
     q: "What if I don't have photos?",
-    a: "That's normal and it isn't a problem. A lot of what I build leans on typography, colour and motion rather than photography. Where we do need images, I'll tell you exactly what to take — a phone camera is usually enough.",
+    a: "That's normal and it isn't a problem. A lot of what I build leans on type, colour and motion rather than photography. Where we do need images, I'll tell you exactly what to take. A phone camera is usually enough.",
   },
   {
     q: "How long does it actually take?",
-    a: "About two weeks from the first call to a live site, assuming you can get me your content and feedback in good time. If something's holding it up, you'll hear from me rather than wonder.",
+    a: "14 days from the first call to a live site, assuming you can get me your content and feedback in good time. If something's holding it up, you'll hear from me rather than wonder.",
   },
   {
     q: "How do I pay?",
@@ -52,8 +56,8 @@ export default function Faq() {
     <section id="faq" ref={root} className="bg-ink py-20 sm:py-28 lg:py-36">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="fq-reveal flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
-          <h2 className="display text-cream text-[clamp(2.4rem,10vw,8rem)]">Questions</h2>
-          <p className="micro text-cream/50">The ones people actually ask</p>
+          <h2 className="display text-white text-[clamp(2.4rem,10vw,8rem)]">Questions</h2>
+          <p className="micro text-white/50">The ones people actually ask</p>
         </div>
 
         {/* Native details/summary: accessible and keyboard-operable with no JS. */}
@@ -64,18 +68,18 @@ export default function Faq() {
                 data-cursor
                 className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-6 [&::-webkit-details-marker]:hidden"
               >
-                <h3 className="display text-[clamp(1.3rem,4vw,2.4rem)] text-cream transition-colors group-hover:text-gold">
+                <h3 className="display text-[clamp(1.3rem,4vw,2.4rem)] text-white transition-colors group-hover:text-accent">
                   {q}
                 </h3>
                 <span
                   aria-hidden="true"
-                  className="relative h-4 w-4 shrink-0 text-gold transition-transform duration-300 ease-snap group-open:rotate-45"
+                  className="relative h-4 w-4 shrink-0 text-accent transition-transform duration-300 ease-snap group-open:rotate-45"
                 >
                   <span className="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 bg-current" />
                   <span className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-current" />
                 </span>
               </summary>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-cream/65 sm:text-lg">
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/65 sm:text-lg">
                 {a}
               </p>
             </details>

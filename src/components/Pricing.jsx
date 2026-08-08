@@ -6,9 +6,9 @@ import { SITE, mailtoHref } from "../config.js";
 gsap.registerPlugin(ScrollTrigger);
 
 const INCLUDED = [
-  "One page, animated end to end",
-  "Designed and built for you — no template",
-  "Works properly on phones, fast on 4G",
+  "Up to three pages, animated end to end",
+  "Designed and built for you, never a template",
+  "Works properly on phones and loads fast on 4G",
   "Enquiry form and your socials wired up",
   "Thirty days of small changes after launch",
   "The files, the domain and the site are yours",
@@ -52,7 +52,7 @@ export default function Pricing() {
   }, []);
 
   return (
-    <section id="pricing" ref={root} className="bg-cream py-20 text-ink sm:py-28 lg:py-36">
+    <section id="pricing" ref={root} className="bg-white py-20 text-ink sm:py-28 lg:py-36">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <p className="pc-reveal micro text-ink/45">What it costs</p>
 
@@ -63,15 +63,16 @@ export default function Pricing() {
               <span className="pc-num display text-[clamp(5rem,20vw,14rem)] text-ink">499</span>
             </p>
             <p className="pc-reveal mt-2 display text-[clamp(1.2rem,3.6vw,2.2rem)] text-ink/70">
-              One page. One price.
+              Up to three pages. One price.
             </p>
             <p className="pc-reveal mt-6 max-w-md text-base leading-relaxed text-ink/70 sm:text-lg">
               Paid once, not monthly. There is no second tier and nothing held back for a bigger
-              package — this is the whole thing.
+              package. Keeping sites small is what keeps them quick to build, which is what keeps
+              this number where it is.
             </p>
 
             <div className="pc-reveal mt-8">
-              <Pill as="a" href={mailtoHref(`One-page website — ${SITE.price}`)} variant="gold">
+              <Pill as="a" href={mailtoHref(`One-page website — ${SITE.price}`)} variant="accent">
                 Start a project
               </Pill>
             </div>
@@ -85,14 +86,14 @@ export default function Pricing() {
                   key={f}
                   className="flex items-start gap-4 border-b border-ink/15 py-4 text-base text-ink/80 sm:text-lg"
                 >
-                  <span aria-hidden="true" className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-pill bg-gold" />
+                  <span aria-hidden="true" className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-pill bg-accent" />
                   {f}
                 </li>
               ))}
             </ul>
             <p className="mt-6 text-sm leading-relaxed text-ink/55">
-              Need more than one page, a shop or a booking system? That's real work with a real cost,
-              so I quote it individually. Ask and you'll get a fixed number, free.
+              Need more than three pages, an online shop or a booking system? That's real work with a
+              real cost, so I quote it on its own. Ask and you'll get a fixed number, free.
             </p>
           </div>
         </div>

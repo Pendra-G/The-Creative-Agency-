@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SITE } from "../config.js";
 import { getLenis, startScroll, stopScroll } from "../lib/scroll.js";
 
 const EXIT_MS = 420;
 
 const NAV = [
-  ["Home", "#home", null],
-  ["What you get", "#what", null],
-  ["Work", "#work", 2],
-  ["How it works", "#process", null],
-  ["Pricing", "#pricing", null],
-  ["Contact", "#contact", null],
+  ["Home", "/", null],
+  ["What you get", "/#what", null],
+  ["What we build", "/#build", 6],
+  ["Work", "/#work", 2],
+  ["Pricing", "/#pricing", null],
+  ["About", "/about", null],
+  ["Contact", "/contact", null],
 ];
 
 function useFijiClock(active) {
@@ -34,6 +36,8 @@ function useFijiClock(active) {
 }
 
 export default function NavPanel({ open, onClose }) {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [mounted, setMounted] = useState(open);
   const [shown, setShown] = useState(false);
   const time = useFijiClock(mounted);
@@ -60,17 +64,25 @@ export default function NavPanel({ open, onClose }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  // Close first, then scroll — Lenis is stopped while the panel is open, so
-  // letting the global anchor handler fire immediately would go nowhere.
+  // Close first, then move — Lenis is stopped while the panel is open, so
+  // acting immediately would scroll nowhere.
   const go = (e, href) => {
     e.preventDefault();
     onClose();
-    const target = document.querySelector(href);
-    if (!target) return;
     setTimeout(() => {
-      const lenis = getLenis();
-      if (lenis) lenis.scrollTo(target, { offset: -80 });
-      else target.scrollIntoView({ behavior: "smooth" });
+      if (href.startsWith("/#")) {
+        const hash = href.slice(1);
+        if (pathname === "/") {
+          const target = document.querySelector(hash);
+          const lenis = getLenis();
+          if (target && lenis) lenis.scrollTo(target, { offset: -80 });
+          else target?.scrollIntoView({ behavior: "smooth" });
+        } else {
+          navigate(`/${hash}`);
+        }
+        return;
+      }
+      navigate(href);
     }, EXIT_MS - 60);
   };
 
@@ -99,13 +111,13 @@ export default function NavPanel({ open, onClose }) {
           {/* Menu */}
           <div className="border-b border-line px-6 pb-10 pt-6 sm:px-10">
             <div className="flex items-start justify-between">
-              <p className="micro text-cream/45">Menu</p>
+              <p className="micro text-white/45">Menu</p>
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close menu"
                 data-cursor
-                className="-m-3 p-3 text-cream transition-colors hover:text-gold"
+                className="-m-3 p-3 text-white transition-colors hover:text-accent"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"
                   strokeLinecap="round" className="h-6 w-6" aria-hidden="true">
@@ -131,10 +143,10 @@ export default function NavPanel({ open, onClose }) {
                       href={href}
                       onClick={(e) => go(e, href)}
                       data-cursor
-                      className="flex items-baseline gap-2 py-1 font-display text-[clamp(1.9rem,5.5vw,2.6rem)] font-medium leading-[1.25] tracking-tighter text-cream/85 transition-colors hover:text-cream"
+                      className="flex items-baseline gap-2 py-1 font-display text-[clamp(1.9rem,5.5vw,2.6rem)] font-medium leading-[1.25] tracking-tighter text-white/85 transition-colors hover:text-white"
                     >
                       {label}
-                      {count != null && <span className="text-cream/35">[{count}]</span>}
+                      {count != null && <span className="text-white/35">[{count}]</span>}
                     </a>
                   </li>
                 ))}
@@ -144,25 +156,25 @@ export default function NavPanel({ open, onClose }) {
 
           {/* Let's talk */}
           <div className="border-b border-line px-6 py-10 sm:px-10">
-            <p className="micro text-cream/45">Let's talk</p>
+            <p className="micro text-white/45">Let's talk</p>
             <a
               href={`mailto:${SITE.email}`}
               data-cursor
-              className="mt-3 inline-flex items-baseline gap-2 border-b border-cream/25 pb-2 font-display text-[clamp(1.2rem,4vw,1.9rem)] font-medium tracking-tighter text-cream transition-colors hover:border-gold hover:text-gold"
+              className="mt-3 inline-flex items-baseline gap-2 border-b border-white/25 pb-2 font-display text-[clamp(1.2rem,4vw,1.9rem)] font-medium tracking-tighter text-white transition-colors hover:border-accent hover:text-accent"
             >
               {SITE.email}
-              <span aria-hidden="true" className="text-cream/45">+</span>
+              <span aria-hidden="true" className="text-white/45">+</span>
             </a>
-            <p className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 micro text-cream/55">
+            <p className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 micro text-white/55">
               <span>{SITE.location}</span>
-              <span className="tabular-nums text-cream/80">{time}</span>
+              <span className="tabular-nums text-white/80">{time}</span>
             </p>
           </div>
 
           {/* Socials */}
           {socials.length > 0 && (
             <div className="px-6 py-10 sm:px-10">
-              <p className="micro text-cream/45">Socials</p>
+              <p className="micro text-white/45">Socials</p>
               <ul className="mt-4 flex flex-wrap gap-3">
                 {socials.map(([name, url]) => (
                   <li key={name}>
@@ -171,7 +183,7 @@ export default function NavPanel({ open, onClose }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-cursor
-                      className="inline-flex min-h-[44px] items-center rounded-pill border border-cream/20 px-4 micro text-cream/70 transition-colors hover:bg-cream hover:text-ink"
+                      className="inline-flex min-h-[44px] items-center rounded-pill border border-white/20 px-4 micro text-white/70 transition-colors hover:bg-white hover:text-ink"
                     >
                       {name}
                     </a>
@@ -183,7 +195,7 @@ export default function NavPanel({ open, onClose }) {
         </div>
 
         <div className="border-t border-line px-6 py-5 sm:px-10">
-          <p className="micro text-cream/40">
+          <p className="micro text-white/40">
             © {new Date().getFullYear()} {SITE.name} · Built in Fiji
           </p>
         </div>

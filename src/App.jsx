@@ -1,18 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Cursor from "./components/Cursor.jsx";
 import SmoothScroll from "./components/SmoothScroll.jsx";
 import PageLoader from "./components/PageLoader.jsx";
 import TopBar from "./components/TopBar.jsx";
-import Hero from "./components/Hero.jsx";
-import { WordRule, Marquee } from "./components/Strips.jsx";
-import Pillars from "./components/Pillars.jsx";
-import Work from "./components/Work.jsx";
-import About from "./components/About.jsx";
-import Process from "./components/Process.jsx";
-import Pricing from "./components/Pricing.jsx";
-import Faq from "./components/Faq.jsx";
-import Contact from "./components/Contact.jsx";
 import Footer from "./components/Footer.jsx";
+import Home from "./pages/Home.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import { getLenis } from "./lib/scroll.js";
+
+/**
+ * On navigation: jump to the top, then let ScrollTrigger re-measure. Without
+ * the refresh, triggers created on the previous route keep their old
+ * positions and every reveal on the new page fires at the wrong moment.
+ */
+function RouteChange() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    const lenis = getLenis();
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        requestAnimationFrame(() => {
+          if (lenis) lenis.scrollTo(target, { offset: -80, immediate: true });
+          else target.scrollIntoView();
+        });
+      }
+    } else if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+
+    const id = setTimeout(() => ScrollTrigger.refresh(), 120);
+    return () => clearTimeout(id);
+  }, [pathname, hash]);
+
+  return null;
+}
 
 export default function App() {
   const [ready, setReady] = useState(false);
@@ -22,21 +51,14 @@ export default function App() {
       <Cursor />
       <PageLoader onDone={() => setReady(true)} />
       <TopBar ready={ready} />
+      <RouteChange />
       <main id="main" className={`app ${ready ? "ready" : ""}`}>
-        {/* What is it → what do I get → can they do it → who are they →
-            how does it work → what's it cost → what about… → how do I start */}
-        <Hero ready={ready} />
-        <WordRule words={["One page", "Fully animated", "Live in two weeks", "Built in Fiji"]} />
-        <Pillars />
-        <Work />
-        <div className="border-y border-line py-4">
-          <Marquee text="Available for work" duration={34} direction="right" />
-        </div>
-        <About />
-        <Process />
-        <Pricing />
-        <Faq />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<Home ready={ready} />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
         <Footer />
       </main>
     </SmoothScroll>

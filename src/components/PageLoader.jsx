@@ -73,7 +73,7 @@ export default function PageLoader({ onDone }) {
       role="status"
       aria-live="polite"
       aria-label="Loading"
-      className="fixed inset-0 z-[120] flex flex-col items-center justify-center gap-10 bg-ink text-cream"
+      className="fixed inset-0 z-[120] flex flex-col items-center justify-center gap-10 bg-ink text-white"
       style={{
         transform: exiting ? "translateY(-100%)" : "translateY(0%)",
         transition: `transform ${EXIT_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
@@ -87,31 +87,31 @@ export default function PageLoader({ onDone }) {
           transition: "opacity 400ms ease-out, transform 400ms ease-out",
         }}
       >
-        <p className="display text-[clamp(2rem,9vw,5rem)] leading-[0.85] text-cream">
+        <p className="display text-[clamp(2rem,9vw,5rem)] leading-[0.85] text-white">
           Website
           <br />
           Portfolio
         </p>
-        <p className="flex items-center gap-2 micro text-cream/55">
-          One page <Star className="text-gold" /> Launched fast
+        <p className="flex items-center gap-2 micro text-white/55">
+          Small sites <Star className="text-accent" /> Launched fast
         </p>
       </div>
 
       <div className="flex w-[min(22rem,72vw)] flex-col gap-3">
-        <div className="h-px w-full bg-cream/15">
+        <div className="h-px w-full bg-white/15">
           {/* scaleX rather than width: this updates every frame while loading,
               and transforms stay off the layout path. */}
           <div
-            className="h-full w-full origin-left bg-gold"
+            className="h-full w-full origin-left bg-accent"
             style={{
               transform: `scaleX(${progress / 100})`,
               transition: "transform .1s ease-out",
             }}
           />
         </div>
-        <div className="flex items-center justify-between micro text-cream/45">
+        <div className="flex items-center justify-between micro text-white/45">
           <span>Loading</span>
-          <span className="tabular-nums text-cream/80">{String(progress).padStart(3, "0")}</span>
+          <span className="tabular-nums text-white/80">{String(progress).padStart(3, "0")}</span>
         </div>
       </div>
     </div>

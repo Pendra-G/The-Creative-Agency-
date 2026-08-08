@@ -17,11 +17,19 @@ export default function SmoothScroll({ children }) {
     let tick;
     let onClick;
 
+    // Mobile browsers resize the viewport when their chrome hides on scroll.
+    // Without this, ScrollTrigger recalculates mid-scroll and everything jumps.
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
     try {
       lenis = new Lenis({
-        duration: 1.15,
+        duration: 1.05,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
+        // Damps trackpad/wheel spikes so scrubbed timelines glide instead of
+        // stepping frame to frame.
+        wheelMultiplier: 0.9,
+        touchMultiplier: 1.6,
       });
 
       setLenis(lenis);
