@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MaskHeading } from "./Reveal.jsx";
 gsap.registerPlugin(ScrollTrigger);
 
 const STEPS = [
@@ -29,7 +30,7 @@ export default function Process() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".pr-head", {
+      gsap.from(".pr-head p", {
         y: 60,
         opacity: 0,
         duration: 1,
@@ -62,7 +63,7 @@ export default function Process() {
     <section id="process" ref={root} className="bg-ink py-20 sm:py-28 lg:py-36">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="pr-head flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
-          <h2 className="display text-white text-[clamp(2.4rem,10vw,8rem)]">How it works</h2>
+          <MaskHeading text="How it works" className="display text-white text-[clamp(2.4rem,10vw,8rem)]" />
           <p className="micro text-white/50">Three steps · 14 days</p>
         </div>
 

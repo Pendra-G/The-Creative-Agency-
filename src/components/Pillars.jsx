@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MaskHeading } from "./Reveal.jsx";
 gsap.registerPlugin(ScrollTrigger);
 
 const CARDS = [
@@ -110,7 +112,7 @@ export default function Pillars() {
     >
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <h2 className="display text-white text-[clamp(2rem,7vw,5rem)]">What you actually get</h2>
+          <MaskHeading text="What you actually get" className="display text-white text-[clamp(2rem,7vw,5rem)]" />
           <p className="max-w-xs text-sm leading-relaxed text-white/55 sm:text-base">
             One service, done to a standard. No tiers, no upsell path.
           </p>
@@ -130,15 +132,39 @@ export default function Pillars() {
           {CARDS.map((c) => (
             <article
               key={c.n}
-              className="pl-card flex w-[78vw] shrink-0 snap-start flex-col justify-between rounded-card border border-line bg-carbon p-6 xs:w-[70vw] sm:w-[52vw] sm:p-8 lg:h-[24rem] lg:w-[24rem] lg:will-change-transform"
+              className="pl-card flex w-[78vw] shrink-0 snap-start flex-col justify-between rounded-card border border-line bg-carbon p-6 xs:w-[70vw] sm:w-[52vw] sm:p-8 lg:h-[26rem] lg:w-[30rem] lg:will-change-transform"
             >
               <span className="micro text-accent">{String(c.n).padStart(2, "0")}</span>
               <div className="mt-14 lg:mt-0">
-                <h3 className="display text-[clamp(1.6rem,5vw,2.4rem)] text-white">{c.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-white/60 sm:text-base">{c.body}</p>
+                <h3 className="display text-[clamp(1.6rem,5vw,2.6rem)] text-white">{c.title}</h3>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60 sm:text-base">
+                  {c.body}
+                </p>
               </div>
             </article>
           ))}
+
+          {/* Closing card: gives the row enough width to be worth pinning, and
+              puts an action at the end of the sequence instead of a dead stop. */}
+          <article className="pl-card relative flex w-[78vw] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-card bg-accent-grad p-6 text-ink xs:w-[70vw] sm:w-[52vw] sm:p-8 lg:h-[26rem] lg:w-[30rem] lg:will-change-transform">
+            <span className="micro text-ink/60">05</span>
+            <div className="mt-14 lg:mt-0">
+              <h3 className="display text-[clamp(1.6rem,5vw,2.6rem)] text-ink">
+                That's the whole offer.
+              </h3>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/75 sm:text-base">
+                No tiers, no add-ons, nothing held back. If it suits you, the next step is a
+                half-hour call.
+              </p>
+              <Link
+                to="/contact"
+                data-cursor
+                className="mt-6 inline-flex min-h-[48px] items-center rounded-pill bg-ink px-6 micro text-white transition-transform duration-300 ease-snap hover:scale-[1.04]"
+              >
+                Start a project
+              </Link>
+            </div>
+          </article>
         </div>
       </div>
     </section>

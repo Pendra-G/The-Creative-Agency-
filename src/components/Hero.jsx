@@ -46,6 +46,18 @@ export default function Hero({ ready = false }) {
         ease: "power3.out",
         delay: 0.35,
       });
+
+      // Exit parallax: the copy and the frame leave at different rates, so the
+      // hero feels like layered depth rather than one flat block sliding away.
+      const exit = {
+        trigger: root.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: 0.8,
+      };
+      gsap.to(".hero-copy", { yPercent: -16, opacity: 0.25, ease: "none", scrollTrigger: exit });
+      gsap.to(".hero-frame", { yPercent: 12, ease: "none", scrollTrigger: exit });
+      gsap.to(".hero-glow", { yPercent: 24, opacity: 0.2, ease: "none", scrollTrigger: exit });
     }, root);
 
     return () => ctx.revert();
@@ -60,11 +72,11 @@ export default function Hero({ ready = false }) {
       {/* Purple wash instead of a full-bleed video behind the type */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-1/4 left-1/2 h-[70rem] w-[70rem] -translate-x-1/2 bg-accent-glow opacity-70"
+        className="hero-glow pointer-events-none absolute -top-1/4 left-1/2 h-[70rem] w-[70rem] -translate-x-1/2 bg-accent-glow opacity-70"
       />
 
       <div className="relative mx-auto grid w-full max-w-shell grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
-        <div>
+        <div className="hero-copy">
           <p className="hero-fade micro text-accent">Websites for small businesses in Fiji</p>
 
           <h1

@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextLink } from "./ui.jsx";
+import { MaskHeading } from "./Reveal.jsx";
 import PLLFI from "../assets/PLLFI.png";
 import TropicXImage from "../assets/TropicX.png";
 gsap.registerPlugin(ScrollTrigger);
@@ -37,7 +38,7 @@ export default function Work() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
-      gsap.from(".wk-head", {
+      gsap.from(".wk-head p", {
         y: 70,
         opacity: 0,
         duration: 1,
@@ -74,7 +75,7 @@ export default function Work() {
     <section id="work" ref={root} className="bg-ink py-20 sm:py-28 lg:py-36">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="wk-head flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
-          <h2 className="display text-white text-[clamp(2.4rem,10vw,8rem)]">Selected work</h2>
+          <MaskHeading text="Selected work" className="display text-white text-[clamp(2.4rem,10vw,8rem)]" />
           <p className="micro text-white/50">Two projects · Fiji</p>
         </div>
 

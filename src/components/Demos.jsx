@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextLink } from "./ui.jsx";
+import { MaskHeading } from "./Reveal.jsx";
 import { mailtoHref } from "../config.js";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -104,7 +105,7 @@ export default function Demos() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
-      gsap.from(".dm-head", {
+      gsap.from(".dm-head p", {
         y: 50,
         opacity: 0,
         duration: 0.9,
@@ -127,9 +128,7 @@ export default function Demos() {
     <section id="build" ref={root} className="bg-ink py-20 sm:py-28 lg:py-32">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="dm-head max-w-2xl">
-          <h2 className="display text-white text-[clamp(2rem,7vw,4.5rem)]">
-            What we build
-          </h2>
+          <MaskHeading text="What we build" className="display text-white text-[clamp(2rem,7vw,4.5rem)]" />
           <p className="mt-5 text-base leading-relaxed text-white/60 sm:text-lg">
             Mostly small businesses that need to be found, trusted and contacted. If your customers
             look you up before they walk in, this is for you.

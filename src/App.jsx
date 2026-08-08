@@ -6,6 +6,7 @@ import SmoothScroll from "./components/SmoothScroll.jsx";
 import PageLoader from "./components/PageLoader.jsx";
 import TopBar from "./components/TopBar.jsx";
 import Footer from "./components/Footer.jsx";
+import { ScrollProgress } from "./components/Reveal.jsx";
 import Home from "./pages/Home.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
@@ -50,6 +51,7 @@ export default function App() {
     <SmoothScroll>
       <Cursor />
       <PageLoader onDone={() => setReady(true)} />
+      <ScrollProgress />
       <TopBar ready={ready} />
       <RouteChange />
       <main id="main" className={`app ${ready ? "ready" : ""}`}>
