@@ -4,10 +4,14 @@
 // build — replace it with the real inbox before launch. Leaving a social URL
 // empty simply hides that link rather than rendering a dead "#".
 export const SITE = {
-  name: "The Creative Agency",
+  name: "Website Portfolio",
+  // TODO(owner): add your name so the "who's behind it" section can sign off.
+  // Left blank it simply hides the signature rather than inventing one.
+  owner: "",
   email: "hello@creative.agency",
   phones: ["+679 2921000", "+679 8091770"],
   location: "Viti Levu, Fiji",
+  price: "FJ$499",
   socials: {
     Facebook: "https://www.facebook.com/profile.php?id=61565173942247",
     Instagram: "",
@@ -20,7 +24,7 @@ export const telHref = (phone) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 // Enquiry links open the visitor's mail client with the subject pre-filled.
 // Swap this for a real form endpoint (Formspree, Netlify Forms, etc.) when
 // one is available — see the notes in the handover.
-export const mailtoHref = (subject = "Website enquiry", body = "") =>
+export const mailtoHref = (subject = "One-page website enquiry", body = "") =>
   `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}${
     body ? `&body=${encodeURIComponent(body)}` : ""
   }`;

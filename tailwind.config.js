@@ -4,33 +4,24 @@ export default {
     extend: {
       screens: { xs: '375px' },
       colors: {
-        // Light world
-        paper: '#FFFFFF',
-        foreground: '#111111',
-        surface: '#F1F0EE',
-        surface2: '#E3E2DF',
-        line: '#E6E5E2',
-        muted: '#8D8D8D',
-        subtle: '#B6B6B6',
-        // Dark anchors (hero, showcase, work, footer)
-        ink: '#0A0A0A',
-        carbon: '#111111',
-        // Single accent
-        accent: '#B15F2C',
-        'accent-from': '#CF8047',
-        'accent-to': '#97501F',
-        // Legacy alias: `bone` still reads as the light surface across the app.
-        bone: '#F1F0EE',
+        // Near-black page, cream type, one gold accent. Not pure white/black —
+        // the warmth is what stops it reading as a default dark theme.
+        ink: '#010101',
+        carbon: '#0C0C0C',
+        cream: '#FEF9E7',
+        gold: '#F5C518',
+        // legacy aliases so nothing half-migrated explodes mid-build
+        paper: '#FEF9E7',
+        foreground: '#FEF9E7',
+        surface: '#0C0C0C',
+        line: '#242424',
       },
-      fontFamily: { display: ['Onest', 'sans-serif'], body: ['Onest', 'sans-serif'] },
-      letterSpacing: { tightest: '-0.02em' },
-      borderRadius: { pill: '9999px', card: '2rem', 'card-sm': '1.25rem', control: '0.875rem' },
-      maxWidth: { shell: '88rem' },
-      fontSize: { watermark: '13rem' },
+      fontFamily: { display: ['Archivo', 'sans-serif'], body: ['Archivo', 'sans-serif'] },
+      letterSpacing: { tightest: '-0.05em', tighter: '-0.03em' },
+      borderRadius: { pill: '9999px', card: '1.25rem', control: '0.75rem' },
+      maxWidth: { shell: '96rem' },
       transitionTimingFunction: {
-        // The reference's spring feels, as curves.
         reveal: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
-        word: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
         spring: 'cubic-bezier(0.22, 1, 0.36, 1)',
         snap: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
       },

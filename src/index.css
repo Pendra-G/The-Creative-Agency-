@@ -3,60 +3,49 @@
 @tailwind utilities;
 
 :root{
-  --paper:#FFFFFF; --foreground:#111111; --surface:#F1F0EE; --surface-2:#E3E2DF;
-  --line:#E6E5E2; --muted:#8D8D8D; --subtle:#B6B6B6;
-  --ink:#0A0A0A; --carbon:#111111;
-  --accent:#B15F2C; --accent-from:#CF8047; --accent-to:#97501F;
+  --ink:#010101; --carbon:#0C0C0C; --cream:#FEF9E7; --gold:#F5C518; --line:#242424;
 }
 
-/* No scroll-behavior:smooth — Lenis drives scrolling and the two fight.
-   Reduced-motion users fall back to native instant jumps, which is correct. */
-html,body{ background:var(--paper); color:var(--foreground); -webkit-font-smoothing:antialiased; }
-body{ min-height:100vh; overflow-x:hidden; cursor:none; font-family:'Onest',sans-serif; touch-action:manipulation; }
+/* No scroll-behavior:smooth — Lenis drives scrolling and the two fight. */
+html,body{ background:var(--ink); color:var(--cream); -webkit-font-smoothing:antialiased; }
+body{ min-height:100vh; overflow-x:hidden; cursor:none; font-family:'Archivo',sans-serif; touch-action:manipulation; }
 img,picture,video{ max-width:100%; height:auto; }
 button,input,a{ touch-action:manipulation; }
 @media (hover:none){ body{ cursor:auto; } }
-::selection{ background:var(--accent); color:#fff; }
-:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+::selection{ background:var(--gold); color:var(--ink); }
+:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 
-/* Scroll lock used by the intro loader. */
 html.is-locked{ position:relative; overflow:hidden; height:100%; }
 
-/* Custom cursor. Both layers are white with difference blending, so the ring
-   reads black on light sections and white on the dark anchors — one cursor,
-   both worlds. */
+/* The display voice: enormous, tight, uppercase, leading under 1. */
+.display{
+  font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
+  letter-spacing:-0.05em; line-height:0.85;
+}
+/* Micro labels used throughout, mirroring the reference's small caps marks. */
+.micro{
+  font-size:0.6875rem; font-weight:500; text-transform:uppercase; letter-spacing:0.14em;
+}
+
+/* Cursor: cream with difference blending so it inverts over the cream panels. */
 .cursor-dot,.cursor-follower{ position:fixed; top:0; left:0; pointer-events:none; z-index:9999; border-radius:9999px; transform:translate3d(-100px,-100px,0); will-change:transform; mix-blend-mode:difference; }
 .cursor-dot{ width:6px; height:6px; background:#fff; }
-.cursor-follower{ width:36px; height:36px; border:1px solid #fff; transition:width .3s,height .3s,background .3s; }
-.cursor-follower.hovering{ width:70px; height:70px; background:#fff; }
+.cursor-follower{ width:34px; height:34px; border:1px solid #fff; transition:width .3s,height .3s,background .3s; }
+.cursor-follower.hovering{ width:64px; height:64px; background:#fff; }
 @media (hover:none){ .cursor-dot,.cursor-follower{ display:none; } }
 
 .app{ opacity:0; transition:opacity .8s ease; } .app.ready{ opacity:1; }
 
-.marquee-tile{ width:420px; height:270px; border-radius:1.25rem; object-fit:cover; flex-shrink:0; background:var(--carbon); }
-@media (max-width:640px){ .marquee-tile{ width:280px; height:180px; } }
-@media (max-width:480px){ .marquee-tile{ width:200px; height:130px;  } }
-
-/* Pill button, the reference's primary control. */
-.link-btn{ display:inline-flex; align-items:center; gap:.75rem; border-radius:9999px; font-family:'Onest',sans-serif; font-weight:500; font-size:.875rem; padding:.875rem 1.75rem; min-height:44px; will-change:transform; transition:background .3s,color .3s,border-color .3s; }
-.link-btn.outline{ border:1px solid var(--line); background:transparent; color:var(--foreground); }
-.link-btn.outline:hover{ background:var(--surface); }
-
-/* Floating decorative renders */
-@keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
-@keyframes floatYSlow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-.float { animation: floatY 3.6s ease-in-out infinite; }
-.float-slow { animation: floatYSlow 5s ease-in-out infinite; }
-.float-fast { animation: floatY 2.6s ease-in-out infinite; }
+/* Marquee tracks */
+.mq-track{ display:flex; align-items:center; width:max-content; will-change:transform; }
+@keyframes mq-left { from { transform:translate3d(0,0,0); } to { transform:translate3d(-50%,0,0); } }
+@keyframes mq-right { from { transform:translate3d(-50%,0,0); } to { transform:translate3d(0,0,0); } }
+.mq-left{ animation:mq-left var(--mq-dur,38s) linear infinite; }
+.mq-right{ animation:mq-right var(--mq-dur,38s) linear infinite; }
+@media (prefers-reduced-motion: reduce){ .mq-left,.mq-right{ animation:none; } }
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{ animation-duration:.001ms!important; transition-duration:.001ms!important; }
   .cursor-dot,.cursor-follower{ display:none; }
   body{ cursor:auto; }
-}
-
-@layer components {
-  @media (max-width: 374px) {
-    input, button, a { min-height: 44px; }
-  }
 }

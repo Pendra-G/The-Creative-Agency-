@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { LogoMark } from "./ui.jsx";
+import { Star } from "./ui.jsx";
 import { startScroll, stopScroll } from "../lib/scroll.js";
 
-const FILL_MS = 1300;
+const FILL_MS = 1200;
 const EXIT_MS = 700;
 
 // t<.5 ? 4t³ : 1-((-2t+2)³)/2
@@ -42,7 +42,6 @@ export default function PageLoader({ onDone }) {
     };
 
     if (reduced) {
-      // No theatre for reduced-motion visitors — hand the page over immediately.
       leave();
     } else {
       const step = (now) => {
@@ -63,7 +62,6 @@ export default function PageLoader({ onDone }) {
       if (raf) cancelAnimationFrame(raf);
       if (exitTimer) clearTimeout(exitTimer);
       if (failsafe) clearTimeout(failsafe);
-      // Never leave the page locked if this unmounts mid-flight.
       startScroll();
     };
   }, []);
@@ -75,39 +73,40 @@ export default function PageLoader({ onDone }) {
       role="status"
       aria-live="polite"
       aria-label="Loading"
-      className="fixed inset-0 z-[120] flex flex-col items-center justify-center gap-8 bg-ink text-paper"
+      className="fixed inset-0 z-[120] flex flex-col items-center justify-center gap-10 bg-ink text-cream"
       style={{
         transform: exiting ? "translateY(-100%)" : "translateY(0%)",
         transition: `transform ${EXIT_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
       }}
     >
       <div
-        className="flex flex-col items-center gap-5 text-center px-6"
+        className="flex flex-col items-center gap-4 px-6 text-center"
         style={{
           opacity: exiting ? 0 : 1,
           transform: exiting ? "translateY(-12px)" : "translateY(0)",
           transition: "opacity 400ms ease-out, transform 400ms ease-out",
         }}
       >
-        <p className="flex items-center gap-3 text-2xl font-semibold sm:text-3xl">
-          <LogoMark className="text-3xl text-accent-from" />
-          The Creative Agency
+        <p className="display text-[clamp(2rem,9vw,5rem)] leading-[0.85] text-cream">
+          Website
+          <br />
+          Portfolio
         </p>
-        <p className="max-w-[24ch] text-sm text-paper/55">One page. Built to move.</p>
+        <p className="flex items-center gap-2 micro text-cream/55">
+          One page <Star className="text-gold" /> Launched fast
+        </p>
       </div>
 
       <div className="flex w-[min(22rem,72vw)] flex-col gap-3">
-        {/* scaleX rather than width: this runs while the page is still parsing
-            JS and fetching fonts, so it must not trigger layout each tick. */}
-        <div className="h-px w-full overflow-hidden bg-paper/15">
+        <div className="h-px w-full bg-cream/15">
           <div
-            className="h-full w-full origin-left bg-accent-from"
-            style={{ transform: `scaleX(${progress / 100})`, transition: "transform .1s ease-out" }}
+            className="h-full bg-gold"
+            style={{ width: `${progress}%`, transition: "width .1s ease-out" }}
           />
         </div>
-        <div className="flex items-center justify-between text-xs font-medium uppercase tracking-[0.05em] text-paper/45">
+        <div className="flex items-center justify-between micro text-cream/45">
           <span>Loading</span>
-          <span className="tabular-nums text-paper/80">{String(progress).padStart(3, "0")}</span>
+          <span className="tabular-nums text-cream/80">{String(progress).padStart(3, "0")}</span>
         </div>
       </div>
     </div>

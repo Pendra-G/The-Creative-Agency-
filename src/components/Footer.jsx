@@ -1,21 +1,20 @@
-import { PillButton, LogoMark } from "./ui.jsx";
 import { SITE, telHref, mailtoHref } from "../config.js";
 
 const LINKS = [
-  ["What we build", "#offer"],
-  ["Motion showcase", "#showcase"],
-  ["Process", "#process"],
-  ["Pricing", "#packages"],
+  ["What you get", "#what"],
   ["Work", "#work"],
+  ["How it works", "#process"],
+  ["Pricing", "#pricing"],
+  ["Questions", "#faq"],
 ];
 
-function AnimatedLink({ href, children, external = false }) {
+function FooterLink({ href, children, external = false }) {
   return (
     <a
       href={href}
       data-cursor
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="inline-flex min-h-[44px] items-center text-sm text-paper/65 transition-all duration-300 ease-snap hover:translate-x-1 hover:text-paper"
+      className="inline-flex min-h-[44px] items-center micro text-cream/60 transition-all duration-300 ease-snap hover:translate-x-1 hover:text-gold"
     >
       {children}
     </a>
@@ -23,65 +22,44 @@ function AnimatedLink({ href, children, external = false }) {
 }
 
 export default function Footer() {
-  // Empty entries in SITE.socials are hidden rather than rendered as dead links.
   const socials = Object.entries(SITE.socials).filter(([, url]) => Boolean(url));
 
   return (
-    <footer id="footer" className="relative overflow-hidden rounded-t-card bg-ink text-paper">
-      <div className="relative z-10 mx-auto max-w-shell px-5 pb-10 pt-20 sm:px-8 lg:pt-24">
-        {/* CTA */}
-        <div className="flex flex-col gap-8 border-b border-paper/10 pb-16 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="max-w-[16ch] font-display text-[clamp(2rem,7vw,3.75rem)] font-semibold leading-[0.95] tracking-tightest">
-            Have a project in mind? Let's get to work.
-          </h2>
-          <PillButton
-            as="a"
-            href={mailtoHref("Website enquiry")}
-            variant="light"
-            withArrow
-            arrow="up-right"
-            className="shrink-0"
-          >
-            Start a project
-          </PillButton>
-        </div>
-
-        {/* Columns */}
-        <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <p className="flex items-center gap-2 text-lg font-semibold">
-              <LogoMark className="text-xl text-accent-from" />
-              {SITE.name}
-            </p>
-            <p className="mt-4 max-w-[20rem] text-sm leading-relaxed text-paper/55">
-              One-page animated websites for Pacific businesses, from FJ$499. Designed and built in
-              Fiji.
-            </p>
+    <footer id="footer" className="relative overflow-hidden bg-ink pb-8 pt-16">
+      <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
+        <div className="grid grid-cols-2 gap-8 border-b border-line pb-14 sm:gap-10 lg:grid-cols-4">
+          <div className="col-span-2 lg:col-span-1">
+            <p className="micro text-cream/45">Get in touch</p>
+            <a
+              href={mailtoHref()}
+              data-cursor
+              className="mt-3 inline-flex min-h-[44px] items-center display text-[clamp(1.1rem,3.2vw,1.6rem)] text-cream transition-colors hover:text-gold"
+            >
+              {SITE.email}
+            </a>
+            <p className="mt-4 micro text-cream/45">{SITE.location}</p>
           </div>
 
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.05em] text-paper/40">Site</p>
+            <p className="mb-2 micro text-cream/45">Site</p>
             <ul>
               {LINKS.map(([label, href]) => (
                 <li key={href}>
-                  <AnimatedLink href={href}>{label}</AnimatedLink>
+                  <FooterLink href={href}>{label}</FooterLink>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.05em] text-paper/40">Contact</p>
+            <p className="mb-2 micro text-cream/45">Contact</p>
             <ul>
               <li>
-                <AnimatedLink href="#contact">Start a project</AnimatedLink>
-              </li>
-              <li>
-                <AnimatedLink href={mailtoHref("Website enquiry")}>Email us</AnimatedLink>
+                <FooterLink href="#contact">Start a project</FooterLink>
               </li>
               {SITE.phones.map((p) => (
                 <li key={p}>
-                  <AnimatedLink href={telHref(p)}>{p}</AnimatedLink>
+                  <FooterLink href={telHref(p)}>{p}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -89,13 +67,13 @@ export default function Footer() {
 
           {socials.length > 0 && (
             <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.05em] text-paper/40">Social</p>
+              <p className="mb-2 micro text-cream/45">Social</p>
               <ul>
                 {socials.map(([name, url]) => (
                   <li key={name}>
-                    <AnimatedLink href={url} external>
+                    <FooterLink href={url} external>
                       {name}
-                    </AnimatedLink>
+                    </FooterLink>
                   </li>
                 ))}
               </ul>
@@ -103,20 +81,20 @@ export default function Footer() {
           )}
         </div>
 
-        {/* Legal */}
-        <div className="flex flex-col items-start justify-between gap-4 border-t border-paper/10 pt-8 text-xs text-paper/45 sm:flex-row sm:items-center">
-          <p>
-            © {new Date().getFullYear()} {SITE.name}. All rights reserved.
+        <div className="flex flex-col items-start justify-between gap-3 py-6 sm:flex-row sm:items-center">
+          <p className="micro text-cream/40">
+            © {new Date().getFullYear()} {SITE.name}
           </p>
-          <p>Designed and built in Fiji.</p>
+          <p className="micro text-cream/40">Designed &amp; built in Fiji</p>
         </div>
       </div>
 
+      {/* The oversized sign-off, bled to the edges like the reference's. */}
       <p
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -bottom-2 z-0 select-none text-center font-display text-[clamp(3.5rem,18vw,13rem)] font-bold leading-none text-paper/[0.05] sm:-bottom-6"
+        className="select-none px-2 text-center display leading-[0.8] text-cream/[0.07] text-[clamp(3.5rem,19vw,17rem)]"
       >
-        CREATIVE
+        Website Portfolio
       </p>
     </footer>
   );
