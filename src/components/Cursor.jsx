@@ -15,5 +15,7 @@ export default function Cursor(){
     raf=requestAnimationFrame(tick);
     return ()=>{ cancelAnimationFrame(raf); window.removeEventListener("mousemove",move); document.removeEventListener("mouseover",over); document.removeEventListener("mouseout",out); };
   },[]);
-  return (<><div ref={d} className="cursor-dot"/><div ref={f} className="cursor-follower"/></>);
+  // The outer element owns the position transform (rewritten every frame);
+  // the inner ring owns the hover scale, so the two never fight.
+  return (<><div ref={d} className="cursor-dot"/><div ref={f} className="cursor-follower"><span className="cursor-ring"/></div></>);
 }
