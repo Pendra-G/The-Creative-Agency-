@@ -103,13 +103,15 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Oversized sign-off, kept on one line and clipped by the footer so any
-          overhang reads as deliberate. */}
+      {/* Oversized sign-off. On a phone the two words stack, because forcing
+          17 characters onto one line just clips half the wordmark off. From
+          sm up it's a single line, bled to the edges. */}
       <p
         aria-hidden="true"
-        className="mt-6 select-none whitespace-nowrap text-center display leading-[0.78] text-white/[0.09] text-[clamp(2.4rem,13.5vw,15rem)]"
+        className="mt-8 select-none px-4 text-center display leading-[0.82] text-white/[0.09] text-[clamp(2.6rem,17vw,15rem)] sm:mt-6 sm:whitespace-nowrap sm:px-0 sm:text-[clamp(2.4rem,13.5vw,15rem)] sm:leading-[0.78]"
       >
-        Website Portfolio
+        <span className="block sm:inline">Website</span>{" "}
+        <span className="block sm:inline">Portfolio</span>
       </p>
     </footer>
   );

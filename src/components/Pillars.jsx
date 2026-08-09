@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { telHref } from "../config.js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,33 +21,37 @@ const CARDS = [
     title: "Built to a scope",
     body: "We agree what the site includes before anything starts, and you get a real timeline with it. No open-ended build, no scope drifting sideways.",
   },
-  {
-    n: 4,
-    title: "Yours to keep",
-    body: "You own the site, the domain and the files. No lock-in and no monthly fee just to stay online.",
-  },
 ];
 
 export default function Pillars() {
   const root = useRef(null);
   const track = useRef(null);
+  // Until the scroll animation is wired up the row stays a plain swipeable
+  // list, so it still works if JS never runs or motion is reduced.
+  const [pinned, setPinned] = useState(false);
 
-  useEffect(() => {
+  // Swap the track to its pinned layout first, in its own pass. Building the
+  // triggers in the same effect measured the pre-swap layout, so the row was
+  // pinned but never actually moved.
+  useLayoutEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setPinned(true);
+  }, []);
 
-    const mm = gsap.matchMedia(root);
+  useLayoutEffect(() => {
+    if (!pinned) return;
 
-    mm.add("(min-width: 1024px)", () => {
-      const distance = () => Math.max(0, track.current.scrollWidth - window.innerWidth + 120);
+    const ctx = gsap.context(() => {
+      const distance = () => Math.max(0, track.current.scrollWidth - window.innerWidth + 40);
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
           end: () => `+=${distance()}`,
-          // A higher scrub value adds easing to the scroll link, so the row
-          // glides rather than snapping frame-for-frame with the wheel.
-          scrub: 1.1,
+          // Scrub adds easing to the scroll link so the row glides rather than
+          // snapping frame-for-frame with the wheel or the finger.
+          scrub: 1,
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -56,11 +60,10 @@ export default function Pillars() {
 
       tl.to(track.current, { x: () => -distance(), ease: "none" });
 
-      // Cards lift and brighten as they reach the middle of the viewport.
       gsap.utils.toArray(".pl-card").forEach((card) => {
         gsap.fromTo(
           card,
-          { scale: 0.94, opacity: 0.55 },
+          { scale: 0.95, opacity: 0.6 },
           {
             scale: 1,
             opacity: 1,
@@ -68,8 +71,8 @@ export default function Pillars() {
             scrollTrigger: {
               trigger: card,
               containerAnimation: tl,
-              start: "left 88%",
-              end: "left 45%",
+              start: "left 92%",
+              end: "left 50%",
               scrub: true,
             },
           }
@@ -86,77 +89,80 @@ export default function Pillars() {
           scrub: 0.5,
         },
       });
-    });
+    }, root);
 
-    // Mobile keeps a native swipe with snap points — pinned horizontal scroll
-    // on a phone fights the browser's own gesture handling.
-    mm.add("(max-width: 1023px)", () => {
-      gsap.from(".pl-card", {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: { trigger: ".pl-track", start: "top 85%", once: true },
-      });
-    });
+    // Measure once the swapped layout has settled.
+    const id = requestAnimationFrame(() => ScrollTrigger.refresh());
 
-    return () => mm.revert();
-  }, []);
+    return () => {
+      cancelAnimationFrame(id);
+      ctx.revert();
+    };
+  }, [pinned]);
 
   return (
     <section
       id="what"
       ref={root}
-      className="relative overflow-hidden bg-ink py-20 sm:py-28 lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:py-0"
+      className="relative flex min-h-[92svh] flex-col justify-center overflow-hidden bg-ink py-16 sm:min-h-screen sm:py-0"
     >
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <MaskHeading text="What you actually get" className="display text-white text-[clamp(2rem,7vw,5rem)]" />
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <MaskHeading
+            text="What you actually get"
+            className="display text-white text-[clamp(1.9rem,7vw,5rem)]"
+          />
           <p className="max-w-xs text-sm leading-relaxed text-white/55 sm:text-base">
             One service, done to a standard. No tiers, no upsell path.
           </p>
         </div>
 
-        {/* Progress rule, desktop only — tells you the row has further to go */}
-        <div className="mt-8 hidden h-px w-full bg-line lg:block">
+        <div className="mt-7 h-px w-full bg-line">
           <div className="pl-progress h-px origin-left scale-x-0 bg-accent" />
         </div>
       </div>
 
-      <div className="mt-10 lg:mt-12">
+      <div className="mt-8 sm:mt-12">
         <div
           ref={track}
-          className="pl-track flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] sm:px-6 lg:w-max lg:snap-none lg:overflow-visible lg:pb-0 lg:pl-[max(1.5rem,calc((100vw-96rem)/2))] [&::-webkit-scrollbar]:hidden"
+          className={`pl-track flex gap-4 px-4 sm:px-6 ${
+            pinned
+              ? "w-max overflow-visible"
+              : "snap-x snap-mandatory overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          }`}
         >
           {CARDS.map((c) => (
             <article
               key={c.n}
-              className="pl-card flex w-[78vw] shrink-0 snap-start flex-col justify-between rounded-card border border-line bg-carbon p-6 xs:w-[70vw] sm:w-[52vw] sm:p-8 lg:h-[26rem] lg:w-[30rem] lg:will-change-transform"
+              className="pl-card flex w-[76vw] shrink-0 snap-start flex-col justify-between rounded-card border border-line bg-carbon p-6 xs:w-[70vw] sm:w-[46vw] sm:p-8 lg:h-[26rem] lg:w-[30rem] lg:will-change-transform"
             >
               <span className="micro text-white/40">{String(c.n).padStart(2, "0")}</span>
-              <div className="mt-14 lg:mt-0">
-                <h3 className="display text-[clamp(1.6rem,5vw,2.6rem)] text-white">{c.title}</h3>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60 sm:text-base">
+              <div className="mt-12 lg:mt-0">
+                <h3 className="display text-[clamp(1.5rem,5vw,2.6rem)] text-white">{c.title}</h3>
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-white/60 sm:mt-4 sm:text-base">
                   {c.body}
                 </p>
               </div>
             </article>
           ))}
 
-          {/* Closing card: gives the row enough width to be worth pinning, and
-              puts an action at the end of the sequence instead of a dead stop. */}
-          <article className="pl-card relative flex w-[78vw] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-card bg-accent-grad p-6 text-ink xs:w-[70vw] sm:w-[52vw] sm:p-8 lg:h-[26rem] lg:w-[30rem] lg:will-change-transform">
-            <span className="micro text-ink/60">05</span>
-            <div className="mt-14 lg:mt-0">
-              <h3 className="display text-[clamp(1.6rem,5vw,2.6rem)] text-ink">
+          {/* The row ends on an action rather than a dead stop. */}
+          <article className="pl-card relative flex w-[76vw] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-card bg-accent-grad p-6 text-ink xs:w-[70vw] sm:w-[46vw] sm:p-8 lg:h-[26rem] lg:w-[30rem] lg:will-change-transform">
+            <span className="micro text-ink/60">04</span>
+            <div className="mt-12 lg:mt-0">
+              <h3 className="display text-[clamp(1.5rem,5vw,2.6rem)] text-ink">
                 That's the whole offer.
               </h3>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-ink/75 sm:text-base">
-                No tiers, no add-ons, nothing held back. If it suits you, the next step is a
-                half-hour call.
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-ink/75 sm:mt-4 sm:text-base">
+                No tiers, no add-ons, nothing held back. If it suits you, the next step is a call.
               </p>
-              <a href={telHref()} data-cursor className="mt-6 inline-flex min-h-[48px] items-center rounded-pill bg-ink px-6 micro text-white transition-transform duration-300 ease-snap hover:scale-[1.04]">Call now</a>
+              <a
+                href={telHref()}
+                data-cursor
+                className="mt-6 inline-flex min-h-[48px] items-center rounded-pill bg-ink px-6 micro text-white transition-transform duration-300 ease-snap hover:scale-[1.04]"
+              >
+                Call now
+              </a>
             </div>
           </article>
         </div>

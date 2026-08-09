@@ -89,9 +89,7 @@ export default function Hero({ ready = false }) {
 
       <div className="relative mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="hero-copy max-w-3xl">
-          <p className="hero-fade micro text-white/60">Websites for small businesses in Fiji</p>
-
-          <h1 aria-label="Everything you need. Nothing you don't." className="mt-6">
+          <h1 aria-label="Everything you need. Nothing you don't.">
             <span className="block overflow-hidden">
               <span ref={l1} className="display block text-white text-[clamp(2.6rem,9vw,7rem)]">
                 Everything you need.

@@ -10,11 +10,11 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * The six kinds of business we build for.
  *
- * Clips live in public/services and are deliberately NOT preloaded: they are
- * large files and six of them autoplaying would cost more than the rest of the
- * page combined. Each card rests on its DOM miniature and streams the real
- * clip only when the visitor hovers it (or when it scrolls into view on
- * touch, where there is no hover).
+ * Clips live in public/services and start playing when their card scrolls into
+ * view, then pause when it leaves — so only the two or three cards actually on
+ * screen are ever decoding. They stay preload="none" until then; these are
+ * large files and fetching all six up front would cost more than the rest of
+ * the page combined.
  */
 const DEMOS = [
   { slug: "hair-salon", name: "Hair salon", note: "Cuts, prices, and a booking button that works on a phone.", variant: "booking", tint: "#C084FC", wordmark: "Shear" },
@@ -28,52 +28,40 @@ const DEMOS = [
 function DemoCard({ demo, index }) {
   const holder = useRef(null);
   const videoRef = useRef(null);
-  const [armed, setArmed] = useState(false); // src attached
+  const [armed, setArmed] = useState(false);
   const [playing, setPlaying] = useState(false);
-  const [touch, setTouch] = useState(false);
 
   useEffect(() => {
-    setTouch(window.matchMedia("(hover: none)").matches);
-  }, []);
+    const el = holder.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  // On touch there is no hover, so arm the clip when the card is on screen.
-  useEffect(() => {
-    if (!touch || !holder.current) return;
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setArmed(true);
-          io.disconnect();
+          videoRef.current?.play().catch(() => {});
+        } else {
+          // Pause off-screen so six clips never decode at once.
+          videoRef.current?.pause();
         }
       },
-      { rootMargin: "200px" }
+      { threshold: 0.25 }
     );
-    io.observe(holder.current);
+    io.observe(el);
     return () => io.disconnect();
-  }, [touch]);
+  }, []);
 
-  const start = () => {
-    setArmed(true);
-    const v = videoRef.current;
-    if (v) v.play().then(() => setPlaying(true)).catch(() => {});
-  };
-  const stop = () => {
-    const v = videoRef.current;
-    if (v) {
-      v.pause();
-      v.currentTime = 0;
-    }
-    setPlaying(false);
-  };
+  // Once the element mounts (after arming) it still needs the first play call.
+  useEffect(() => {
+    if (armed) videoRef.current?.play().catch(() => {});
+  }, [armed]);
 
   return (
-    <article
-      ref={holder}
-      className="dm-card group"
-      onMouseEnter={touch ? undefined : start}
-      onMouseLeave={touch ? undefined : stop}
-    >
+    <article ref={holder} className="dm-card group">
       <div className="relative aspect-[16/10] overflow-hidden rounded-card border border-line bg-carbon">
+        {/* The DOM miniature is what you see until the clip has enough data,
+            so a card is never an empty black rectangle. */}
         <MiniSite variant={demo.variant} tint={demo.tint} wordmark={demo.wordmark} />
 
         {armed && (
@@ -84,10 +72,9 @@ function DemoCard({ demo, index }) {
             loop
             playsInline
             preload="none"
-            autoPlay={touch}
             onPlaying={() => setPlaying(true)}
             aria-hidden="true"
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
               playing ? "opacity-100" : "opacity-0"
             }`}
           />
