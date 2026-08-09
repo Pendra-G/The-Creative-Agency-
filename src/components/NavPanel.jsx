@@ -33,7 +33,6 @@ export default function NavPanel({ open, onClose }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const time = useFijiClock();
-  const socials = Object.entries(SITE.socials).filter(([, url]) => Boolean(url));
 
   const root = useRef(null);
   const backdrop = useRef(null);
@@ -216,24 +215,6 @@ export default function NavPanel({ open, onClose }) {
             <span>{SITE.location}</span>
             <span className="tabular-nums text-white/75">{time}</span>
           </p>
-
-          {socials.length > 0 && (
-            <ul className="np-meta mt-5 flex flex-wrap gap-3">
-              {socials.map(([name, url]) => (
-                <li key={name}>
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-cursor
-                    className="inline-flex min-h-[44px] items-center micro text-white/50 transition-colors hover:text-white"
-                  >
-                    {name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
       </div>
     </div>

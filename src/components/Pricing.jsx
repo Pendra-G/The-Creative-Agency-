@@ -7,11 +7,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const INCLUDED = [
   "Up to three pages, animated end to end",
-  "Designed and built for you, never a template",
   "Works properly on phones and loads fast on 4G",
   "Enquiry form and your socials wired up",
   "Thirty days of small changes after launch",
-  "The files, the domain and the site are yours",
 ];
 
 export default function Pricing() {
@@ -71,7 +69,7 @@ export default function Pricing() {
               this number where it is.
             </p>
 
-            <CallCtas className="pc-reveal mt-8" variant="accent" />
+            <CallCtas className="pc-reveal mt-8" variant="accent" tone="light" />
           </div>
 
           <div className="pc-reveal">

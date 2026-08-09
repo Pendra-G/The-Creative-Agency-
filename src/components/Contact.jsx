@@ -39,7 +39,7 @@ export default function Contact() {
           One call, thirty minutes, free. You'll get a straight answer on what your site actually needs, and an honest one if that turns out to be less than you expected.
         </p>
 
-        <CallCtas className="ct-reveal mt-10" showNumber />
+        <CallCtas className="ct-reveal mt-10" />
         <p className="ct-reveal mt-6">
           <TextLink as="a" href={mailtoHref()}>Prefer email?</TextLink>
         </p>

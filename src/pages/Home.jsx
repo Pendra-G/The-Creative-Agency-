@@ -19,7 +19,7 @@ export default function Home({ ready = false }) {
   return (
     <>
       <Hero ready={ready} />
-      <WordRule words={["Two to three pages", "Fully animated", "Built in Fiji", "Yours to keep"]} />
+      <WordRule words={["Two to three pages", "Fully animated"]} />
       <Pillars />
       <Demos />
       <Work />
@@ -46,7 +46,7 @@ export default function Home({ ready = false }) {
                 Tell me what the site needs to do. Half an hour on a call, no charge, and a straight
                 answer on whether this is right for you.
               </p>
-              <CallCtas className="mt-8" showNumber />
+              <CallCtas className="mt-8" />
             </div>
           </div>
         </div>

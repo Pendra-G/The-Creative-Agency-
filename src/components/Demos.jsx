@@ -8,115 +8,97 @@ import { mailtoHref } from "../config.js";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Businesses in Fiji that need a small site and can justify FJ$499.
+ * The six kinds of business we build for.
  *
- * Each card shows a live miniature of that industry's site, built in DOM so
- * there is nothing to download and it stays sharp at any size. If a real
- * screen recording is dropped at public/demos/<slug>.webm it fades in over the
- * top; until then the miniature is the preview, not a placeholder.
+ * Clips live in public/services and are deliberately NOT preloaded: they are
+ * large files and six of them autoplaying would cost more than the rest of the
+ * page combined. Each card rests on its DOM miniature and streams the real
+ * clip only when the visitor hovers it (or when it scrolls into view on
+ * touch, where there is no hover).
  */
 const DEMOS = [
-  {
-    slug: "hair-salon",
-    name: "Hair salon",
-    note: "Cuts, prices, and a booking button that works on a phone.",
-    variant: "booking",
-    tint: "#C084FC",
-    wordmark: "Shear",
-  },
-  {
-    slug: "photography",
-    name: "Photography",
-    note: "The portfolio first. Everything else gets out of the way.",
-    variant: "gallery",
-    tint: "#E5E7EB",
-    wordmark: "Frame",
-  },
-  {
-    slug: "beauty-salon",
-    name: "Beauty salon",
-    note: "Treatments, prices, and how to book, in one scroll.",
-    variant: "booking",
-    tint: "#F472B6",
-    wordmark: "Glow",
-  },
-  {
-    slug: "gadgets",
-    name: "Gadget seller",
-    note: "Stock, prices and a Viber button. No cart to maintain.",
-    variant: "catalogue",
-    tint: "#38BDF8",
-    wordmark: "Volt",
-  },
-  {
-    slug: "cafe",
-    name: "Café & takeaway",
-    note: "Menu, hours, location. The three things people search for.",
-    variant: "catalogue",
-    tint: "#FBBF24",
-    wordmark: "Kava",
-  },
-  {
-    slug: "trades",
-    name: "Trades & services",
-    note: "What you do, where you work, and a number to call.",
-    variant: "booking",
-    tint: "#FB923C",
-    wordmark: "Bilo",
-  },
+  { slug: "hair-salon", name: "Hair salon", note: "Cuts, prices, and a booking button that works on a phone.", variant: "booking", tint: "#C084FC", wordmark: "Shear" },
+  { slug: "beauty-salon", name: "Beauty salon", note: "Treatments, prices, and how to book, in one scroll.", variant: "booking", tint: "#F472B6", wordmark: "Glow" },
+  { slug: "photography", name: "Photography", note: "The portfolio first. Everything else gets out of the way.", variant: "gallery", tint: "#E5E7EB", wordmark: "Frame" },
+  { slug: "cafe", name: "Café & takeaway", note: "Menu, hours, location. The three things people search for.", variant: "catalogue", tint: "#FBBF24", wordmark: "Kava" },
+  { slug: "restaurant", name: "Restaurant", note: "Menu, table bookings, and where to find you.", variant: "catalogue", tint: "#FB923C", wordmark: "Vale" },
+  { slug: "car-rental", name: "Car rental", note: "Fleet, rates and an enquiry that reaches you straight away.", variant: "booking", tint: "#38BDF8", wordmark: "Drive" },
 ];
 
 function DemoCard({ demo, index }) {
+  const holder = useRef(null);
   const videoRef = useRef(null);
-  const [hasClip, setHasClip] = useState(false);
+  const [armed, setArmed] = useState(false); // src attached
+  const [playing, setPlaying] = useState(false);
   const [touch, setTouch] = useState(false);
 
   useEffect(() => {
     setTouch(window.matchMedia("(hover: none)").matches);
   }, []);
 
-  const play = () => videoRef.current?.play().catch(() => {});
-  const pause = () => {
+  // On touch there is no hover, so arm the clip when the card is on screen.
+  useEffect(() => {
+    if (!touch || !holder.current) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setArmed(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(holder.current);
+    return () => io.disconnect();
+  }, [touch]);
+
+  const start = () => {
+    setArmed(true);
+    const v = videoRef.current;
+    if (v) v.play().then(() => setPlaying(true)).catch(() => {});
+  };
+  const stop = () => {
     const v = videoRef.current;
     if (v) {
       v.pause();
       v.currentTime = 0;
     }
+    setPlaying(false);
   };
 
   return (
     <article
+      ref={holder}
       className="dm-card group"
-      onMouseEnter={touch ? undefined : play}
-      onMouseLeave={touch ? undefined : pause}
+      onMouseEnter={touch ? undefined : start}
+      onMouseLeave={touch ? undefined : stop}
     >
       <div className="relative aspect-[16/10] overflow-hidden rounded-card border border-line bg-carbon">
         <MiniSite variant={demo.variant} tint={demo.tint} wordmark={demo.wordmark} />
 
-        {/* Browser chrome sits above the miniature */}
-        <div className="absolute inset-x-0 top-0 flex items-center gap-1.5 border-b border-white/5 bg-ink/40 px-3 py-2 backdrop-blur-sm">
+        {armed && (
+          <video
+            ref={videoRef}
+            src={`/services/${demo.slug}.mp4`}
+            muted
+            loop
+            playsInline
+            preload="none"
+            autoPlay={touch}
+            onPlaying={() => setPlaying(true)}
+            aria-hidden="true"
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+              playing ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        )}
+
+        <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center gap-1.5 border-b border-white/5 bg-ink/40 px-3 py-2 backdrop-blur-sm">
           <span className="h-2 w-2 rounded-pill bg-white/15" />
           <span className="h-2 w-2 rounded-pill bg-white/15" />
           <span className="h-2 w-2 rounded-pill bg-white/15" />
           <span className="ml-2 micro text-white/30">{demo.slug}.fj</span>
         </div>
-
-        {/* Real recording, if one exists. Only marked available once it can
-            actually play, so a missing file never flashes an empty frame. */}
-        <video
-          ref={videoRef}
-          src={`/demos/${demo.slug}.webm`}
-          muted
-          loop
-          playsInline
-          preload="none"
-          autoPlay={touch}
-          onCanPlay={() => setHasClip(true)}
-          aria-hidden="true"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
-            hasClip ? "opacity-0 group-hover:opacity-100" : "opacity-0"
-          } ${hasClip && touch ? "opacity-100" : ""}`}
-        />
       </div>
 
       <div className="mt-4 flex items-start justify-between gap-4">

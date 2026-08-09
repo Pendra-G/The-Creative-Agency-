@@ -69,7 +69,10 @@ export function Pill({ as: Tag = "a", variant = "white", className = "", childre
  * The site's primary action. Calling is the main path; Viber sits alongside
  * because the deep link does nothing on a desktop without the app installed.
  */
-export function CallCtas({ className = "", variant = "white", showNumber = false }) {
+export function CallCtas({ className = "", variant = "white", tone = "dark" }) {
+  // `tone` is the background this sits on, not the button colour. On the white
+  // pricing panel a white-on-white Viber button is invisible.
+  const onLight = tone === "light";
   return (
     <div className={`flex flex-wrap items-center gap-3 ${className}`}>
       <Pill as="a" href={telHref()} variant={variant}>
@@ -78,19 +81,12 @@ export function CallCtas({ className = "", variant = "white", showNumber = false
       <a
         href={viberHref()}
         data-cursor
-        className="group inline-flex min-h-[52px] items-center gap-2 rounded-pill border border-accent/70 px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-all duration-300 ease-snap hover:scale-[1.03] hover:bg-accent hover:text-ink"
+        className={`group inline-flex min-h-[52px] items-center gap-2 rounded-pill border px-6 text-sm font-semibold uppercase tracking-[0.08em] transition-all duration-300 ease-snap hover:scale-[1.03] hover:bg-accent hover:text-ink ${
+          onLight ? "border-ink/25 text-ink" : "border-accent/70 text-white"
+        }`}
       >
         Message on Viber
       </a>
-      {showNumber && (
-        <a
-          href={telHref()}
-          data-cursor
-          className="inline-flex min-h-[44px] items-center font-display text-lg font-semibold tracking-tighter text-white/70 transition-colors hover:text-white"
-        >
-          {PRIMARY_PHONE}
-        </a>
-      )}
     </div>
   );
 }

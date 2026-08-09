@@ -53,10 +53,12 @@ export default function Hero({ ready = false }) {
   }, [ready]);
 
   return (
+    // Shorter on portrait screens: a landscape clip inside a tall box gets
+    // cropped hard at the sides, and a wider box shows more of the frame.
     <section
       id="home"
       ref={root}
-      className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden bg-ink pb-14 pt-32 sm:pb-16"
+      className="relative isolate flex min-h-[86svh] flex-col justify-center overflow-hidden bg-ink pb-14 pt-32 sm:min-h-[100svh] sm:pb-16"
     >
       <video
         className="hero-video absolute inset-0 -z-20 h-full w-full object-cover"
@@ -71,18 +73,18 @@ export default function Hero({ ready = false }) {
         <source src={ReelMp4} type="video/mp4" />
       </video>
 
-      {/* Legibility stack: a flat scrim for baseline contrast, then a vertical
-          gradient that goes solid behind the type and at both edges. Type over
-          moving footage needs both — a single overlay either washes the video
-          out or leaves the copy unreadable on light frames. */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/70" />
+      {/* Legibility is weighted to where the type actually sits rather than
+          flooding the whole frame. A light base keeps the footage visible; the
+          horizontal gradient does the real work behind the copy column, and
+          the vertical one anchors the top bar and the stats row. */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-ink/35" />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-ink via-ink/45 to-ink"
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/75 to-transparent sm:via-ink/55"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/85 via-ink/30 to-transparent"
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/80 via-transparent to-ink"
       />
 
       <div className="relative mx-auto w-full max-w-shell px-4 sm:px-6">

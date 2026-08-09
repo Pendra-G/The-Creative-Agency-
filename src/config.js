@@ -5,15 +5,10 @@
 // empty simply hides that link rather than rendering a dead "#".
 export const SITE = {
   name: "Website Portfolio",
-  email: "hello@creative.agency",
+  email: "salvinshavnitnarayan@gmail.com",
   phones: ["+679 2921000", "+679 8091770"],
   location: "Viti Levu, Fiji",
   price: "FJ$499",
-  socials: {
-    Facebook: "https://www.facebook.com/profile.php?id=61565173942247",
-    Instagram: "",
-    LinkedIn: "",
-  },
 };
 
 // The number every call-to-action points at.

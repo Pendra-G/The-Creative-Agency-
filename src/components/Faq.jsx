@@ -37,24 +37,10 @@ const QA = [
     ],
   },
   {
-    q: "What if I don't like it?",
-    a: [
-      "You see and approve the full design before any production code is written, so there's no point where a finished build lands as a surprise.",
-      "Changes at the design stage cost nothing but a conversation. That's the whole reason the design comes first.",
-    ],
-  },
-  {
     q: "How does payment work?",
     a: [
       "Half to start and half when the site goes live. No subscription and no ongoing fee just to stay online.",
       "If you need a domain or hosting bought on your behalf, I'll tell you the cost up front and charge it at cost.",
-    ],
-  },
-  {
-    q: "Do I own the website?",
-    a: [
-      "Yes. The site, the files and the domain are yours. You can move it elsewhere whenever you like and you don't need my permission to do it.",
-      "Nothing is held hostage. That includes the code, which is a fair question to ask anyone building your site.",
     ],
   },
 ];
