@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextLink } from "./ui.jsx";
-import { MaskHeading } from "./Reveal.jsx";
 import PLLFI from "../assets/PLLFI.png";
 import TropicXImage from "../assets/TropicX.png";
 gsap.registerPlugin(ScrollTrigger);
@@ -10,31 +9,25 @@ gsap.registerPlugin(ScrollTrigger);
 /**
  * Client stories.
  *
- * `result` is deliberately optional. Where a real, verifiable number exists it
- * gets the large treatment; where one doesn't, the block is omitted entirely
- * rather than filled with a placeholder or an invented figure. Add
- * `result: { value: "21%", label: "..." }` to a project when you have it.
+ * `result` is optional. Where a real, verifiable figure exists it gets the
+ * boxed treatment beside the description; where one doesn't, the block is
+ * omitted rather than filled with a placeholder or an invented number. Add
+ * `result: { value: "21%", label: "Increase in enquiries" }` when you have it.
  */
 const PROJECTS = [
   {
     title: "TropicX",
     url: "https://www.tropicxdesignstudio.com/",
     img: TropicXImage,
-    type: "Architecture studio",
-    location: "Nadi, Fiji",
-    year: "2026",
-    line: "A cinematic single scroll that puts a decade of built work centre stage, and stays fast on island mobile networks.",
-    scope: ["Brand direction", "Web design", "Build", "Motion"],
+    line: "Brand direction and website for an architecture and design studio with a decade of built work behind it.",
+    meta: "Architecture studio · Nadi · 2026",
   },
   {
     title: "PLLFI",
     url: "https://www.pllfi.org/",
     img: PLLFI,
-    type: "Non-profit",
-    location: "Suva, Fiji",
-    year: "2025",
-    line: "Mission, programmes and impact laid out in one calm, readable pass, with typography anyone can read.",
-    scope: ["Strategy", "UX/UI", "Build", "CMS"],
+    line: "Website for a non-profit running community and environmental programmes across the Pacific.",
+    meta: "Non-profit · Suva · 2025",
   },
 ];
 
@@ -45,17 +38,9 @@ export default function Work() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
-      gsap.from(".wk-head p", {
-        y: 60,
-        opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: { trigger: root.current, start: "top 78%", once: true },
-      });
-
       gsap.utils.toArray(".wk-item").forEach((item) => {
         gsap.from(item, {
-          y: 70,
+          y: 60,
           opacity: 0,
           duration: 1,
           ease: "power3.out",
@@ -65,9 +50,9 @@ export default function Work() {
         if (media) {
           gsap.fromTo(
             media,
-            { yPercent: -6 },
+            { yPercent: -5 },
             {
-              yPercent: 6,
+              yPercent: 5,
               ease: "none",
               scrollTrigger: { trigger: item, start: "top bottom", end: "bottom top", scrub: true },
             }
@@ -79,95 +64,73 @@ export default function Work() {
   }, []);
 
   return (
-    <section id="work" ref={root} className="bg-ink py-20 sm:py-28 lg:py-36">
-      <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-        <div className="wk-head border-b border-line pb-8">
-          <MaskHeading
-            text="Success stories"
-            className="display text-white text-[clamp(2.4rem,9vw,7rem)]"
-          />
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Two businesses in Fiji, each with a site built to do one job properly.
-          </p>
+    <section id="work" ref={root} className="bg-ink py-20 sm:py-28 lg:py-32">
+      <div className="mx-auto grid w-full max-w-shell grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-[13rem_1fr] lg:gap-10">
+        {/* Label rides alongside the list rather than sitting above it as
+            another oversized heading. */}
+        <div className="lg:sticky lg:top-32 lg:h-max lg:pt-2">
+          <h2 className="flex items-center gap-3 font-display text-lg font-semibold tracking-tighter text-white">
+            <span aria-hidden="true" className="h-2.5 w-2.5 rounded-pill bg-white/35" />
+            Success Stories
+          </h2>
         </div>
 
-        <div className="mt-12 flex flex-col gap-20 sm:gap-28">
+        <div>
           {PROJECTS.map((p, i) => (
-            <article key={p.title} className="wk-item group">
-              <div className="flex items-baseline gap-3 pb-5">
-                <span className="micro text-white/40">{String(i + 1).padStart(2, "0")}</span>
-                <span className="micro text-white/30">/ {total}</span>
-              </div>
-
+            <article
+              key={p.title}
+              className="wk-item group border-b border-line py-10 first:pt-0 last:border-b-0 sm:py-14"
+            >
               <a
                 href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor
-                className="block"
+                className="grid grid-cols-1 gap-7 lg:grid-cols-[1fr_20rem] lg:gap-12"
                 aria-label={`${p.title} — open the live site`}
               >
-                <div className="wk-media relative aspect-[16/10] overflow-hidden rounded-card bg-carbon sm:aspect-[16/9]">
+                <div className="wk-media relative aspect-[16/10] overflow-hidden rounded-card bg-carbon">
                   <img
                     src={p.img}
                     alt={`${p.title} website`}
                     loading="lazy"
                     decoding="async"
-                    className="absolute inset-0 h-[112%] w-full object-cover object-top transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+                    className="absolute inset-0 h-[110%] w-full object-cover object-top transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
                   />
                 </div>
 
-                <div className="mt-7 grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-                  <div>
-                    <h3 className="display text-white text-[clamp(2rem,6vw,4rem)] transition-colors group-hover:text-accent">
-                      {p.title}
-                    </h3>
-                    <p className="mt-4 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-                      {p.line}
-                    </p>
-                    <div className="mt-6">
-                      <TextLink as="span">Visit live site</TextLink>
+                <div className="lg:pt-1">
+                  {/* SS ←— 01/02 */}
+                  <p className="flex items-center gap-2">
+                    <span className="micro text-white/40">SS</span>
+                    <span aria-hidden="true" className="h-px w-5 bg-white/20" />
+                    <span className="rounded-[4px] border border-white/20 px-2 py-[3px] micro text-white/70">
+                      {String(i + 1).padStart(2, "0")}/{total}
+                    </span>
+                  </p>
+
+                  <h3 className="mt-5 font-display text-[clamp(1.6rem,4vw,2.4rem)] font-semibold leading-tight tracking-tighter text-white transition-colors group-hover:text-accent">
+                    {p.title}
+                  </h3>
+
+                  <p className="mt-3 max-w-md text-base leading-relaxed text-white/60">{p.line}</p>
+
+                  {/* Boxed figure, only when a real one exists */}
+                  {p.result && (
+                    <div className="mt-8">
+                      <span className="inline-block rounded-[6px] bg-white/[0.08] px-3 py-1.5 font-display text-[clamp(1.4rem,3.5vw,1.9rem)] font-bold tracking-tighter text-white">
+                        {p.result.value}
+                      </span>
+                      <p className="mt-3 max-w-xs text-base leading-relaxed text-white/70">
+                        {p.result.label}
+                      </p>
                     </div>
-                  </div>
+                  )}
 
-                  <div className="lg:pt-2">
-                    {/* Large result, only when a real one exists */}
-                    {p.result && (
-                      <div className="mb-8 border-l-2 border-accent pl-5">
-                        <p className="display text-white text-[clamp(2.4rem,7vw,4rem)]">
-                          {p.result.value}
-                        </p>
-                        <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/60">
-                          {p.result.label}
-                        </p>
-                      </div>
-                    )}
+                  <p className="mt-8 micro text-white/35">{p.meta}</p>
 
-                    <dl className="space-y-3 border-t border-line pt-5">
-                      <div className="flex justify-between gap-4">
-                        <dt className="micro text-white/40">Sector</dt>
-                        <dd className="micro text-white/75">{p.type}</dd>
-                      </div>
-                      <div className="flex justify-between gap-4">
-                        <dt className="micro text-white/40">Where</dt>
-                        <dd className="micro text-white/75">{p.location}</dd>
-                      </div>
-                      <div className="flex justify-between gap-4">
-                        <dt className="micro text-white/40">Year</dt>
-                        <dd className="micro text-white/75">{p.year}</dd>
-                      </div>
-                    </dl>
-
-                    <ul className="mt-5 flex flex-wrap gap-2">
-                      {p.scope.map((s) => (
-                        <li
-                          key={s}
-                          className="rounded-pill border border-white/15 px-3 py-1.5 micro text-white/60"
-                        >
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="mt-5">
+                    <TextLink as="span">Visit live site</TextLink>
                   </div>
                 </div>
               </a>
