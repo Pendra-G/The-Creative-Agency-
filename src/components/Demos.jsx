@@ -3,39 +3,79 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextLink } from "./ui.jsx";
 import { MaskHeading } from "./Reveal.jsx";
+import MiniSite from "./MiniSite.jsx";
 import { mailtoHref } from "../config.js";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Businesses in Fiji that need a small site and can justify FJ$499.
  *
- * Each card plays a muted looping clip from public/demos/<slug>.mp4 on hover
- * (autoplay on touch, where there is no hover). Until a clip exists the card
- * falls back to a designed gradient tile rather than a broken frame — drop the
- * files in and they take over with no code change.
+ * Each card shows a live miniature of that industry's site, built in DOM so
+ * there is nothing to download and it stays sharp at any size. If a real
+ * screen recording is dropped at public/demos/<slug>.webm it fades in over the
+ * top; until then the miniature is the preview, not a placeholder.
  */
 const DEMOS = [
-  { slug: "hair-salon", name: "Hair salon", note: "Cuts, prices, and a booking button that works on a phone." },
-  { slug: "photography", name: "Photography", note: "The portfolio first. Everything else gets out of the way." },
-  { slug: "beauty-salon", name: "Beauty salon", note: "Treatments, prices, and how to book — in one scroll." },
-  { slug: "gadgets", name: "Gadget seller", note: "Stock, prices and a WhatsApp button. No cart to maintain." },
-  { slug: "cafe", name: "Café & takeaway", note: "Menu, hours, location. The three things people search for." },
-  { slug: "trades", name: "Trades & services", note: "What you do, where you work, and a number to call." },
+  {
+    slug: "hair-salon",
+    name: "Hair salon",
+    note: "Cuts, prices, and a booking button that works on a phone.",
+    variant: "booking",
+    tint: "#C084FC",
+    wordmark: "Shear",
+  },
+  {
+    slug: "photography",
+    name: "Photography",
+    note: "The portfolio first. Everything else gets out of the way.",
+    variant: "gallery",
+    tint: "#E5E7EB",
+    wordmark: "Frame",
+  },
+  {
+    slug: "beauty-salon",
+    name: "Beauty salon",
+    note: "Treatments, prices, and how to book, in one scroll.",
+    variant: "booking",
+    tint: "#F472B6",
+    wordmark: "Glow",
+  },
+  {
+    slug: "gadgets",
+    name: "Gadget seller",
+    note: "Stock, prices and a Viber button. No cart to maintain.",
+    variant: "catalogue",
+    tint: "#38BDF8",
+    wordmark: "Volt",
+  },
+  {
+    slug: "cafe",
+    name: "Café & takeaway",
+    note: "Menu, hours, location. The three things people search for.",
+    variant: "catalogue",
+    tint: "#FBBF24",
+    wordmark: "Kava",
+  },
+  {
+    slug: "trades",
+    name: "Trades & services",
+    note: "What you do, where you work, and a number to call.",
+    variant: "booking",
+    tint: "#FB923C",
+    wordmark: "Bilo",
+  },
 ];
 
 function DemoCard({ demo, index }) {
   const videoRef = useRef(null);
-  const [failed, setFailed] = useState(false);
+  const [hasClip, setHasClip] = useState(false);
   const [touch, setTouch] = useState(false);
 
   useEffect(() => {
     setTouch(window.matchMedia("(hover: none)").matches);
   }, []);
 
-  const play = () => {
-    const v = videoRef.current;
-    if (v) v.play().catch(() => {});
-  };
+  const play = () => videoRef.current?.play().catch(() => {});
   const pause = () => {
     const v = videoRef.current;
     if (v) {
@@ -51,41 +91,32 @@ function DemoCard({ demo, index }) {
       onMouseLeave={touch ? undefined : pause}
     >
       <div className="relative aspect-[16/10] overflow-hidden rounded-card border border-line bg-carbon">
-        {/* Gradient stands in until a clip is dropped in — it reads as designed,
-            not as a missing asset. */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-accent-grad opacity-[0.18] transition-opacity duration-500 group-hover:opacity-30"
-          style={{ filter: `hue-rotate(${index * 18}deg)` }}
-        />
-        <div className="absolute inset-x-0 top-0 flex items-center gap-1.5 border-b border-line/70 bg-ink/50 px-3 py-2.5 backdrop-blur-sm">
+        <MiniSite variant={demo.variant} tint={demo.tint} wordmark={demo.wordmark} />
+
+        {/* Browser chrome sits above the miniature */}
+        <div className="absolute inset-x-0 top-0 flex items-center gap-1.5 border-b border-white/5 bg-ink/40 px-3 py-2 backdrop-blur-sm">
           <span className="h-2 w-2 rounded-pill bg-white/15" />
           <span className="h-2 w-2 rounded-pill bg-white/15" />
           <span className="h-2 w-2 rounded-pill bg-white/15" />
           <span className="ml-2 micro text-white/30">{demo.slug}.fj</span>
         </div>
 
-        {!failed && (
-          <video
-            ref={videoRef}
-            src={`/demos/${demo.slug}.mp4`}
-            muted
-            loop
-            playsInline
-            preload="none"
-            autoPlay={touch}
-            onError={() => setFailed(true)}
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100 data-[touch=true]:opacity-100"
-            data-touch={touch}
-          />
-        )}
-
-        {failed && (
-          <div className="absolute inset-0 flex items-end p-5">
-            <p className="display text-[clamp(1.4rem,4vw,2rem)] text-white/85">{demo.name}</p>
-          </div>
-        )}
+        {/* Real recording, if one exists. Only marked available once it can
+            actually play, so a missing file never flashes an empty frame. */}
+        <video
+          ref={videoRef}
+          src={`/demos/${demo.slug}.webm`}
+          muted
+          loop
+          playsInline
+          preload="none"
+          autoPlay={touch}
+          onCanPlay={() => setHasClip(true)}
+          aria-hidden="true"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+            hasClip ? "opacity-0 group-hover:opacity-100" : "opacity-0"
+          } ${hasClip && touch ? "opacity-100" : ""}`}
+        />
       </div>
 
       <div className="mt-4 flex items-start justify-between gap-4">

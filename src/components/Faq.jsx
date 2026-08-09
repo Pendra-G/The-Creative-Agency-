@@ -26,7 +26,7 @@ const QA = [
   },
   {
     q: "How long does it actually take?",
-    a: "14 days from the first call to a live site, assuming you can get me your content and feedback in good time. If something's holding it up, you'll hear from me rather than wonder.",
+    a: "It depends on what the site has to do. A simple three-pager moves quickly; anything with a booking flow or a lot of content takes longer. You will get a real date on the first call once I know the scope, and you will hear from me if anything threatens it.",
   },
   {
     q: "How do I pay?",

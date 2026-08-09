@@ -18,7 +18,7 @@ const STEPS = [
   {
     n: 3,
     title: "We launch",
-    body: "Built, animated, tested and live. Your domain pointed at it and the keys handed over. 14 days from that first call, start to finish.",
+    body: "Built, animated, tested and live. Your domain pointed at it and the keys handed over, on the date we agreed at the start.",
   },
 ];
 
@@ -64,7 +64,7 @@ export default function Process() {
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="pr-head flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
           <MaskHeading text="How it works" className="display text-white text-[clamp(2.4rem,10vw,8rem)]" />
-          <p className="micro text-white/50">Three steps · 14 days</p>
+          <p className="micro text-white/50">Three steps</p>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[16rem_1fr] lg:gap-20">

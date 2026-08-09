@@ -18,8 +18,8 @@ const CARDS = [
   },
   {
     n: 3,
-    title: "Live in 14 days",
-    body: "From the first call to a site people can visit. Copy, design, build, launch. One sprint, no drift.",
+    title: "Built to a scope",
+    body: "We agree what the site includes before anything starts, and you get a real timeline with it. No open-ended build, no scope drifting sideways.",
   },
   {
     n: 4,

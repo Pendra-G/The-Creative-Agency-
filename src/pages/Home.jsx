@@ -19,12 +19,12 @@ export default function Home({ ready = false }) {
   return (
     <>
       <Hero ready={ready} />
-      <WordRule words={["Two to three pages", "Fully animated", "Live in 14 days", "Built in Fiji"]} />
+      <WordRule words={["Two to three pages", "Fully animated", "Built in Fiji", "Yours to keep"]} />
       <Pillars />
       <Demos />
       <Work />
       <div className="border-y border-line py-4">
-        <Marquee text="Live in 14 days" duration={34} direction="right" />
+        <Marquee text="Small sites, done properly" duration={34} direction="right" />
       </div>
       <Process />
       <Pricing />

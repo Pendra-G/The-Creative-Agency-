@@ -99,7 +99,7 @@ export default function Hero({ ready = false }) {
           </h1>
 
           <p className="hero-fade mt-7 max-w-lg text-lg leading-relaxed text-white/70 sm:text-xl">
-            Two to three page websites, properly designed and animated. Live in 14 days, from{" "}
+            Two to three page websites, properly designed and animated, from{" "}
             <span className="text-white">{SITE.price}</span>.
           </p>
 
@@ -111,11 +111,11 @@ export default function Hero({ ready = false }) {
 
           <dl className="hero-fade mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6">
             {[
-              ["14", "days to live"],
               ["2–3", "pages"],
               ["1", "flat price"],
+              ["100%", "yours to keep"],
             ].map(([big, small]) => (
-              <div key={small}>
+              <div key={`${big}-${small}`}>
                 <dt className="display text-2xl text-white sm:text-3xl">{big}</dt>
                 <dd className="mt-1 micro text-white/45">{small}</dd>
               </div>
