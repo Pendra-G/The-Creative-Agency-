@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MaskHeading } from "./Reveal.jsx";
@@ -6,53 +6,62 @@ gsap.registerPlugin(ScrollTrigger);
 
 const STEPS = [
   {
-    n: 1,
-    title: "We talk",
-    body: "One call, thirty minutes, no charge. You tell me what the site has to do and who it has to convince. If what you need is bigger than this, I will say so on that call rather than squeeze it in.",
+    n: "01",
+    title: "We work out what it has to say",
+    body: "Half an hour on a call. You tell me what the business does, who you want walking through the door, and what usually stops them. I tell you what belongs on the site and what doesn't.",
+    note: "You get a clear scope and a fixed price before anything starts.",
   },
   {
-    n: 2,
-    title: "We design",
-    body: "Words first, then design. The copy decides the layout, not the other way round. You see and approve the full design before a line of production code gets written.",
+    n: "02",
+    title: "We shape it",
+    body: "Words first, then design. The copy decides the layout, not the other way round. You see the full design and approve it before a line of production code gets written.",
+    note: "Nothing gets built until you've seen it and said yes.",
   },
   {
-    n: 3,
-    title: "We launch",
-    body: "Built, animated, tested and live. Your domain pointed at it and the keys handed over, on the date we agreed at the start.",
+    n: "03",
+    title: "We put it live",
+    body: "Built, animated, tested and launched. Your domain pointed at it, the files handed over, and thirty days of small changes included while you settle in.",
+    note: "The site, the domain and the files are yours to keep.",
   },
 ];
 
 export default function Process() {
   const root = useRef(null);
-  const [active, setActive] = useState(1);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const ctx = gsap.context(() => {
       gsap.from(".pr-head p", {
-        y: 60,
+        y: 50,
         opacity: 0,
-        duration: 1,
+        duration: 0.9,
         ease: "power3.out",
-        scrollTrigger: { trigger: root.current, start: "top 78%", once: true },
+        scrollTrigger: { trigger: root.current, start: "top 80%", once: true },
       });
 
-      gsap.utils.toArray(".pr-step").forEach((step, i) => {
+      gsap.utils.toArray(".pr-step").forEach((step) => {
         gsap.from(step, {
-          y: 60,
+          y: 56,
           opacity: 0,
           duration: 0.9,
           ease: "power3.out",
           scrollTrigger: { trigger: step, start: "top 85%", once: true },
         });
-        // The sticky counter tracks whichever step owns the viewport.
-        ScrollTrigger.create({
-          trigger: step,
-          start: "top 60%",
-          end: "bottom 60%",
-          onToggle: (self) => self.isActive && setActive(i + 1),
-        });
+        // The rule draws itself as each step arrives.
+        const rule = step.querySelector(".pr-rule");
+        if (rule) {
+          gsap.fromTo(
+            rule,
+            { scaleX: 0 },
+            {
+              scaleX: 1,
+              duration: 1.1,
+              ease: "power3.out",
+              scrollTrigger: { trigger: step, start: "top 85%", once: true },
+            }
+          );
+        }
       });
     }, root);
 
@@ -62,47 +71,43 @@ export default function Process() {
   return (
     <section id="process" ref={root} className="bg-ink py-20 sm:py-28 lg:py-36">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-        <div className="pr-head flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
-          <MaskHeading text="How it works" className="display text-white text-[clamp(2.4rem,10vw,8rem)]" />
-          <p className="micro text-white/50">Three steps</p>
+        <div className="pr-head">
+          <MaskHeading
+            text="How a project runs"
+            className="display text-white text-[clamp(2.4rem,9vw,7rem)]"
+          />
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
+            Three steps, and you know exactly where you stand at the end of each one.
+          </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[16rem_1fr] lg:gap-20">
-          {/* Sticky counter — the reference's sticky-media column, as type */}
-          <div className="hidden lg:block">
-            <div className="sticky top-32">
-              <p className="display text-[10rem] leading-[0.8] text-accent">
-                {String(active).padStart(2, "0")}
-              </p>
-              <p className="mt-4 micro text-white/45">of 03</p>
-              <div className="mt-8 h-px w-full bg-line">
-                <div
-                  className="h-px bg-accent transition-all duration-500 ease-spring"
-                  style={{ width: `${(active / STEPS.length) * 100}%` }}
-                />
-              </div>
-            </div>
-          </div>
+        <ol className="mt-14 flex flex-col gap-14 sm:mt-20 sm:gap-20">
+          {STEPS.map((s) => (
+            <li key={s.n} className="pr-step">
+              <div className="pr-rule h-px w-full origin-left bg-line" />
 
-          <ol className="flex flex-col">
-            {STEPS.map((s) => (
-              <li
-                key={s.n}
-                className="pr-step border-b border-line py-10 last:border-b-0 sm:py-14"
-              >
-                <div className="flex items-baseline gap-5">
-                  <span className="micro text-accent lg:hidden">
-                    {String(s.n).padStart(2, "0")}
-                  </span>
-                  <h3 className="display text-white text-[clamp(2rem,7vw,4.5rem)]">{s.title}</h3>
+              <div className="mt-7 grid grid-cols-1 gap-6 lg:grid-cols-[10rem_1fr_18rem] lg:gap-12">
+                <div>
+                  <p className="micro text-white/35">Step</p>
+                  <p className="display mt-2 text-accent text-[clamp(3rem,9vw,5.5rem)] leading-[0.8]">
+                    {s.n}
+                  </p>
                 </div>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-                  {s.body}
+
+                <div>
+                  <h3 className="display text-white text-[clamp(1.7rem,5vw,3.2rem)]">{s.title}</h3>
+                  <p className="mt-4 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
+                    {s.body}
+                  </p>
+                </div>
+
+                <p className="border-l-2 border-accent/60 pl-5 text-sm leading-relaxed text-white/70 lg:pt-2">
+                  {s.note}
                 </p>
-              </li>
-            ))}
-          </ol>
-        </div>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

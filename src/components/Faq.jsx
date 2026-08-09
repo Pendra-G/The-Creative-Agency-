@@ -1,36 +1,61 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { MaskHeading } from "./Reveal.jsx";
 gsap.registerPlugin(ScrollTrigger);
 
+// Answers run to two short paragraphs rather than one line: the questions
+// people actually hesitate over deserve a proper answer, and a thin one reads
+// as evasive.
 const QA = [
   {
-    q: "Do I own the website?",
-    a: "Yes. The site, the files and the domain are yours. There's no lock-in and no monthly fee just to keep it online — you can take it elsewhere any time you like.",
+    q: "Who actually builds it?",
+    a: [
+      "I do. The person you speak to on the first call is the person who writes the copy, designs the pages and ships the site.",
+      "There's no account manager in the middle and no queue. If something needs deciding, you're talking to the one who'll act on it.",
+    ],
   },
   {
     q: "Why only two or three pages?",
-    a: "Because it's what most small businesses actually need, and it's the reason the price is what it is. Two or three pages is enough to say who you are, show your work and let people contact you. Beyond that you're usually paying for pages nobody visits.",
+    a: [
+      "Because it's what most small businesses genuinely need, and it's the reason the price is what it is. Two or three pages is enough to say who you are, show your work, and let people get hold of you.",
+      "Past that you're usually paying to build pages nobody visits. If your business really does need more, I'll tell you on the first call rather than quietly sell you less than you need.",
+    ],
   },
   {
-    q: "What if I need more than three?",
-    a: "Then I'll say so on the first call rather than squeeze it in. Extra pages, online shops and booking systems are real work with real costs, so I quote those on their own. The quote is free.",
+    q: "How long does it take?",
+    a: [
+      "It depends on what the site has to do. A straightforward three-pager moves quickly. Anything with a booking flow or a lot of content takes longer.",
+      "You'll get a real date once I know the scope, agreed before any work starts. If anything threatens it, you'll hear it from me rather than find out on the deadline.",
+    ],
   },
   {
-    q: "Who writes the words?",
-    a: "We do it together. You know your business; I know what a page needs to say to get an enquiry. I'll draft it from our call and you approve every line before it goes live.",
+    q: "What do you need from me?",
+    a: [
+      "Half an hour on a call, and whatever you already have. Photos on your phone, a logo, a rough idea of what you want to say. None of it needs to be tidy.",
+      "I'll draft the words from our conversation and you approve every line. Where we need better photos, I'll tell you exactly what to take.",
+    ],
   },
   {
-    q: "What if I don't have photos?",
-    a: "That's normal and it isn't a problem. A lot of what I build leans on type, colour and motion rather than photography. Where we do need images, I'll tell you exactly what to take. A phone camera is usually enough.",
+    q: "What if I don't like it?",
+    a: [
+      "You see and approve the full design before any production code is written, so there's no point where a finished build lands as a surprise.",
+      "Changes at the design stage cost nothing but a conversation. That's the whole reason the design comes first.",
+    ],
   },
   {
-    q: "How long does it actually take?",
-    a: "It depends on what the site has to do. A simple three-pager moves quickly; anything with a booking flow or a lot of content takes longer. You will get a real date on the first call once I know the scope, and you will hear from me if anything threatens it.",
+    q: "How does payment work?",
+    a: [
+      "Half to start and half when the site goes live. No subscription and no ongoing fee just to stay online.",
+      "If you need a domain or hosting bought on your behalf, I'll tell you the cost up front and charge it at cost.",
+    ],
   },
   {
-    q: "How do I pay?",
-    a: "Half to start, half when the site goes live. No subscription, no hidden extras. If you need hosting or a domain bought on your behalf, I'll tell you the cost up front, at cost.",
+    q: "Do I own the website?",
+    a: [
+      "Yes. The site, the files and the domain are yours. You can move it elsewhere whenever you like and you don't need my permission to do it.",
+      "Nothing is held hostage. That includes the code, which is a fair question to ask anyone building your site.",
+    ],
   },
 ];
 
@@ -40,13 +65,20 @@ export default function Faq() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
-      gsap.from(".fq-reveal", {
-        y: 50,
+      gsap.from(".fq-head p", {
+        y: 40,
         opacity: 0,
-        stagger: 0.07,
         duration: 0.9,
         ease: "power3.out",
         scrollTrigger: { trigger: root.current, start: "top 80%", once: true },
+      });
+      gsap.from(".fq-item", {
+        y: 34,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.7,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".fq-list", start: "top 88%", once: true },
       });
     }, root);
     return () => ctx.revert();
@@ -55,20 +87,28 @@ export default function Faq() {
   return (
     <section id="faq" ref={root} className="bg-ink py-20 sm:py-28 lg:py-36">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-        <div className="fq-reveal flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
-          <h2 className="display text-white text-[clamp(2.4rem,10vw,8rem)]">Questions</h2>
-          <p className="micro text-white/50">The ones people actually ask</p>
+        <div className="fq-head grid grid-cols-1 gap-6 lg:grid-cols-[1fr_20rem] lg:items-end">
+          <MaskHeading
+            text="Before we work together"
+            className="display text-white text-[clamp(2.2rem,8vw,6rem)]"
+          />
+          <p className="max-w-sm text-base leading-relaxed text-white/60 lg:text-right">
+            The things worth knowing before you commit to anyone, not just me.
+          </p>
         </div>
 
         {/* Native details/summary: accessible and keyboard-operable with no JS. */}
-        <div className="mt-4">
-          {QA.map(({ q, a }) => (
-            <details key={q} className="fq-reveal group border-b border-line py-6">
+        <div className="fq-list mt-12 border-t border-line">
+          {QA.map(({ q, a }, i) => (
+            <details key={q} className="fq-item group border-b border-line">
               <summary
                 data-cursor
-                className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-6 [&::-webkit-details-marker]:hidden"
+                className="flex min-h-[72px] cursor-pointer list-none items-center gap-5 py-6 [&::-webkit-details-marker]:hidden"
               >
-                <h3 className="display text-[clamp(1.3rem,4vw,2.4rem)] text-white transition-colors group-hover:text-accent">
+                <span className="micro w-8 shrink-0 text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="flex-1 font-display text-[clamp(1.1rem,3.2vw,1.75rem)] font-semibold leading-snug tracking-tighter text-white transition-colors group-hover:text-accent">
                   {q}
                 </h3>
                 <span
@@ -79,9 +119,17 @@ export default function Faq() {
                   <span className="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-current" />
                 </span>
               </summary>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/65 sm:text-lg">
-                {a}
-              </p>
+
+              <div className="pb-8 pl-0 pr-4 sm:pl-13 sm:pr-16">
+                {a.map((para) => (
+                  <p
+                    key={para}
+                    className="mt-3 max-w-2xl text-base leading-relaxed text-white/60 first:mt-0 sm:text-lg"
+                  >
+                    {para}
+                  </p>
+                ))}
+              </div>
             </details>
           ))}
         </div>
