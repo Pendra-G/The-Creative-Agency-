@@ -89,7 +89,7 @@ export default function Process() {
               <div className="mt-7 grid grid-cols-1 gap-6 lg:grid-cols-[10rem_1fr_18rem] lg:gap-12">
                 <div>
                   <p className="micro text-white/35">Step</p>
-                  <p className="display mt-2 text-accent text-[clamp(3rem,9vw,5.5rem)] leading-[0.8]">
+                  <p className="display mt-2 text-white/20 text-[clamp(3rem,9vw,5.5rem)] leading-[0.8]">
                     {s.n}
                   </p>
                 </div>
@@ -101,7 +101,7 @@ export default function Process() {
                   </p>
                 </div>
 
-                <p className="border-l-2 border-accent/60 pl-5 text-sm leading-relaxed text-white/70 lg:pt-2">
+                <p className="border-l-2 border-accent pl-5 text-sm leading-relaxed text-white/70 lg:pt-2">
                   {s.note}
                 </p>
               </div>

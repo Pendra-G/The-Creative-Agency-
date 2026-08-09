@@ -14,7 +14,7 @@ export default function NotFound() {
         className="pointer-events-none absolute left-1/2 top-0 h-[40rem] w-[40rem] -translate-x-1/2 bg-accent-glow opacity-60"
       />
       <div className="relative mx-auto w-full max-w-shell px-4 sm:px-6">
-        <p className="micro text-accent">404</p>
+        <p className="micro text-white/45">404</p>
         <h1 className="mt-6 display text-white text-[clamp(2.6rem,10vw,7rem)]">
           That page
           <br />

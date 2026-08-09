@@ -5,9 +5,6 @@
 // empty simply hides that link rather than rendering a dead "#".
 export const SITE = {
   name: "Website Portfolio",
-  // TODO(owner): add your name so the "who's behind it" section can sign off.
-  // Left blank it simply hides the signature rather than inventing one.
-  owner: "",
   email: "hello@creative.agency",
   phones: ["+679 2921000", "+679 8091770"],
   location: "Viti Levu, Fiji",
@@ -21,6 +18,26 @@ export const SITE = {
 
 // The number every call-to-action points at.
 export const PRIMARY_PHONE = SITE.phones[0];
+
+// The two people behind the studio. Shown on the About page.
+export const FOUNDERS = [
+  {
+    name: "Salvin Shavnit Narayan",
+    initials: "SSN",
+    role: "Creative & Marketing Director",
+    focus: "Design direction, marketing and new business.",
+    email: "salvinshavnitnarayan@gmail.com",
+    phone: "+679 2921000",
+  },
+  {
+    name: "Upendra Gounder",
+    initials: "URG",
+    role: "Operations Director",
+    focus: "Build, delivery and everything after launch.",
+    email: "gounder.upendra@gmail.com",
+    phone: "+679 8091770",
+  },
+];
 
 export const telHref = (phone = PRIMARY_PHONE) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 

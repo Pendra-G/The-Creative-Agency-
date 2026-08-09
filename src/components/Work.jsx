@@ -95,7 +95,7 @@ export default function Work() {
           {PROJECTS.map((p, i) => (
             <article key={p.title} className="wk-item group">
               <div className="flex items-baseline gap-3 pb-5">
-                <span className="micro text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <span className="micro text-white/40">{String(i + 1).padStart(2, "0")}</span>
                 <span className="micro text-white/30">/ {total}</span>
               </div>
 
@@ -134,7 +134,7 @@ export default function Work() {
                     {/* Large result, only when a real one exists */}
                     {p.result && (
                       <div className="mb-8 border-l-2 border-accent pl-5">
-                        <p className="display text-accent text-[clamp(2.4rem,7vw,4rem)]">
+                        <p className="display text-white text-[clamp(2.4rem,7vw,4rem)]">
                           {p.result.value}
                         </p>
                         <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/60">

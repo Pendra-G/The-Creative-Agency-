@@ -15,7 +15,7 @@ export default function ContactPage() {
           className="pointer-events-none absolute -top-1/3 left-1/2 h-[50rem] w-[50rem] -translate-x-1/2 bg-accent-glow opacity-60"
         />
         <div className="relative mx-auto w-full max-w-shell px-4 sm:px-6">
-          <p className="micro text-accent">Contact</p>
+          <p className="micro text-white/45">Contact</p>
           <h1 className="mt-6 display text-white text-[clamp(2.6rem,10vw,7rem)]">
             Let's get
             <br />

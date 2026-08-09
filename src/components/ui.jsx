@@ -78,7 +78,7 @@ export function CallCtas({ className = "", variant = "white", showNumber = false
       <a
         href={viberHref()}
         data-cursor
-        className="group inline-flex min-h-[52px] items-center gap-2 rounded-pill border border-accent px-6 text-sm font-semibold uppercase tracking-[0.08em] text-accent transition-all duration-300 ease-snap hover:scale-[1.03] hover:bg-accent hover:text-ink"
+        className="group inline-flex min-h-[52px] items-center gap-2 rounded-pill border border-accent/70 px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-all duration-300 ease-snap hover:scale-[1.03] hover:bg-accent hover:text-ink"
       >
         Message on Viber
       </a>

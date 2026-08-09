@@ -174,7 +174,7 @@ export default function NavPanel({ open, onClose }) {
                   data-cursor
                   aria-current={pathname === href ? "page" : undefined}
                   className={`np-item block font-display text-[clamp(2.6rem,9vw,4.5rem)] font-semibold leading-[1.1] tracking-tighter transition-colors ${
-                    pathname === href ? "text-accent" : "text-white/85 hover:text-white"
+                    pathname === href ? "text-white" : "text-white/55 hover:text-white"
                   }`}
                 >
                   {label}
@@ -206,7 +206,7 @@ export default function NavPanel({ open, onClose }) {
             <a
               href={viberHref()}
               data-cursor
-              className="inline-flex min-h-[48px] items-center rounded-pill border border-accent px-6 micro text-accent transition-colors hover:bg-accent hover:text-ink"
+              className="inline-flex min-h-[48px] items-center rounded-pill border border-white/30 px-6 micro text-white transition-colors hover:bg-accent hover:text-ink"
             >
               Viber
             </a>

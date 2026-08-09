@@ -105,7 +105,7 @@ export default function Faq() {
                 data-cursor
                 className="flex min-h-[72px] cursor-pointer list-none items-center gap-5 py-6 [&::-webkit-details-marker]:hidden"
               >
-                <span className="micro w-8 shrink-0 text-accent">
+                <span className="micro w-8 shrink-0 text-white/40">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="flex-1 font-display text-[clamp(1.1rem,3.2vw,1.75rem)] font-semibold leading-snug tracking-tighter text-white transition-colors group-hover:text-accent">

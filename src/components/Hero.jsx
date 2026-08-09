@@ -80,7 +80,7 @@ export default function Hero({ ready = false }) {
 
       <div className="relative mx-auto grid w-full max-w-shell grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
         <div className="hero-copy">
-          <p className="hero-fade micro text-accent">Websites for small businesses in Fiji</p>
+          <p className="hero-fade micro text-white/45">Websites for small businesses in Fiji</p>
 
           <h1
             aria-label="Everything you need. Nothing you don't."
@@ -92,7 +92,7 @@ export default function Hero({ ready = false }) {
               </span>
             </span>
             <span className="block overflow-hidden">
-              <span ref={l2} className="display block text-accent text-[clamp(2.6rem,8.5vw,6.5rem)]">
+              <span ref={l2} className="display block text-white/55 text-[clamp(2.6rem,8.5vw,6.5rem)]">
                 Nothing you don't.
               </span>
             </span>

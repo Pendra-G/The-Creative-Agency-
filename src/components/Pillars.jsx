@@ -134,7 +134,7 @@ export default function Pillars() {
               key={c.n}
               className="pl-card flex w-[78vw] shrink-0 snap-start flex-col justify-between rounded-card border border-line bg-carbon p-6 xs:w-[70vw] sm:w-[52vw] sm:p-8 lg:h-[26rem] lg:w-[30rem] lg:will-change-transform"
             >
-              <span className="micro text-accent">{String(c.n).padStart(2, "0")}</span>
+              <span className="micro text-white/40">{String(c.n).padStart(2, "0")}</span>
               <div className="mt-14 lg:mt-0">
                 <h3 className="display text-[clamp(1.6rem,5vw,2.6rem)] text-white">{c.title}</h3>
                 <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60 sm:text-base">
