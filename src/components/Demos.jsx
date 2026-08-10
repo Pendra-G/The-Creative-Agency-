@@ -17,61 +17,38 @@ gsap.registerPlugin(ScrollTrigger);
  * the page combined.
  */
 const DEMOS = [
-  { slug: "hair-salon", name: "Hair salon", note: "Cuts, prices, and a booking button that works on a phone.", variant: "booking", tint: "#C084FC", wordmark: "Shear" },
   { slug: "beauty-salon", name: "Beauty salon", note: "Treatments, prices, and how to book, in one scroll.", variant: "booking", tint: "#F472B6", wordmark: "Glow" },
   { slug: "photography", name: "Photography", note: "The portfolio first. Everything else gets out of the way.", variant: "gallery", tint: "#E5E7EB", wordmark: "Frame" },
-  { slug: "cafe", name: "Café & takeaway", note: "Menu, hours, location. The three things people search for.", variant: "catalogue", tint: "#FBBF24", wordmark: "Kava" },
+  { slug: "cafe", name: "Café & takeaway", note: "Menu, hours, location. The three things people search for.", variant: "catalogue", tint: "#FBBF24", wordmark: "Kava", clip: false },
   { slug: "restaurant", name: "Restaurant", note: "Menu, table bookings, and where to find you.", variant: "catalogue", tint: "#FB923C", wordmark: "Vale" },
   { slug: "car-rental", name: "Car rental", note: "Fleet, rates and an enquiry that reaches you straight away.", variant: "booking", tint: "#38BDF8", wordmark: "Drive" },
 ];
 
 function DemoCard({ demo, index }) {
-  const holder = useRef(null);
   const videoRef = useRef(null);
-  const [armed, setArmed] = useState(false);
   const [playing, setPlaying] = useState(false);
-
-  useEffect(() => {
-    const el = holder.current;
-    if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setArmed(true);
-          videoRef.current?.play().catch(() => {});
-        } else {
-          // Pause off-screen so six clips never decode at once.
-          videoRef.current?.pause();
-        }
-      },
-      { threshold: 0.25 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  // Once the element mounts (after arming) it still needs the first play call.
-  useEffect(() => {
-    if (armed) videoRef.current?.play().catch(() => {});
-  }, [armed]);
+  // `clip: false` means there is no usable file for this category yet, so the
+  // card shows its miniature rather than pointing at a source that 404s.
+  const hasClip = demo.clip !== false;
 
   return (
-    <article ref={holder} className="dm-card group">
+    <article className="dm-card group">
       <div className="relative aspect-[16/10] overflow-hidden rounded-card border border-line bg-carbon">
-        {/* The DOM miniature is what you see until the clip has enough data,
-            so a card is never an empty black rectangle. */}
+        {/* The DOM miniature sits underneath until the clip has data, so a card
+            is never an empty black rectangle. */}
         <MiniSite variant={demo.variant} tint={demo.tint} wordmark={demo.wordmark} />
 
-        {armed && (
+        {hasClip && (
           <video
             ref={videoRef}
-            src={`/services/${demo.slug}.mp4`}
+            src={`/services/${demo.slug}.webm`}
             muted
             loop
+            autoPlay
             playsInline
-            preload="none"
+            // Compressed to well under a megabyte each, so they load with the
+            // page rather than waiting for a scroll or a hover.
+            preload="auto"
             onPlaying={() => setPlaying(true)}
             aria-hidden="true"
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${

@@ -1,94 +1,92 @@
 import { Link } from "react-router-dom";
+import { Marquee } from "./Strips.jsx";
 import { SITE, PRIMARY_PHONE, telHref, viberHref, mailtoHref } from "../config.js";
 
-// Every entry here is either a route that exists, a section id that exists on
-// the home page, or a tel/mailto/viber scheme. Nothing points at a bare hash.
+// Every entry is a route that exists or a section id that exists on home.
 const LINKS = [
   ["Home", "/"],
   ["What we build", "/#build"],
-  ["Work", "/#work"],
-  ["Pricing", "/#pricing"],
+  ["Projects", "/#work"],
+  ["Process", "/#process"],
+  ["Packages", "/#pricing"],
   ["About", "/about"],
   ["Contact", "/contact"],
 ];
 
-const CLS =
-  "inline-flex min-h-[44px] items-center micro text-white/60 transition-all duration-300 ease-snap hover:translate-x-1 hover:text-accent";
-
 function FooterLink({ href, children }) {
-  // Internal routes go through the router; a plain <a> would trigger a full
-  // page reload and throw away the smooth-scroll instance.
-  if (href.startsWith("/")) {
-    return (
-      <Link to={href} data-cursor className={CLS}>
-        {children}
-      </Link>
-    );
-  }
-  return (
-    <a href={href} data-cursor className={CLS}>
+  const cls =
+    "group inline-flex min-h-[42px] items-center gap-2 micro text-white/55 transition-colors hover:text-white";
+  const inner = (
+    <>
+      <span
+        aria-hidden="true"
+        className="h-px w-0 bg-accent transition-all duration-300 ease-snap group-hover:w-4"
+      />
       {children}
+    </>
+  );
+  return href.startsWith("/") ? (
+    <Link to={href} data-cursor className={cls}>
+      {inner}
+    </Link>
+  ) : (
+    <a href={href} data-cursor className={cls}>
+      {inner}
     </a>
   );
 }
 
 export default function Footer() {
   return (
-    <footer id="footer" className="relative overflow-hidden bg-ink pb-8 pt-16">
+    <footer id="footer" className="relative overflow-hidden bg-ink pt-16">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-        <div className="grid grid-cols-1 gap-10 border-b border-line pb-14 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-12 border-b border-line pb-14 lg:grid-cols-[1.3fr_1fr]">
+          {/* Everything a visitor needs, in one place */}
           <div>
-            <p className="micro text-white/45">Call or message</p>
+            <p className="micro text-white/45">Get in touch</p>
+
             <a
               href={telHref()}
               data-cursor
-              className="mt-3 inline-flex min-h-[44px] items-center font-display text-[clamp(1.3rem,4vw,1.9rem)] font-semibold tracking-tighter text-white transition-colors hover:text-accent"
+              className="mt-4 block font-display text-[clamp(1.8rem,6vw,3.2rem)] font-semibold leading-tight tracking-tighter text-white transition-colors hover:text-accent"
             >
               {PRIMARY_PHONE}
             </a>
-            <div className="mt-3 flex flex-wrap gap-3">
+
+            <a
+              href={mailtoHref()}
+              data-cursor
+              className="mt-2 block break-all font-display text-[clamp(1rem,3.2vw,1.5rem)] font-medium tracking-tight text-white/70 transition-colors hover:text-white"
+            >
+              {SITE.email}
+            </a>
+
+            <div className="mt-7 flex flex-wrap gap-3">
               <a
                 href={telHref()}
                 data-cursor
-                className="inline-flex min-h-[44px] items-center rounded-pill bg-white px-5 micro text-ink transition-colors hover:bg-accent"
+                className="inline-flex min-h-[48px] items-center rounded-pill bg-white px-6 micro text-ink transition-transform duration-300 ease-snap hover:scale-[1.04]"
               >
                 Call now
               </a>
               <a
                 href={viberHref()}
                 data-cursor
-                className="inline-flex min-h-[44px] items-center rounded-pill border border-white/30 px-5 micro text-white transition-colors hover:bg-accent hover:text-ink"
+                className="inline-flex min-h-[48px] items-center rounded-pill border border-white/30 px-6 micro text-white transition-colors hover:bg-accent hover:text-ink"
               >
-                Viber
+                Message on Viber
               </a>
             </div>
-            <p className="mt-5 micro text-white/45">{SITE.location}</p>
+
+            <p className="mt-7 micro text-white/40">{SITE.location}</p>
           </div>
 
           <div>
-            <p className="mb-2 micro text-white/45">Site</p>
-            <ul>
+            <p className="mb-3 micro text-white/45">Site</p>
+            <ul className="columns-2 gap-6">
               {LINKS.map(([label, href]) => (
                 <li key={href}>
                   <FooterLink href={href}>{label}</FooterLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <p className="mb-2 micro text-white/45">Email</p>
-            <a
-              href={mailtoHref()}
-              data-cursor
-              className="inline-flex min-h-[44px] items-center break-all text-sm text-white/70 transition-colors hover:text-white"
-            >
-              {SITE.email}
-            </a>
-            <ul className="mt-2">
-              {SITE.phones.map((p) => (
-                <li key={p}>
-                  <FooterLink href={telHref(p)}>{p}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -103,16 +101,10 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Oversized sign-off. On a phone the two words stack, because forcing
-          17 characters onto one line just clips half the wordmark off. From
-          sm up it's a single line, bled to the edges. */}
-      <p
-        aria-hidden="true"
-        className="mt-8 select-none px-4 text-center display leading-[0.82] text-white/[0.09] text-[clamp(2.6rem,17vw,15rem)] sm:mt-6 sm:whitespace-nowrap sm:px-0 sm:text-[clamp(2.4rem,13.5vw,15rem)] sm:leading-[0.78]"
-      >
-        <span className="block sm:inline">Website</span>{" "}
-        <span className="block sm:inline">Portfolio</span>
-      </p>
+      {/* Sign-off runs continuously leftward across the base of the page. */}
+      <div className="border-t border-line py-6">
+        <Marquee text="Website Portfolio" duration={40} direction="left" />
+      </div>
     </footer>
   );
 }

@@ -1,34 +1,32 @@
 import { useEffect } from "react";
 import Hero from "../components/Hero.jsx";
 import { WordRule, Marquee } from "../components/Strips.jsx";
-import Pillars from "../components/Pillars.jsx";
 import Demos from "../components/Demos.jsx";
 import Work from "../components/Work.jsx";
 import Process from "../components/Process.jsx";
-import Pricing from "../components/Pricing.jsx";
-import Faq from "../components/Faq.jsx";
+import Packages from "../components/Packages.jsx";
+import About from "../components/About.jsx";
 import { CallCtas } from "../components/ui.jsx";
 
 export default function Home({ ready = false }) {
   // Every other route sets its own title, so home has to restore the default
   // or it inherits whatever page you arrived from.
   useEffect(() => {
-    document.title = "Website Portfolio — small animated websites from FJ$499";
+    document.title = "Website Portfolio — animated websites, built in Fiji";
   }, []);
 
   return (
     <>
       <Hero ready={ready} />
       <WordRule words={["Two to three pages", "Fully animated"]} />
-      <Pillars />
       <Demos />
       <Work />
       <div className="border-y border-line py-4">
         <Marquee text="Small sites, done properly" duration={34} direction="right" />
       </div>
       <Process />
-      <Pricing />
-      <Faq />
+      <Packages />
+      <About />
 
       {/* Closing CTA — the contact page does the heavy lifting */}
       <section className="bg-ink py-20 sm:py-28">

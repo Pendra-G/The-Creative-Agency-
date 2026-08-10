@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { split } from "../utils/anim.js";
 import { CallCtas, TextLink } from "./ui.jsx";
-import { SITE } from "../config.js";
 import ReelWebm from "../assets/Developer_Final_edit1.webm";
 import ReelMp4 from "../assets/Developer_coding_creative_agency…_202607071835.mp4";
 
@@ -103,8 +102,7 @@ export default function Hero({ ready = false }) {
           </h1>
 
           <p className="hero-fade mt-7 max-w-lg text-lg leading-relaxed text-white/80 sm:text-xl">
-            Two to three page websites, properly designed and animated, from{" "}
-            <span className="text-white">{SITE.price}</span>.
+            Small, fast, properly animated websites for businesses across Fiji.
           </p>
 
           <CallCtas className="hero-fade mt-9" />
@@ -118,7 +116,7 @@ export default function Hero({ ready = false }) {
           <dl className="hero-fade mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-white/15 pt-6">
             {[
               ["2–3", "pages"],
-              ["1", "flat price"],
+              ["0", "monthly fees"],
               ["100%", "yours to keep"],
             ].map(([big, small]) => (
               <div key={`${big}-${small}`}>

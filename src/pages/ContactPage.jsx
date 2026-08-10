@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import Contact from "../components/Contact.jsx";
-import Faq from "../components/Faq.jsx";
 
 export default function ContactPage() {
   useEffect(() => {
@@ -29,7 +28,6 @@ export default function ContactPage() {
       </section>
 
       <Contact />
-      <Faq />
     </>
   );
 }
