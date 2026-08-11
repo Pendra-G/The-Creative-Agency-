@@ -19,16 +19,14 @@ export const FOUNDERS = [
     initials: "SSN",
     role: "Creative & Marketing Director",
     focus: "Design direction, marketing and new business. First call is with him.",
-    // Served from public/ rather than imported, so a missing file degrades to
-    // the initials plate instead of breaking the build.
-    photo: "/founders/SSN.jpg",
+    photo: "/founders/salvin.jpg",
   },
   {
     name: "Upendra Gounder",
     initials: "URG",
     role: "Operations Director",
     focus: "Build, delivery and everything after launch.",
-    photo: "/founders/Upendra%20Gounder%20side%20profile%20photo.png",
+    photo: "/founders/upendra.jpg",
   },
 ];
 

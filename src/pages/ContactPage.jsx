@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Contact from "../components/Contact.jsx";
+import ContactForm from "../components/ContactForm.jsx";
 import { MaskHeading, Reveal } from "../components/Reveal.jsx";
 
 export default function ContactPage() {
@@ -27,6 +28,28 @@ export default function ContactPage() {
       </section>
 
       <Contact />
+
+      <section className="bg-surface py-section">
+        <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
+          <div className="max-w-2xl">
+            <MaskHeading
+              text="Or send us a note"
+              className="display text-display-md text-white"
+              start="top 95%"
+            />
+            <Reveal>
+              <p className="mt-6 max-w-measure text-body-lg text-body">
+                If you'd rather write first, fill this out and we'll get back to you. Either way is
+                fine — a call is usually faster, but we read every message.
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal selector="form" className="mt-12">
+            <ContactForm />
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }
