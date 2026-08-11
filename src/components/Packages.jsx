@@ -42,17 +42,17 @@ function Countdown({ iso }) {
   ];
 
   return (
-    <div className="rounded-lg bg-red-600/10 border border-red-500/30 p-4">
-      <p className="text-body-sm font-bold text-red-400 mb-3">⏱ Offer closes in</p>
-      <div className="flex gap-3 justify-between">
+    <div className="rounded-lg bg-red-600/20 border-2 border-red-400 p-5 shadow-lg shadow-red-600/30">
+      <p className="text-body-sm font-bold text-red-300 mb-4">⏱ OFFER CLOSES IN</p>
+      <div className="flex gap-2 justify-between">
         {cells.map(([v, label]) => (
           <div key={label} className="flex-1 text-center">
-            <div className="rounded-md bg-red-600/20 border border-red-500/40 py-3 px-2">
-              <span className="numeric block text-display-sm font-bold leading-none text-red-300">
+            <div className="rounded-md bg-red-500/30 border-2 border-red-400/60 py-4 px-2">
+              <span className="numeric block text-4xl font-black leading-none text-red-200">
                 {String(v).padStart(2, "0")}
               </span>
             </div>
-            <span className="mt-2 block text-[12px] font-medium tracking-tight text-red-300/80">
+            <span className="mt-3 block text-xs font-bold tracking-wider text-red-300/90">
               {label}
             </span>
           </div>
@@ -87,36 +87,39 @@ export default function Packages() {
             return (
               <article
                 key={p.key}
-                /* The featured tier uses a purple gradient. On a dark canvas that
+                /* The featured tier uses a purple gradient with glow. On a dark canvas that
                    reads as "this is the one" without a coloured ribbon. */
                 className={`pk-card flex flex-col rounded-xl p-6 sm:p-8 ${
                   featured
-                    ? "bg-gradient-to-br from-purple-600 to-purple-700 text-white shadow-float lg:-mt-6 lg:pb-10"
+                    ? "bg-gradient-to-br from-purple-600 to-purple-700 text-white shadow-2xl shadow-purple-600/50 lg:-mt-8 lg:pb-12"
                     : "border border-hairline bg-elevated text-white"
                 }`}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <h3 className={`text-title-md ${featured ? "text-white" : "text-white"}`}>
+                  <h3 className={`text-display-sm font-bold ${featured ? "text-white" : "text-white"}`}>
                     {p.name}
                   </h3>
-                  {featured && <Badge tone="promo">{p.badge}</Badge>}
+                  {featured && <Badge tone="promo" className="text-xs">{p.badge}</Badge>}
                 </div>
 
-                <p className="mt-6 flex items-baseline gap-3">
+                <p className="mt-4 flex items-baseline gap-3">
                   <span
-                    className={`numeric text-number-lg ${featured ? "text-white" : "text-white"}`}
+                    className={`numeric text-display-lg font-bold ${featured ? "text-white" : "text-white"}`}
                   >
                     {p.price}
                   </span>
                   {p.was && (
-                    <span className="numeric text-title-md text-white/60 line-through">
-                      {p.was}
-                    </span>
+                    <>
+                      <span className="numeric text-title-md text-white/60 line-through">
+                        {p.was}
+                      </span>
+                      <span className="text-red-300 font-bold text-title-sm">Save 29%</span>
+                    </>
                   )}
                 </p>
 
                 <p
-                  className={`mt-4 text-body-md ${featured ? "text-white/80" : "text-body"}`}
+                  className={`mt-3 text-body-md font-semibold ${featured ? "text-white" : "text-body"}`}
                 >
                   {p.line}
                 </p>
@@ -145,9 +148,10 @@ export default function Packages() {
                   as="a"
                   href={telHref()}
                   variant={featured ? "invert" : "secondary"}
-                  className="mt-9 w-full"
+                  size="lg"
+                  className={`mt-9 w-full font-bold ${featured ? "bg-white/95 hover:bg-white text-purple-700" : ""}`}
                 >
-                  Call now
+                  Lock in this price
                 </Button>
               </article>
             );
