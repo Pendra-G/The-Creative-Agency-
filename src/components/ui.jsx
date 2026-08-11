@@ -92,7 +92,7 @@ export function Badge({ tone = "soft", className = "", children }) {
     soft: "bg-surface-strong text-white",
     accent: "bg-accent text-white",
     light: "bg-ink/10 text-ink",
-    promo: "bg-semantic-down text-white font-bold shadow-md",
+    promo: "bg-red-600 text-white font-bold shadow-lg border border-red-500",
   };
   return (
     <span

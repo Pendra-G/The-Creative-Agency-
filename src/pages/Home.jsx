@@ -37,8 +37,8 @@ export default function Home({ ready = false }) {
               />
               <Reveal>
                 <p className="mt-6 max-w-measure text-body-lg text-body">
-                  Fill out the form below or give us a call. Either way, you'll get a straight
-                  answer on what your site needs and whether we're the right fit.
+                  Ready to get started? Click the button to fill out the form, or give us a call
+                  directly. Either way, you'll get a straight answer on what your site needs.
                 </p>
                 <Button as={Link} to="/contact" variant="primary" size="lg" className="mt-9">
                   Go to the form
