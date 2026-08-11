@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Hero from "../components/Hero.jsx";
 import Work from "../components/Work.jsx";
 import Demos from "../components/Demos.jsx";
@@ -6,7 +7,7 @@ import Process from "../components/Process.jsx";
 import Packages from "../components/Packages.jsx";
 import About from "../components/About.jsx";
 import { MaskHeading, Reveal } from "../components/Reveal.jsx";
-import { CallCtas } from "../components/ui.jsx";
+import { Button } from "../components/ui.jsx";
 
 export default function Home({ ready = false }) {
   // Every other route sets its own title, so home has to restore the default
@@ -36,10 +37,12 @@ export default function Home({ ready = false }) {
               />
               <Reveal>
                 <p className="mt-6 max-w-measure text-body-lg text-body">
-                  Tell us what the site needs to do. Half an hour on a call, no charge, and a
-                  straight answer on whether this is right for you.
+                  Fill out the form below or give us a call. Either way, you'll get a straight
+                  answer on what your site needs and whether we're the right fit.
                 </p>
-                <CallCtas className="mt-9" secondary="secondary" />
+                <Button as={Link} to="/contact" variant="primary" size="lg" className="mt-9">
+                  Go to the form
+                </Button>
               </Reveal>
             </div>
           </div>
