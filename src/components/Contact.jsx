@@ -1,54 +1,62 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Marquee } from "./Strips.jsx";
-import { CallCtas, TextLink } from "./ui.jsx";
-import { SITE, telHref, mailtoHref } from "../config.js";
-gsap.registerPlugin(ScrollTrigger);
+import { MaskHeading, Reveal } from "./Reveal.jsx";
+import { Button } from "./ui.jsx";
+import { SITE, PRIMARY_PHONE, telHref, viberHref, mailtoHref } from "../config.js";
 
 export default function Contact() {
-  const root = useRef(null);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const ctx = gsap.context(() => {
-      gsap.from(".ct-reveal", {
-        y: 60,
-        opacity: 0,
-        stagger: 0.1,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: { trigger: root.current, start: "top 78%", once: true },
-      });
-    }, root);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="contact" ref={root} className="bg-ink pt-20 sm:pt-28 lg:pt-36">
+    <section id="contact" className="bg-canvas pb-section pt-16 sm:pt-24">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-        <p className="ct-reveal micro text-white/45">Start a project</p>
+        <div className="rounded-xl border border-hairline bg-elevated p-6 sm:p-10 lg:p-14">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-20">
+            <div>
+              <MaskHeading
+                text="Tell us what it needs to do."
+                className="display text-display-md text-white"
+              />
+              <Reveal>
+                <p className="mt-6 max-w-measure text-body-lg text-body">
+                  One call, thirty minutes, no charge. You will get a straight answer on what your
+                  site actually needs — and an honest one if that turns out to be less than you
+                  expected.
+                </p>
+              </Reveal>
+            </div>
 
-        <h2 className="ct-reveal mt-6 display text-white text-[clamp(2.4rem,9vw,7rem)]">
-          Tell me what
-          <br />
-          it needs to do.
-        </h2>
+            {/* Phone and email in one place, so nobody has to hunt. */}
+            <Reveal selector=".ct-line" className="flex flex-col gap-6" stagger={0.1}>
+              <div className="ct-line">
+                <p className="text-caption text-muted">Call</p>
+                <a
+                  href={telHref()}
+                  className="numeric mt-1 inline-flex min-h-[44px] w-fit items-center text-title-lg text-white transition-colors duration-200 hover:text-accent-text"
+                >
+                  {PRIMARY_PHONE}
+                </a>
+              </div>
 
-        <p className="ct-reveal mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">
-          One call, thirty minutes, free. You'll get a straight answer on what your site actually needs, and an honest one if that turns out to be less than you expected.
-        </p>
+              <div className="ct-line">
+                <p className="text-caption text-muted">Email</p>
+                <a
+                  href={mailtoHref()}
+                  className="mt-1 inline-flex min-h-[44px] w-fit items-center break-all text-body-lg text-white transition-colors duration-200 hover:text-accent-text"
+                >
+                  {SITE.email}
+                </a>
+              </div>
 
-        <CallCtas className="ct-reveal mt-10" />
-        <p className="ct-reveal mt-6">
-          <TextLink as="a" href={mailtoHref()}>Prefer email?</TextLink>
-        </p>
-      </div>
+              <div className="ct-line flex flex-wrap gap-3 pt-2">
+                <Button as="a" href={telHref()} variant="primary">
+                  Call now
+                </Button>
+                <Button as="a" href={viberHref()} variant="secondary">
+                  Message on Viber
+                </Button>
+              </div>
 
-      <div className="ct-reveal mt-16 border-y border-line py-4 sm:mt-24">
-        <a href={mailtoHref()} data-cursor className="block min-h-[44px] py-1">
-          <Marquee text="Send me an email" duration={30} />
-        </a>
+              <p className="ct-line text-caption text-muted">{SITE.location}</p>
+            </Reveal>
+          </div>
+        </div>
       </div>
     </section>
   );

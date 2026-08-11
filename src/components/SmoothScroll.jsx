@@ -16,6 +16,7 @@ export default function SmoothScroll({ children }) {
     let lenis;
     let tick;
     let onClick;
+    let onLoad;
 
     // Mobile browsers resize the viewport when their chrome hides on scroll.
     // Without this, ScrollTrigger recalculates mid-scroll and everything jumps.
@@ -62,8 +63,16 @@ export default function SmoothScroll({ children }) {
       };
       document.addEventListener("click", onClick);
 
+      // The project screenshots are large, and they land after the first
+      // ScrollTrigger measurement — which leaves every trigger below them
+      // pointing at a stale position. Re-measure once everything has loaded.
+      onLoad = () => ScrollTrigger.refresh();
+      if (document.readyState === "complete") ScrollTrigger.refresh();
+      else window.addEventListener("load", onLoad);
+
       return () => {
         document.removeEventListener("click", onClick);
+        if (onLoad) window.removeEventListener("load", onLoad);
         gsap.ticker.remove(tick);
         setLenis(null);
         lenis.destroy();

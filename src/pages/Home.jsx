@@ -1,50 +1,49 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Hero from "../components/Hero.jsx";
-import { WordRule, Marquee } from "../components/Strips.jsx";
-import Demos from "../components/Demos.jsx";
 import Work from "../components/Work.jsx";
+import Demos from "../components/Demos.jsx";
 import Process from "../components/Process.jsx";
 import Packages from "../components/Packages.jsx";
 import About from "../components/About.jsx";
-import { CallCtas } from "../components/ui.jsx";
+import { MaskHeading, Reveal } from "../components/Reveal.jsx";
+import { Button } from "../components/ui.jsx";
 
 export default function Home({ ready = false }) {
   // Every other route sets its own title, so home has to restore the default
   // or it inherits whatever page you arrived from.
   useEffect(() => {
-    document.title = "Website Portfolio — animated websites, built in Fiji";
+    document.title = "Website Portfolio — small, fast, fully animated websites";
   }, []);
 
   return (
     <>
+      {/* The work leads. Everything after it is context for what you just saw. */}
       <Hero ready={ready} />
-      <WordRule words={["Two to three pages", "Fully animated"]} />
-      <Demos />
       <Work />
-      <div className="border-y border-line py-4">
-        <Marquee text="Small sites, done properly" duration={34} direction="right" />
-      </div>
+      <Demos />
       <Process />
       <Packages />
       <About />
 
       {/* Closing CTA — the contact page does the heavy lifting */}
-      <section className="bg-ink py-20 sm:py-28">
+      <section className="bg-canvas pb-section">
         <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-          <div className="relative overflow-hidden rounded-card border border-line bg-carbon px-6 py-14 sm:px-12 sm:py-20">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-24 h-96 w-96 bg-accent-glow opacity-80"
-            />
-            <div className="relative max-w-2xl">
-              <h2 className="display text-white text-[clamp(2rem,6.5vw,4rem)]">
-                Ready when you are.
-              </h2>
-              <p className="mt-5 text-base leading-relaxed text-white/65 sm:text-lg">
-                Tell me what the site needs to do. Half an hour on a call, no charge, and a straight
-                answer on whether this is right for you.
-              </p>
-              <CallCtas className="mt-8" />
+          <div className="rounded-xl border border-hairline bg-elevated px-6 py-14 sm:px-12 sm:py-20">
+            <div className="max-w-2xl">
+              <MaskHeading
+                text="Ready when you are."
+                className="display text-display-md text-white"
+              />
+              <Reveal>
+                <p className="mt-6 max-w-measure text-body-lg text-body">
+                  Ready to get started? Click the button to fill out the form, or give us a call
+                  directly. Either way, you'll get a straight answer on what your site needs.
+                </p>
+                <Button as={Link} to="/contact" variant="primary" size="lg" className="mt-9">
+                  Go to the form
+                </Button>
+              </Reveal>
             </div>
           </div>
         </div>

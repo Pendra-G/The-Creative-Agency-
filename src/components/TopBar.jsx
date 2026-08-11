@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { telHref } from "../config.js";
 import NavPanel from "./NavPanel.jsx";
 
 export default function TopBar({ ready = false }) {
@@ -14,10 +13,7 @@ export default function TopBar({ ready = false }) {
     // Lenis makes <body> the scroll container, so window.scrollY stays at 0
     // while the page actually moves. Read whichever element is really scrolling.
     const readY = () =>
-      window.scrollY ||
-      document.scrollingElement?.scrollTop ||
-      document.body.scrollTop ||
-      0;
+      window.scrollY || document.scrollingElement?.scrollTop || document.body.scrollTop || 0;
     const onScroll = () => setScrolled(readY() > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -27,39 +23,41 @@ export default function TopBar({ ready = false }) {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-          scrolled ? "border-b border-line bg-ink/85 backdrop-blur-md" : "border-b border-transparent"
+        className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${
+          scrolled ? "border-hairline bg-canvas/85 backdrop-blur-md" : "border-transparent"
         }`}
         style={{
           opacity: ready ? 1 : 0,
-          transform: ready ? "translateY(0)" : "translateY(-14px)",
+          transform: ready ? "translateY(0)" : "translateY(-12px)",
           transition:
             "opacity 700ms cubic-bezier(0.22,1,0.36,1) 150ms, transform 700ms cubic-bezier(0.22,1,0.36,1) 150ms, background-color 300ms, border-color 300ms",
         }}
       >
-        <div className="mx-auto flex max-w-shell items-center justify-between gap-6 px-4 py-4 sm:px-6">
-          <Link to="/" data-cursor className="-my-3 shrink-0 py-3 leading-[0.95]">
-            <span className="block micro text-white">Website</span>
-            <span className="block micro text-white">Portfolio</span>
+        <div className="mx-auto flex h-16 max-w-shell items-center justify-between gap-3 px-4 sm:gap-6 sm:px-6">
+          <Link
+            to="/"
+            className="display -my-3 flex shrink-0 items-center whitespace-nowrap py-3 text-title-sm tracking-[-0.01em] text-white transition-colors duration-200 hover:text-accent-text"
+          >
+            WEBSITE PORTFOLIO
           </Link>
 
-          <div className="flex items-center gap-4 sm:gap-6">
-            {/* A way to act at any scroll position, not just at the CTA blocks */}
-            <a href={telHref()} data-cursor className="hidden min-h-[40px] items-center rounded-pill bg-white px-5 micro text-ink transition-colors hover:bg-accent xs:inline-flex">Call now</a>
-
+          {/* No CTA up here: the accent belongs to one action per view, and a
+              second purple pill in the bar competes with the hero's own. The
+              menu panel carries the phone number and both call buttons. */}
+          <div className="flex items-center">
             <button
               type="button"
               onClick={() => setOpen(true)}
               aria-expanded={open}
               aria-haspopup="dialog"
-              data-cursor
-              className="group -my-3 flex min-h-[44px] items-center gap-2.5 py-3 micro text-white transition-colors hover:text-accent"
+              aria-label="Open menu"
+              className="group -mr-3 flex h-11 min-w-11 items-center justify-center gap-2.5 rounded-pill px-3 text-nav-link text-white transition-colors duration-200 hover:text-accent-text"
             >
-            <span className="flex flex-col gap-[3px]" aria-hidden="true">
-              <span className="block h-px w-5 bg-current transition-transform duration-300 ease-snap group-hover:-translate-y-[1px]" />
-              <span className="block h-px w-5 bg-current transition-transform duration-300 ease-snap group-hover:translate-y-[1px]" />
-            </span>
-              Menu
+              <span className="flex flex-col gap-[4px]" aria-hidden="true">
+                <span className="block h-px w-5 bg-current transition-transform duration-300 ease-editorial group-hover:-translate-y-[1px]" />
+                <span className="block h-px w-5 bg-current transition-transform duration-300 ease-editorial group-hover:translate-y-[1px]" />
+              </span>
+              <span className="hidden sm:inline">Menu</span>
             </button>
           </div>
         </div>
