@@ -18,10 +18,11 @@ export default function Home({ ready = false }) {
 
   return (
     <>
-      {/* The work leads. Everything after it is context for what you just saw. */}
+      {/* "What we build" frames who this is for, then the portfolios show it
+          delivered for real clients. Everything after is context for that. */}
       <Hero ready={ready} />
-      <Work />
       <Demos />
+      <Work />
       <Process />
       <Packages />
       <About />

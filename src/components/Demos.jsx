@@ -59,8 +59,12 @@ function DemoCard({ demo }) {
 }
 
 export default function Demos() {
+  /* Canvas, not surface: this now follows the hero directly, and the hero is
+     full-bleed media, so a shared tone here reads as the hero settling into
+     content. That frees the alternation to resume cleanly from the portfolios
+     down. */
   return (
-    <section id="build" className="bg-surface py-section">
+    <section id="build" className="bg-canvas py-section">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="max-w-3xl">
           <MaskHeading text="What we build" className="display text-display-lg text-white" />

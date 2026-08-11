@@ -104,11 +104,14 @@ export default function Work() {
     return () => ctx.revert();
   }, []);
 
+  /* Surface, not canvas: this took the alternating band from "What we build"
+     when the two swapped places, so Work and Process don't merge into one
+     unbroken tone. */
   return (
-    <section id="work" ref={root} className="bg-canvas py-section">
+    <section id="work" ref={root} className="bg-surface py-section">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="max-w-3xl">
-          <MaskHeading text="Selected work" className="display text-display-lg text-white" />
+          <MaskHeading text="Our project portfolios" className="display text-display-lg text-white" />
           <Reveal selector="p" stagger={0.1}>
             <p className="mt-6 max-w-measure text-body-lg text-body">
               Each project below was built end to end — direction, design, copy and code — and every
@@ -118,7 +121,7 @@ export default function Work() {
         </div>
 
         <div className="mt-16 flex flex-col gap-24 sm:mt-24 sm:gap-32">
-          {PROJECTS.map((p, i) => (
+          {PROJECTS.map((p) => (
             <article key={p.title} className="wk-item">
               <a
                 href={p.url}
@@ -128,15 +131,17 @@ export default function Work() {
                 aria-label={`${p.title} — open the live site in a new tab`}
               >
                 <div className="wk-frame relative aspect-[16/10] overflow-hidden rounded-xl border border-hairline bg-elevated sm:aspect-[2/1]">
-                  {/* The first project sits just below the hero, so it loads
-                      eagerly and claims priority; the rest wait until they are
-                      near the viewport. These screenshots are heavy — see the
-                      note in README about compressing them. */}
+                  {/* All lazy: this section now sits below "What we build", so
+                      no screenshot is near the viewport on load. The first one
+                      was eager back when it followed the hero directly — left
+                      that way it would pull ~1.6MB off-screen and contend with
+                      the demo clips above it, which are the ones actually on
+                      screen. These are heavy; see the note in README about
+                      compressing them. */}
                   <img
                     src={p.img}
                     alt={`The ${p.title} website, shown on desktop`}
-                    loading={i === 0 ? "eager" : "lazy"}
-                    fetchpriority={i === 0 ? "high" : "auto"}
+                    loading="lazy"
                     decoding="async"
                     className="wk-media absolute inset-0 h-[110%] w-full object-cover object-top transition-transform duration-[1200ms] ease-editorial group-hover:scale-[1.02]"
                   />
