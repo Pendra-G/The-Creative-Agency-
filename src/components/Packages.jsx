@@ -4,21 +4,6 @@ import { Button, Badge, Check } from "./ui.jsx";
 import { PACKAGES, OFFER_ENDS, telHref } from "../config.js";
 
 /**
- * The difference between the old and new price, formatted like them.
- *
- * Computed rather than written down: the card claims a specific saving next to
- * both figures, so hardcoding it would let the claim drift the first time a
- * price changes in config. Returns null if either price has no digits to read.
- */
-function saving(was, now) {
-  const a = Number(String(was).replace(/[^\d]/g, ""));
-  const b = Number(String(now).replace(/[^\d]/g, ""));
-  if (!a || !b || a <= b) return null;
-  const prefix = String(was).match(/^[^\d]*/)?.[0] ?? "";
-  return `${prefix}${a - b}`;
-}
-
-/**
  * Counts down to a fixed date. Once it passes the timer disappears rather than
  * rolling over — a countdown that silently restarts is a lie, and anyone who
  * visits twice will notice.
@@ -57,26 +42,27 @@ function Countdown({ iso }) {
     [t.seconds, "Secs"],
   ];
 
-  /* The plate is a deep violet-black recess cut into the card. Red only reads
-     as urgency over something dark — laid over the purple directly it
-     composites to dusty pink, which is why this sits on its own floor. */
+  /* A black plate cut into the purple card, with the accent's on-dark cut
+     (#A78BFA, 7.2:1 on near-black) carrying every figure. Purple only reads as
+     purple over black — laid over the card's own fill it disappears into it,
+     which is why this sits on its own floor. */
   return (
-    <div className="rounded-lg bg-[#12071F]/80 p-4 ring-1 ring-inset ring-white/10">
+    <div className="rounded-lg bg-ink p-4 ring-1 ring-inset ring-white/10">
       <div className="mb-3 flex items-center gap-2">
-        <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-semantic-down" />
-        <p className="text-caption-strong uppercase tracking-[0.12em] text-semantic-down">
+        <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-text" />
+        <p className="text-caption-strong uppercase tracking-[0.12em] text-accent-text">
           Offer closes in
         </p>
       </div>
       <div className="flex justify-between gap-2">
         {cells.map(([v, label]) => (
           <div key={label} className="flex-1 text-center">
-            <div className="rounded-md bg-semantic-down/10 py-2.5 ring-1 ring-inset ring-semantic-down/25">
-              <span className="numeric block text-2xl font-bold leading-none text-[#FCA5A5]">
+            <div className="rounded-md bg-accent/20 py-2.5 ring-1 ring-inset ring-accent/45">
+              <span className="numeric block text-2xl font-bold leading-none text-accent-text">
                 {String(v).padStart(2, "0")}
               </span>
             </div>
-            <span className="mt-2 block text-[11px] font-semibold uppercase tracking-[0.08em] text-[#FCA5A5]/80">
+            <span className="mt-2 block text-[11px] font-semibold uppercase tracking-[0.08em] text-accent-text/85">
               {label}
             </span>
           </div>
@@ -124,30 +110,25 @@ export default function Packages() {
                 }`}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <h3 className={featured ? "text-title-lg text-white" : "text-title-md text-white"}>
+                  {/* Black on the card's lightest gradient stop is 3.7:1, which
+                      clears the 3:1 large-text bar only because this is bold —
+                      at 700 and 22px+ it qualifies as large text at every
+                      breakpoint. Keep the weight if you change the size. Caps
+                      also need the token's negative tracking relaxed. */}
+                  <h3
+                    className={
+                      featured
+                        ? "text-title-lg font-bold uppercase tracking-[0.02em] text-ink"
+                        : "text-title-md text-white"
+                    }
+                  >
                     {p.name}
                   </h3>
                   {featured && <Badge tone="promo">{p.badge}</Badge>}
                 </div>
 
-                <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-2">
+                <p className="mt-5">
                   <span className="numeric text-number-lg text-white">{p.price}</span>
-                  {p.was && (
-                    <>
-                      {/* Subordinated by size and the strike, not by a low
-                          opacity — at 18px it is normal-size text and owes the
-                          full 4.5:1, and it is part of the price claim rather
-                          than decoration. */}
-                      <span className="numeric text-title-md text-white/90 line-through">
-                        {p.was}
-                      </span>
-                      {/* Solid, opaque, and derived from the two prices — a
-                          translucent tint over the gradient would read pink. */}
-                      <span className="rounded-pill bg-semantic-down px-2.5 py-1 text-caption-strong uppercase tracking-[0.06em] text-[#3F0A0A]">
-                        Save {saving(p.was, p.price)}
-                      </span>
-                    </>
-                  )}
                 </p>
 
                 <p className={`mt-4 text-body-md ${featured ? "text-white/90" : "text-body"}`}>
@@ -157,14 +138,6 @@ export default function Packages() {
                 {featured && (
                   <div className="mt-7 border-t border-white/15 pt-6">
                     <Countdown iso={OFFER_ENDS} />
-                    {p.was && (
-                      /* States plainly what lapsing costs. The number comes from
-                         the same config field as the struck-through price, so it
-                         can never drift out of sync with it. */
-                      <p className="mt-3 text-caption text-white/90">
-                        Then it goes back to <span className="numeric">{p.was}</span>.
-                      </p>
-                    )}
                   </div>
                 )}
 
