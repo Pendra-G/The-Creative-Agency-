@@ -111,7 +111,7 @@ export default function Work() {
     <section id="work" ref={root} className="bg-surface py-section">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="max-w-3xl">
-          <MaskHeading text="Our project portfolios" className="display text-display-lg text-white" />
+          <MaskHeading text="Our Projects" className="display text-display-lg text-white" />
           <Reveal selector="p" stagger={0.1}>
             <p className="mt-6 max-w-measure text-body-lg text-body">
               Each project below was built end to end — direction, design, copy and code — and every
