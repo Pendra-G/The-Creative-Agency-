@@ -62,7 +62,6 @@ export const PACKAGES = [
       "1 year domain registration included",
       "Google Business Profile set up",
       "Basic SEO — titles, meta, headings",
-      "Email forwarding setup",
     ],
   },
   {
