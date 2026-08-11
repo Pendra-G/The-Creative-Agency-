@@ -92,7 +92,7 @@ export function Badge({ tone = "soft", className = "", children }) {
     soft: "bg-surface-strong text-white",
     accent: "bg-accent text-white",
     light: "bg-ink/10 text-ink",
-    promo: "bg-gradient-to-r from-purple-600 via-purple-500 to-violet-500 text-white font-bold shadow-lg border border-purple-400",
+    promo: "bg-purple-600 text-white font-bold shadow-lg border border-purple-500 hover:bg-purple-700 transition-colors",
   };
   return (
     <span

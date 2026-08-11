@@ -42,17 +42,17 @@ function Countdown({ iso }) {
   ];
 
   return (
-    <div className="rounded-lg bg-gradient-to-br from-purple-600/5 to-violet-600/5 border border-purple-400/30 p-4">
-      <p className="text-body-sm font-bold bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent mb-3">⏱ Offer closes in</p>
+    <div className="rounded-lg bg-purple-600/10 border border-purple-500/30 p-4">
+      <p className="text-body-sm font-bold text-purple-700 mb-3">⏱ Offer closes in</p>
       <div className="flex gap-3 justify-between">
         {cells.map(([v, label]) => (
           <div key={label} className="flex-1 text-center">
-            <div className="rounded-md bg-gradient-to-b from-purple-600/20 to-violet-600/20 border border-purple-400/50 py-3 px-2">
-              <span className="numeric block text-display-sm font-bold leading-none bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent">
+            <div className="rounded-md bg-purple-700/20 border border-purple-600/40 py-3 px-2">
+              <span className="numeric block text-display-sm font-bold leading-none text-purple-700">
                 {String(v).padStart(2, "0")}
               </span>
             </div>
-            <span className="mt-2 block text-[12px] font-medium tracking-tight text-purple-600/80">
+            <span className="mt-2 block text-[12px] font-medium tracking-tight text-purple-700/70">
               {label}
             </span>
           </div>
