@@ -42,17 +42,17 @@ function Countdown({ iso }) {
   ];
 
   return (
-    <div className="rounded-lg bg-white/10 border border-white/20 p-4">
-      <p className="text-body-sm font-bold text-white mb-3">⏱ Offer closes in</p>
+    <div className="rounded-lg bg-red-600/10 border border-red-500/30 p-4">
+      <p className="text-body-sm font-bold text-red-400 mb-3">⏱ Offer closes in</p>
       <div className="flex gap-3 justify-between">
         {cells.map(([v, label]) => (
           <div key={label} className="flex-1 text-center">
-            <div className="rounded-md bg-white/10 border border-white/30 py-3 px-2">
-              <span className="numeric block text-display-sm font-bold leading-none text-white">
+            <div className="rounded-md bg-red-600/20 border border-red-500/40 py-3 px-2">
+              <span className="numeric block text-display-sm font-bold leading-none text-red-300">
                 {String(v).padStart(2, "0")}
               </span>
             </div>
-            <span className="mt-2 block text-[12px] font-medium tracking-tight text-white/80">
+            <span className="mt-2 block text-[12px] font-medium tracking-tight text-red-300/80">
               {label}
             </span>
           </div>
