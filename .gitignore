@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Machine-local Claude Code permissions; launch.json is shared intentionally
+.claude/settings.local.json

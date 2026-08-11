@@ -1,46 +1,109 @@
-import Magnetic from "./Magnetic.jsx";
+import { Link } from "react-router-dom";
+import { Marquee } from "./Strips.jsx";
+import { SITE, PRIMARY_PHONE, telHref, viberHref, mailtoHref } from "../config.js";
 
-export default function Footer(){
+// Every entry is a route that exists or a section id that exists on home.
+const LINKS = [
+  ["Home", "/"],
+  ["What we build", "/#build"],
+  ["Projects", "/#work"],
+  ["Process", "/#process"],
+  ["Packages", "/#pricing"],
+  ["About", "/about"],
+  ["Contact", "/contact"],
+];
+
+function FooterLink({ href, children }) {
+  const cls =
+    "group inline-flex min-h-[42px] items-center gap-2 micro text-white/55 transition-colors hover:text-white";
+  const inner = (
+    <>
+      <span
+        aria-hidden="true"
+        className="h-px w-0 bg-accent transition-all duration-300 ease-snap group-hover:w-4"
+      />
+      {children}
+    </>
+  );
+  return href.startsWith("/") ? (
+    <Link to={href} data-cursor className={cls}>
+      {inner}
+    </Link>
+  ) : (
+    <a href={href} data-cursor className={cls}>
+      {inner}
+    </a>
+  );
+}
+
+export default function Footer() {
   return (
-    <footer id="footer" className="bg-white text-ink pt-12 xs:pt-16 sm:pt-20 md:pt-28 pb-6 xs:pb-8 border-t border-black/10">
-      <div className="mx-auto max-w-[1500px] px-4 xs:px-5 sm:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 pb-12 sm:pb-16 md:pb-24">
-          <div className="grid grid-cols-2 gap-4 xs:gap-6">
-            <div>
-              <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.2em] text-ink/50 mb-3">Socials</p>
-              <ul className="space-y-2">
-                {[
-                  { name: "Facebook", url: "https://www.facebook.com/profile.php?id=61565173942247" },
-                  { name: "Instagram", url: "#" },
-                  { name: "LinkedIn", url: "#" }
-                ].map(s=>(
-                  <li key={s.name}>
-                    <a href={s.url} target={s.url !== "#" ? "_blank" : undefined} rel={s.url !== "#" ? "noopener noreferrer" : undefined} data-cursor className="inline-flex items-center gap-2 border border-black/30 rounded-full px-3 py-1.5 xs:py-2 uppercase tracking-[0.15em] text-[9px] xs:text-[10px] hover:bg-black hover:text-white transition-colors whitespace-nowrap">
-                      {s.name} <span>→</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+    <footer id="footer" className="relative overflow-hidden bg-ink pt-16">
+      <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
+        <div className="grid grid-cols-1 gap-12 border-b border-line pb-14 lg:grid-cols-[1.3fr_1fr]">
+          {/* Everything a visitor needs, in one place */}
+          <div>
+            <p className="micro text-white/45">Get in touch</p>
+
+            <a
+              href={telHref()}
+              data-cursor
+              className="mt-4 block font-display text-[clamp(1.8rem,6vw,3.2rem)] font-semibold leading-tight tracking-tighter text-white transition-colors hover:text-accent"
+            >
+              {PRIMARY_PHONE}
+            </a>
+
+            <a
+              href={mailtoHref()}
+              data-cursor
+              className="mt-2 block break-all font-display text-[clamp(1rem,3.2vw,1.5rem)] font-medium tracking-tight text-white/70 transition-colors hover:text-white"
+            >
+              {SITE.email}
+            </a>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href={telHref()}
+                data-cursor
+                className="inline-flex min-h-[48px] items-center rounded-pill bg-white px-6 micro text-ink transition-transform duration-300 ease-snap hover:scale-[1.04]"
+              >
+                Call now
+              </a>
+              <a
+                href={viberHref()}
+                data-cursor
+                className="inline-flex min-h-[48px] items-center rounded-pill border border-white/30 px-6 micro text-white transition-colors hover:bg-accent hover:text-ink"
+              >
+                Message on Viber
+              </a>
             </div>
-            <div>
-              <p className="text-[9px] xs:text-[10px] uppercase tracking-[0.2em] text-ink/50 mb-3">Contact</p>
-              <ul className="space-y-2">
-                <li><a href="mailto:hello@creative.agency" data-cursor className="inline-flex items-center gap-2 border border-black/30 rounded-full px-3 py-1.5 xs:py-2 text-[9px] xs:text-[10px] uppercase tracking-[0.15em] hover:bg-black hover:text-white transition-colors truncate">{`contact`}@... <span>→</span></a></li>
-                <li><a href="tel:+6792921000" data-cursor className="inline-flex items-center gap-2 border border-black/30 rounded-full px-3 py-1.5 xs:py-2 text-[9px] xs:text-[10px] uppercase tracking-[0.15em] hover:bg-black hover:text-white transition-colors whitespace-nowrap">+679 2921000 <span>→</span></a></li>
-                <li><a href="tel:+6792921000" data-cursor className="inline-flex items-center gap-2 border border-black/30 rounded-full px-3 py-1.5 xs:py-2 text-[9px] xs:text-[10px] uppercase tracking-[0.15em] hover:bg-black hover:text-white transition-colors whitespace-nowrap">+679 8091770 <span>→</span></a></li>
-              </ul>
-            </div>
+
+            <p className="mt-7 micro text-white/40">{SITE.location}</p>
           </div>
 
-          <div className="flex flex-col items-start justify-start sm:justify-center gap-4 xs:gap-6">
-            <p className="font-display font-medium text-xl xs:text-2xl sm:text-3xl md:text-4xl leading-tight tracking-tightest text-ink">Clean code. Sharp design. Limitless possibilities.</p>
+          <div>
+            <p className="mb-3 micro text-white/45">Site</p>
+            <ul className="columns-2 gap-6">
+              {LINKS.map(([label, href]) => (
+                <li key={href}>
+                  <FooterLink href={href}>{label}</FooterLink>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <div className="mt-6 xs:mt-8 pt-4 xs:pt-6 border-t border-black/10 flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 xs:gap-3 text-[9px] xs:text-[10px] uppercase tracking-[0.18em] text-ink">
-          <p>© {new Date().getFullYear()} Creative Agency. All rights reserved.</p>
-          <p>Design and built in Fiji.</p>
+        <div className="flex flex-col items-start justify-between gap-3 py-6 sm:flex-row sm:items-center">
+          <p className="micro text-white/40">
+            © {new Date().getFullYear()} {SITE.name}
+          </p>
+          <p className="micro text-white/40">Designed &amp; built in Fiji</p>
         </div>
+      </div>
+
+      {/* Sign-off runs continuously leftward across the base of the page. */}
+      <div className="border-t border-line py-6">
+        <Marquee text="Website Portfolio" duration={40} direction="left" />
       </div>
     </footer>
   );
