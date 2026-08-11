@@ -51,27 +51,27 @@ export default function Footer() {
               className="display text-display-md text-white"
             />
 
-            <Reveal selector=".ft-line" className="mt-8 flex flex-col gap-2" stagger={0.09}>
+            <Reveal selector=".ft-line" className="mt-6 flex flex-col gap-4 sm:gap-2" stagger={0.09}>
               <a
                 href={telHref()}
-                className="ft-line numeric inline-flex min-h-[44px] w-fit items-center text-title-lg text-white transition-colors duration-200 hover:text-accent-text"
+                className="ft-line numeric inline-flex min-h-[48px] sm:min-h-[44px] w-fit items-center text-title-lg text-white transition-colors duration-200 hover:text-accent-text"
               >
                 {PRIMARY_PHONE}
               </a>
               <a
                 href={mailtoHref()}
-                className="ft-line inline-flex min-h-[44px] w-fit items-center break-all text-title-lg text-body transition-colors duration-200 hover:text-white"
+                className="ft-line inline-flex min-h-[48px] sm:min-h-[44px] w-fit items-center text-title-md sm:text-title-lg text-body transition-colors duration-200 hover:text-white"
               >
                 {SITE.email}
               </a>
             </Reveal>
 
-            <Reveal className="mt-9">
-              <div className="flex flex-wrap gap-3">
-                <Button as="a" href={telHref()} variant="primary">
+            <Reveal className="mt-8 sm:mt-9">
+              <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 w-full sm:w-auto">
+                <Button as="a" href={telHref()} variant="primary" className="w-full sm:w-auto justify-center">
                   Call now
                 </Button>
-                <Button as="a" href={viberHref()} variant="secondary">
+                <Button as="a" href={viberHref()} variant="secondary" className="w-full sm:w-auto justify-center">
                   Message on Viber
                 </Button>
               </div>
