@@ -50,7 +50,7 @@ export const PACKAGES = [
     key: "starter",
     name: "Starter",
     price: "FJ$499",
-    was: "FJ$799",
+    was: "FJ$699",
     offer: true,
     badge: "Special offer",
     line: "One page, fully animated. Everything a small business needs to be found and trusted.",

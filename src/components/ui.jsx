@@ -92,10 +92,11 @@ export function Badge({ tone = "soft", className = "", children }) {
     soft: "bg-surface-strong text-white",
     accent: "bg-accent text-white",
     light: "bg-ink/10 text-ink",
+    promo: "bg-semantic-down text-white font-bold shadow-md",
   };
   return (
     <span
-      className={`inline-flex items-center rounded-pill px-3 py-1 text-caption-strong uppercase tracking-[0.08em] ${tones[tone]} ${className}`}
+      className={`inline-flex items-center rounded-pill px-3 py-1.5 text-caption-strong uppercase tracking-[0.1em] ${tones[tone]} ${className}`}
     >
       {children}
     </span>

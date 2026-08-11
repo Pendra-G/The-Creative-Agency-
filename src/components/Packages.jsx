@@ -43,14 +43,14 @@ function Countdown({ iso }) {
 
   return (
     <div>
-      <p className="text-caption text-ink-body">Offer closes in</p>
+      <p className="text-caption font-bold text-semantic-down">Offer closes in</p>
       <div className="mt-2 flex gap-2">
         {cells.map(([v, label]) => (
-          <div key={label} className="rounded-sm bg-ink/[0.07] px-2.5 py-1.5 text-center">
-            <span className="numeric block text-title-md leading-none text-ink">
+          <div key={label} className="rounded-sm bg-semantic-down/10 border border-semantic-down px-2.5 py-1.5 text-center">
+            <span className="numeric block text-title-md leading-none font-bold text-semantic-down">
               {String(v).padStart(2, "0")}
             </span>
-            <span className="mt-1 block text-[10px] uppercase tracking-[0.1em] text-ink-body">
+            <span className="mt-1 block text-[10px] uppercase tracking-[0.1em] text-semantic-down/70">
               {label}
             </span>
           </div>
@@ -97,7 +97,7 @@ export default function Packages() {
                   <h3 className={`text-title-md ${featured ? "text-ink" : "text-white"}`}>
                     {p.name}
                   </h3>
-                  {featured && <Badge tone="light">{p.badge}</Badge>}
+                  {featured && <Badge tone="promo">{p.badge}</Badge>}
                 </div>
 
                 <p className="mt-6 flex items-baseline gap-3">
