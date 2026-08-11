@@ -3,7 +3,7 @@ export const SITE = {
   name: "Website Portfolio",
   email: "salvinshavnitnarayan@gmail.com",
   phone: "+679 2921000",
-  location: "Viti Levu, Fiji",
+  location: "Sigatoka, Fiji",
 };
 
 export const PRIMARY_PHONE = SITE.phone;
