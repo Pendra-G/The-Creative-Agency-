@@ -48,6 +48,9 @@ const VARIANTS = {
   outline: "border border-white/25 text-white hover:border-white/60 hover:bg-white/5",
   /* Inverted — sits on the one light surface in the system. */
   invert: "bg-ink text-white hover:bg-ink/85",
+  /* For use on an accent-filled surface, where both a filled accent pill and a
+     dark pill would sink into the fill. White is the only thing left that lifts. */
+  "on-accent": "bg-white text-[#4C1D95] hover:bg-white/90",
 };
 
 const SIZES = {
@@ -92,7 +95,9 @@ export function Badge({ tone = "soft", className = "", children }) {
     soft: "bg-surface-strong text-white",
     accent: "bg-accent text-white",
     light: "bg-ink/10 text-ink",
-    promo: "bg-purple-600 text-white font-bold shadow-lg border border-purple-500 hover:bg-purple-700 transition-colors",
+    /* Reads on an accent-filled card, where a purple pill would disappear into
+       the fill it is sitting on. */
+    promo: "bg-white text-[#4C1D95]",
   };
   return (
     <span
