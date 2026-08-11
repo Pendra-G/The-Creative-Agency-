@@ -35,22 +35,24 @@ function Countdown({ iso }) {
   }
 
   const cells = [
-    [t.days, "days"],
-    [t.hours, "hrs"],
-    [t.minutes, "min"],
-    [t.seconds, "sec"],
+    [t.days, "Days"],
+    [t.hours, "Hours"],
+    [t.minutes, "Mins"],
+    [t.seconds, "Secs"],
   ];
 
   return (
-    <div>
-      <p className="text-caption font-bold text-semantic-down">Offer closes in</p>
-      <div className="mt-2 flex gap-2">
+    <div className="rounded-lg bg-semantic-down/5 border border-semantic-down/30 p-4">
+      <p className="text-body-sm font-bold text-semantic-down mb-3">⏱ Offer closes in</p>
+      <div className="flex gap-3 justify-between">
         {cells.map(([v, label]) => (
-          <div key={label} className="rounded-sm bg-semantic-down/10 border border-semantic-down px-2.5 py-1.5 text-center">
-            <span className="numeric block text-title-md leading-none font-bold text-semantic-down">
-              {String(v).padStart(2, "0")}
-            </span>
-            <span className="mt-1 block text-[10px] uppercase tracking-[0.1em] text-semantic-down/70">
+          <div key={label} className="flex-1 text-center">
+            <div className="rounded-md bg-semantic-down/10 border border-semantic-down/40 py-3 px-2">
+              <span className="numeric block text-display-sm font-bold leading-none text-semantic-down">
+                {String(v).padStart(2, "0")}
+              </span>
+            </div>
+            <span className="mt-2 block text-[12px] font-medium tracking-tight text-semantic-down/80">
               {label}
             </span>
           </div>
