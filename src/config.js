@@ -19,14 +19,14 @@ export const FOUNDERS = [
     initials: "SSN",
     role: "Creative & Marketing Director",
     focus: "Design direction, marketing and new business. First call is with him.",
-    photo: "/founders/salvin.jpg",
+    photo: "/founders/SSN.jpg",
   },
   {
     name: "Upendra Gounder",
     initials: "URG",
     role: "Operations Director",
     focus: "Build, delivery and everything after launch.",
-    photo: "/founders/upendra.jpg",
+    photo: "/founders/Upendra Gounder side profile photo.png",
   },
 ];
 
@@ -52,7 +52,7 @@ export const PACKAGES = [
     price: "FJ$499",
     was: "FJ$799",
     offer: true,
-    badge: "Launch offer",
+    badge: "Special offer",
     line: "One page, fully animated. The whole business on a single scroll.",
     includes: [
       "One animated page",

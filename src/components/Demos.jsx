@@ -14,7 +14,7 @@ import { mailtoHref } from "../config.js";
 const DEMOS = [
   { slug: "beauty-salon", name: "Beauty & wellness", note: "Treatments, prices, and how to book, in one scroll.", variant: "booking", tint: "#F472B6", wordmark: "Glow" },
   { slug: "photography", name: "Photography", note: "The portfolio first. Everything else gets out of the way.", variant: "gallery", tint: "#E5E7EB", wordmark: "Frame" },
-  { slug: "cafe", name: "Café & takeaway", note: "Menu, hours, location — the three things people search for.", variant: "catalogue", tint: "#FBBF24", wordmark: "Kava" },
+  { slug: "tech-store", name: "Tech Store", note: "Product showcase with live inventory and online ordering.", variant: "catalogue", tint: "#06B6D4", wordmark: "Tech" },
   { slug: "restaurant", name: "Restaurant", note: "Menu, table bookings, and where to find you.", variant: "catalogue", tint: "#FB923C", wordmark: "Vale" },
   { slug: "car-rental", name: "Car rental", note: "Fleet, rates, and an enquiry that reaches you straight away.", variant: "booking", tint: "#38BDF8", wordmark: "Drive" },
 ];

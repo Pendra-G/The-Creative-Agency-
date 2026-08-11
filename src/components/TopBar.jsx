@@ -38,7 +38,7 @@ export default function TopBar({ ready = false }) {
             to="/"
             className="display -my-3 flex shrink-0 items-center whitespace-nowrap py-3 text-title-sm tracking-[-0.01em] text-white transition-colors duration-200 hover:text-accent-text"
           >
-            Website Portfolio
+            WEBSITE PORTFOLIO
           </Link>
 
           {/* No CTA up here: the accent belongs to one action per view, and a
