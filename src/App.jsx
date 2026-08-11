@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Cursor from "./components/Cursor.jsx";
 import SmoothScroll from "./components/SmoothScroll.jsx";
 import PageLoader from "./components/PageLoader.jsx";
 import TopBar from "./components/TopBar.jsx";
@@ -49,7 +48,6 @@ export default function App() {
 
   return (
     <SmoothScroll>
-      <Cursor />
       <PageLoader onDone={() => setReady(true)} />
       <ScrollProgress />
       <TopBar ready={ready} />

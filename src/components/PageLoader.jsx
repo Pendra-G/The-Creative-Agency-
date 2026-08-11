@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Star } from "./ui.jsx";
 import { startScroll, stopScroll } from "../lib/scroll.js";
 
-const FILL_MS = 1200;
+const FILL_MS = 1100;
 const EXIT_MS = 700;
 
 // t<.5 ? 4t³ : 1-((-2t+2)³)/2
@@ -73,45 +72,38 @@ export default function PageLoader({ onDone }) {
       role="status"
       aria-live="polite"
       aria-label="Loading"
-      className="fixed inset-0 z-[120] flex flex-col items-center justify-center gap-10 bg-ink text-white"
+      className="fixed inset-0 z-[120] flex flex-col items-center justify-center gap-12 bg-canvas text-white"
       style={{
         transform: exiting ? "translateY(-100%)" : "translateY(0%)",
         transition: `transform ${EXIT_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`,
       }}
     >
-      <div
-        className="flex flex-col items-center gap-4 px-6 text-center"
+      <p
+        className="display px-6 text-center text-display-lg text-white"
         style={{
           opacity: exiting ? 0 : 1,
           transform: exiting ? "translateY(-12px)" : "translateY(0)",
           transition: "opacity 400ms ease-out, transform 400ms ease-out",
         }}
       >
-        <p className="display text-[clamp(2rem,9vw,5rem)] leading-[0.85] text-white">
-          Website
-          <br />
-          Portfolio
-        </p>
-        <p className="flex items-center gap-2 micro text-white/55">
-          Small sites <Star className="text-accent" /> Launched fast
-        </p>
-      </div>
+        Website Portfolio
+      </p>
 
-      <div className="flex w-[min(22rem,72vw)] flex-col gap-3">
-        <div className="h-px w-full bg-white/15">
+      <div className="flex w-[min(20rem,68vw)] flex-col gap-3">
+        <div className="h-px w-full bg-hairline">
           {/* scaleX rather than width: this updates every frame while loading,
               and transforms stay off the layout path. */}
           <div
-            className="h-full w-full origin-left bg-accent"
+            className="h-full w-full origin-left bg-accent-text"
             style={{
               transform: `scaleX(${progress / 100})`,
               transition: "transform .1s ease-out",
             }}
           />
         </div>
-        <div className="flex items-center justify-between micro text-white/45">
+        <div className="flex items-center justify-between text-caption text-muted">
           <span>Loading</span>
-          <span className="tabular-nums text-white/80">{String(progress).padStart(3, "0")}</span>
+          <span className="numeric text-white">{String(progress).padStart(3, "0")}</span>
         </div>
       </div>
     </div>
