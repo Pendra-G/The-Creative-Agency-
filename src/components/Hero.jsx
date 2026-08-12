@@ -93,15 +93,19 @@ export default function Hero({ ready = false }) {
 
       <div className="relative mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="hero-copy max-w-4xl">
-          <h1 aria-label="Websites worth looking at.">
+          {/* aria-label carries the whole sentence: split() rewrites each line
+              into per-character spans, so the accessible name has to live on the
+              h1 rather than be assembled from the fragments. Keep it in sync
+              with the two lines below. */}
+          <h1 aria-label="Website Design And Development Services.">
             <span className="block overflow-hidden">
               <span ref={l1} className="display block text-display-mega text-white">
-                Websites worth
+                Website Design And
               </span>
             </span>
             <span className="block overflow-hidden">
               <span ref={l2} className="display block text-display-mega text-body">
-                looking at.
+                Development Services.
               </span>
             </span>
           </h1>

@@ -56,7 +56,11 @@ export default {
          owner's direction. Tracking tightens as weight and size climb so the
          big headings stay dense rather than gappy. */
       fontSize: {
-        'display-mega': ['clamp(2.75rem, 7vw, 5rem)', { lineHeight: '1', letterSpacing: '-0.035em', fontWeight: '700' }],
+        /* The floor is set by the hero headline, its only consumer: the longer
+           of its two lines needs ~319px at 30px, and a 375px screen offers 343.
+           Raising this floor wraps that line into four; if the headline ever
+           gets shorter, this can go back up. */
+        'display-mega': ['clamp(1.875rem, 7vw, 5rem)', { lineHeight: '1', letterSpacing: '-0.035em', fontWeight: '700' }],
         'display-xl':   ['clamp(2.375rem, 5.5vw, 4rem)', { lineHeight: '1', letterSpacing: '-0.033em', fontWeight: '700' }],
         'display-lg':   ['clamp(2rem, 4.5vw, 3.25rem)', { lineHeight: '1.03', letterSpacing: '-0.03em', fontWeight: '700' }],
         'display-md':   ['clamp(1.75rem, 3.6vw, 2.75rem)', { lineHeight: '1.09', letterSpacing: '-0.028em', fontWeight: '700' }],
