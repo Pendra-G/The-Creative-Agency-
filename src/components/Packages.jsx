@@ -97,15 +97,16 @@ export default function Packages() {
             return (
               <article
                 key={p.key}
-                /* The featured tier is filled with the accent across a real
-                   three-stop range, so light appears to fall across it. It
-                   starts AT the accent rather than above it: #7C3AED is the
-                   lightest tone that still carries white body text (5.7:1), and
-                   every stop below it is safer. Depth comes from a hairline and
-                   a neutral offset shadow — no coloured halo. */
+                /* The featured tier carries BLACK copy, which sets its floor:
+                   the darkest stop must stay light enough for 14px text to
+                   clear 4.5:1 against #0A0B0D. #8B5CF6 is that floor (4.6:1);
+                   anything deeper and the small copy fails. This is why the
+                   card is a light violet rather than the deep one used
+                   elsewhere — a purple dark enough for white text cannot also
+                   carry black text. Flip both together or neither. */
                 className={`pk-card flex flex-col rounded-xl p-6 sm:p-8 ${
                   featured
-                    ? "bg-gradient-to-br from-accent via-accent-active to-[#3C1478] text-white shadow-float ring-1 ring-inset ring-white/15 lg:-mt-8 lg:pb-10"
+                    ? "bg-gradient-to-br from-[#C4B5FD] via-accent-text to-[#8B5CF6] text-ink shadow-float ring-1 ring-inset ring-ink/10 lg:-mt-8 lg:pb-10"
                     : "border border-hairline bg-elevated text-white"
                 }`}
               >
@@ -128,15 +129,20 @@ export default function Packages() {
                 </div>
 
                 <p className="mt-5">
-                  <span className="numeric text-number-lg text-white">{p.price}</span>
+                  <span className={`numeric text-number-lg ${featured ? "text-ink" : "text-white"}`}>
+                    {p.price}
+                  </span>
                 </p>
 
-                <p className={`mt-4 text-body-md ${featured ? "text-white/90" : "text-body"}`}>
+                {/* Solid ink, not an opacity of it — at 16px this owes the full
+                    4.5:1, and every point of alpha spends contrast the light
+                    violet underneath cannot spare. */}
+                <p className={`mt-4 text-body-md ${featured ? "text-ink" : "text-body"}`}>
                   {p.line}
                 </p>
 
                 {featured && (
-                  <div className="mt-7 border-t border-white/15 pt-6">
+                  <div className="mt-7 border-t border-ink/15 pt-6">
                     <Countdown iso={OFFER_ENDS} />
                   </div>
                 )}
@@ -146,10 +152,10 @@ export default function Packages() {
                     <li key={f} className="flex gap-3 text-body-sm">
                       <Check
                         className={`mt-[0.3em] shrink-0 ${
-                          featured ? "text-white" : "text-accent-text"
+                          featured ? "text-ink" : "text-accent-text"
                         }`}
                       />
-                      <span className={featured ? "text-white/90" : "text-body"}>{f}</span>
+                      <span className={featured ? "text-ink" : "text-body"}>{f}</span>
                     </li>
                   ))}
                 </ul>
