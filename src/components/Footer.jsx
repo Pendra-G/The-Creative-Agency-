@@ -61,9 +61,6 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 border-b border-hairline py-16 sm:py-20 lg:grid-cols-[1fr_auto] lg:gap-24">
           <Reveal>
             <p className="text-title-sm text-white">{SITE.name}</p>
-            <p className="mt-2 max-w-xs text-body-sm text-body">
-              Websites designed and built in {SITE.location}.
-            </p>
 
             <div className="mt-6 flex flex-col gap-1 sm:flex-row sm:gap-8">
               <a
