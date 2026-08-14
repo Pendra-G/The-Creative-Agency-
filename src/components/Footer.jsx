@@ -1,18 +1,29 @@
 import { Link } from "react-router-dom";
 import { Marquee } from "./Strips.jsx";
-import { MaskHeading, Reveal } from "./Reveal.jsx";
-import { Button } from "./ui.jsx";
-import { SITE, PRIMARY_PHONE, telHref, viberHref, mailtoHref } from "../config.js";
+import { Reveal } from "./Reveal.jsx";
+import { SITE, PRIMARY_PHONE, telHref, mailtoHref } from "../config.js";
 
-// Every entry is a route that exists or a section id that exists on home.
-const LINKS = [
-  ["Home", "/"],
-  ["What we build", "/#build"],
-  ["Work", "/#work"],
-  ["Process", "/#process"],
-  ["Packages", "/#pricing"],
-  ["About", "/about"],
-  ["Contact", "/contact"],
+/* Grouped rather than one flat list, so the column has a shape instead of a
+   run of seven links. Every entry is a route that exists or a section id that
+   exists on home. */
+const LINK_GROUPS = [
+  [
+    "Explore",
+    [
+      ["Home", "/"],
+      ["What we build", "/#build"],
+      ["Our Projects", "/#work"],
+      ["Process", "/#process"],
+      ["Packages", "/#pricing"],
+    ],
+  ],
+  [
+    "Company",
+    [
+      ["About", "/about"],
+      ["Contact", "/contact"],
+    ],
+  ],
 ];
 
 function FooterLink({ href, children }) {
@@ -42,55 +53,49 @@ export default function Footer() {
   return (
     <footer id="footer" className="relative overflow-hidden bg-canvas">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
-        <div className="grid grid-cols-1 gap-14 border-b border-hairline py-section lg:grid-cols-[1.4fr_1fr] lg:gap-20">
-          {/* Phone and email sit together — one place to find both. */}
-          <div>
-            <MaskHeading
-              as="h2"
-              text="Get in touch"
-              className="display text-display-md text-white"
-            />
+        {/* The closing card carries the full contact block on home, but the
+            footer is where people habitually look for it — and on every other
+            route it is the only place below the fold that has it. So the
+            details repeat here in a quiet single line rather than a heading
+            and a stack. */}
+        <div className="grid grid-cols-1 gap-12 border-b border-hairline py-16 sm:py-20 lg:grid-cols-[1fr_auto] lg:gap-24">
+          <Reveal>
+            <p className="text-title-sm text-white">{SITE.name}</p>
+            <p className="mt-2 max-w-xs text-body-sm text-body">
+              Websites designed and built in {SITE.location}.
+            </p>
 
-            <Reveal selector=".ft-line" className="mt-6 flex flex-col gap-4 sm:gap-2" stagger={0.09}>
+            <div className="mt-6 flex flex-col gap-1 sm:flex-row sm:gap-8">
               <a
                 href={telHref()}
-                className="ft-line numeric inline-flex min-h-[48px] sm:min-h-[44px] w-fit items-center text-title-lg text-white transition-colors duration-200 hover:text-accent-text"
+                className="numeric inline-flex min-h-[44px] w-fit items-center text-body-sm text-white transition-colors duration-200 hover:text-accent-text"
               >
                 {PRIMARY_PHONE}
               </a>
               <a
                 href={mailtoHref()}
-                className="ft-line inline-flex min-h-[48px] sm:min-h-[44px] w-fit items-center text-title-md sm:text-title-lg text-body transition-colors duration-200 hover:text-white"
+                className="inline-flex min-h-[44px] w-fit items-center text-body-sm text-body transition-colors duration-200 hover:text-white"
               >
                 {SITE.email}
               </a>
-            </Reveal>
+            </div>
+          </Reveal>
 
-            <Reveal className="mt-8 sm:mt-9">
-              <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 w-full sm:w-auto">
-                <Button as="a" href={telHref()} variant="primary" className="w-full sm:w-auto justify-center">
-                  Call now
-                </Button>
-                <Button as="a" href={viberHref()} variant="secondary" className="w-full sm:w-auto justify-center">
-                  Message on Viber
-                </Button>
+          <Reveal className="grid grid-cols-2 gap-10 sm:gap-16">
+            {LINK_GROUPS.map(([heading, links]) => (
+              <div key={heading}>
+                <p className="text-caption-strong uppercase tracking-[0.1em] text-muted">
+                  {heading}
+                </p>
+                <ul className="mt-2">
+                  {links.map(([label, href]) => (
+                    <li key={href}>
+                      <FooterLink href={href}>{label}</FooterLink>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </Reveal>
-
-            <Reveal className="mt-8">
-              <p className="text-caption text-muted">{SITE.location}</p>
-            </Reveal>
-          </div>
-
-          <Reveal>
-            <p className="text-title-sm text-white">Site</p>
-            <ul className="mt-3 columns-2 gap-6">
-              {LINKS.map(([label, href]) => (
-                <li key={href}>
-                  <FooterLink href={href}>{label}</FooterLink>
-                </li>
-              ))}
-            </ul>
+            ))}
           </Reveal>
         </div>
 

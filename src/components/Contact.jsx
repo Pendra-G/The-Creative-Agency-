@@ -1,6 +1,6 @@
 import { MaskHeading, Reveal } from "./Reveal.jsx";
 import { Button } from "./ui.jsx";
-import { SITE, PRIMARY_PHONE, telHref, viberHref, mailtoHref } from "../config.js";
+import { SITE, PRIMARY_PHONE, telHref, mailtoHref } from "../config.js";
 
 export default function Contact() {
   return (
@@ -47,9 +47,6 @@ export default function Contact() {
               <div className="ct-line flex flex-wrap gap-3 pt-2">
                 <Button as="a" href={telHref()} variant="primary">
                   Call now
-                </Button>
-                <Button as="a" href={viberHref()} variant="secondary">
-                  Message on Viber
                 </Button>
               </div>
 

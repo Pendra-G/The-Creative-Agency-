@@ -48,7 +48,10 @@ export default {
       fontFamily: {
         display: ['Inter', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        /* Nothing ships in mono any more — numbers use Inter with tabular
+           figures (see .numeric in index.css). Kept as a system fallback so
+           font-mono still resolves if it is ever reached. */
+        mono: ['ui-monospace', 'SFMono-Regular', 'monospace'],
       },
 
       /* The full scale, responsive at the token rather than per-component.

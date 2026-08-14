@@ -63,7 +63,7 @@ export const PACKAGES = [
       "One fully animated page",
       "Mobile-first, fast on 4G",
       "Professional brand presentation",
-      "Call and Viber buttons wired up",
+      "Call buttons and a form wired to your email",
       "1 year domain and hosting included",
       "Google Business Profile set up",
       "Basic SEO — titles, meta, headings",
@@ -105,13 +105,14 @@ export const PACKAGES = [
 
 export const telHref = (phone = PRIMARY_PHONE) => `tel:${phone.replace(/[^\d+]/g, "")}`;
 
-/**
- * Viber deep link. Opens the chat on a device with Viber installed; on a
- * desktop without it the OS does nothing, which is why calling is always
- * offered alongside rather than instead.
+/*
+ * viberHref lived here until Viber was dropped as a contact route, at the
+ * owner's direction. Calling and the enquiry form are the two paths now. If
+ * Viber comes back, the deep link was:
+ *   `viber://chat?number=${encodeURIComponent(phone.replace(/[^\d+]/g, ""))}`
+ * and it needs a call button beside it — on a desktop without the app the OS
+ * silently does nothing.
  */
-export const viberHref = (phone = PRIMARY_PHONE) =>
-  `viber://chat?number=${encodeURIComponent(phone.replace(/[^\d+]/g, ""))}`;
 
 export const mailtoHref = (subject = "Website enquiry", body = "") =>
   `mailto:${SITE.email}?subject=${encodeURIComponent(subject)}${

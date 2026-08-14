@@ -37,7 +37,7 @@ export default function AboutPage() {
             <p className="max-w-measure text-body-lg text-white">
               If that sounds like the way you would rather work, let&apos;s talk.
             </p>
-            <CallCtas secondary="secondary" />
+            <CallCtas />
           </Reveal>
         </div>
       </section>

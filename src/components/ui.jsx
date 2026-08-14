@@ -5,7 +5,7 @@
  * accent appears once or twice per band and nowhere else, so a filled purple
  * pill always means "this is the action here".
  */
-import { telHref, viberHref } from "../config.js";
+import { telHref } from "../config.js";
 
 export function ArrowUpRight({ className = "" }) {
   return (
@@ -109,17 +109,15 @@ export function Badge({ tone = "soft", className = "", children }) {
 }
 
 /**
- * The site's primary action pair. Calling is the main path; Viber sits
- * alongside because the deep link does nothing on a desktop without the app.
+ * The site's primary action. This was a pair until Viber was dropped as a
+ * contact route; calling is now the single path, so the wrapper exists to keep
+ * the spacing and sizing consistent wherever it appears.
  */
-export function CallCtas({ className = "", size = "md", secondary = "outline" }) {
+export function CallCtas({ className = "", size = "md" }) {
   return (
     <div className={`flex flex-wrap items-center gap-3 ${className}`}>
       <Button as="a" href={telHref()} variant="primary" size={size}>
         Call now
-      </Button>
-      <Button as="a" href={viberHref()} variant={secondary} size={size}>
-        Message on Viber
       </Button>
     </div>
   );

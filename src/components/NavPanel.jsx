@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { Button } from "./ui.jsx";
-import { SITE, PRIMARY_PHONE, telHref, viberHref, mailtoHref } from "../config.js";
+import { SITE, PRIMARY_PHONE, telHref, mailtoHref } from "../config.js";
 import { getLenis, startScroll, stopScroll } from "../lib/scroll.js";
 
 const NAV = [
@@ -231,9 +231,6 @@ export default function NavPanel({ open, onClose }) {
           <div className="np-meta mt-6 flex flex-wrap gap-3">
             <Button as="a" href={telHref()} variant="primary">
               Call now
-            </Button>
-            <Button as="a" href={viberHref()} variant="secondary">
-              Viber
             </Button>
           </div>
 

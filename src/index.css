@@ -44,12 +44,19 @@ html.is-locked{ position:relative; overflow:hidden; height:100%; }
   font-size:0.75rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
 }
 
-/* Every number renders in the mono cut with tabular figures, so prices and
-   countdown digits never reflow as they tick. */
+/* Numbers render in Inter — the same family as everything else — with tabular
+   figures and lining digits. A monospaced cut reads as terminal output, which
+   is the wrong register for a price or a phone number on a site sold to small
+   businesses; matching the brand type is what makes them look considered.
+
+   tabular-nums is what stops the countdown reflowing as the seconds tick and
+   keeps the loader's three-digit counter from shifting. It is doing the real
+   work here — the family is a presentation choice, the figures are not. */
 .numeric{
-  font-family:'JetBrains Mono',ui-monospace,monospace;
-  font-variant-numeric:tabular-nums;
-  font-feature-settings:"tnum";
+  font-family:'Inter',system-ui,sans-serif;
+  font-variant-numeric:tabular-nums lining-nums;
+  font-feature-settings:"tnum" 1,"lnum" 1;
+  letter-spacing:-0.01em;
 }
 
 .app{ opacity:0; transition:opacity .6s ease; } .app.ready{ opacity:1; }
