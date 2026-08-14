@@ -47,9 +47,9 @@ export default function About() {
           />
           <Reveal selector="p" stagger={0.1}>
             <p className="mt-6 max-w-measure text-body-lg text-body">
-              We are two independent freelancers who take on every project together — one on design
-              direction and marketing, one on the code and everything after launch. There is no
-              agency layer in between, so whoever you speak to can make the decision.
+              We are two independent freelancers who take on every project together — one on sales
+              and marketing, one on design and development. There is no agency layer in between, so
+              whoever you speak to can make the decision.
             </p>
             <p className="mt-4 max-w-measure text-body-md text-body">
               That means no account managers, no queue, and nobody handing your job to whoever

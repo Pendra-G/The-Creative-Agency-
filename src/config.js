@@ -17,15 +17,17 @@ export const FOUNDERS = [
   {
     name: "Salvin Shavnit Narayan",
     initials: "SSN",
-    role: "Creative & Marketing Director",
-    focus: "Design direction, marketing and new business. First call is with him.",
+    role: "Sales and Marketing",
+    /* Design moved to the other founder with the new titles, so it comes out of
+       this focus line — leaving it here would contradict the role above it. */
+    focus: "Marketing, new business and looking after clients. First call is with him.",
     photo: "/founders/SSN.jpg",
   },
   {
     name: "Upendra Gounder",
     initials: "URG",
-    role: "Operations Director",
-    focus: "Build, delivery and everything after launch.",
+    role: "Design and Development",
+    focus: "Design, build, delivery and everything after launch.",
     photo: "/founders/Upendra Gounder side profile photo.png",
   },
 ];

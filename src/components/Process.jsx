@@ -11,7 +11,7 @@ const STEPS = [
     n: "01",
     title: "We work out what it needs to say",
     body:
-      "Half an hour on a call. You tell us what the business does, who you want walking through the door, and what usually stops them. We tell you what belongs on the site — and what doesn't.",
+      "15 mins on a call. You tell us what the business does, who you want walking through the door, and what usually stops them. We tell you what belongs on the site — and what doesn't.",
     outcome: "A clear scope and a fixed price, agreed before anything starts.",
   },
   {

@@ -15,7 +15,7 @@ export default function Contact() {
               />
               <Reveal>
                 <p className="mt-6 max-w-measure text-body-lg text-body">
-                  One call, thirty minutes, no charge. You will get a straight answer on what your
+                  One call, 15 mins, no charge. You will get a straight answer on what your
                   site actually needs — and an honest one if that turns out to be less than you
                   expected.
                 </p>

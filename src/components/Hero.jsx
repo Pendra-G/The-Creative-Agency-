@@ -120,7 +120,7 @@ export default function Hero({ ready = false }) {
               Call now
             </Button>
             <TextLink as="a" href="#work">
-              See the work
+              What we build
             </TextLink>
           </div>
         </div>

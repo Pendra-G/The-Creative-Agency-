@@ -20,7 +20,7 @@ export default function ContactPage() {
           />
           <Reveal>
             <p className="mt-8 max-w-measure text-body-lg text-body">
-              Half an hour on a call, no charge. Bring what you have — even if that is just an idea
+              15 mins on a call, no charge. Bring what you have — even if that is just an idea
               and a phone full of photos.
             </p>
           </Reveal>
