@@ -67,7 +67,7 @@ export default function Demos() {
     <section id="build" className="bg-canvas py-section">
       <div className="mx-auto w-full max-w-shell px-4 sm:px-6">
         <div className="max-w-3xl">
-          <MaskHeading text="What we build" className="display text-display-lg text-white" />
+          <MaskHeading text="Illustrative work" className="display text-display-lg text-white" />
           <Reveal>
             <p className="mt-6 max-w-measure text-body-lg text-body">
               Businesses that need to be found, trusted and contacted. If your customers look you up

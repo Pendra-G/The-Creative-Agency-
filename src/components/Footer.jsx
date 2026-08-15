@@ -11,7 +11,7 @@ const LINK_GROUPS = [
     "Explore",
     [
       ["Home", "/"],
-      ["What we build", "/#build"],
+      ["Illustrative work", "/#build"],
       ["Our Projects", "/#work"],
       ["Process", "/#process"],
       ["Packages", "/#pricing"],
