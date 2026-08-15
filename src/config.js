@@ -28,7 +28,7 @@ export const FOUNDERS = [
     initials: "URG",
     role: "Design and Development",
     focus: "Design, build, delivery and everything after launch.",
-    photo: "/founders/Upendra Gounder side profile photo.png",
+    photo: "/founders/Upendra.jpg",
   },
 ];
 

@@ -25,6 +25,51 @@ export function ArrowRight({ className = "" }) {
   );
 }
 
+/* Phone and Mail take their size from the caller rather than defaulting to
+   1em like the arrows above. They sit beside title-sized text, where 1em would
+   render them at 32px — and overriding a baked-in h-[1em] with a utility class
+   resolves by stylesheet order, not class order, which is a coin flip. */
+export function Phone({ className = "h-5 w-5" }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"
+      strokeLinejoin="round" className={className} aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92" />
+    </svg>
+  );
+}
+
+export function Mail({ className = "h-5 w-5" }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"
+      strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+      <path d="m3 7.5 9 5.5 9-5.5" />
+    </svg>
+  );
+}
+
+/**
+ * Decorative browser frame — the product drawn faintly, as texture rather than
+ * illustration. Purely ornamental: it carries no meaning the copy does not, so
+ * it is aria-hidden and inert everywhere it is used.
+ */
+export function BrowserWireframe({ className = "" }) {
+  return (
+    <svg viewBox="0 0 320 240" fill="none" aria-hidden="true" focusable="false" className={className}>
+      <rect x="8" y="8" width="304" height="224" rx="16" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 44h304" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="30" cy="26" r="4" fill="currentColor" />
+      <circle cx="46" cy="26" r="4" fill="currentColor" />
+      <circle cx="62" cy="26" r="4" fill="currentColor" />
+      <rect x="30" y="68" width="132" height="14" rx="7" fill="currentColor" opacity=".55" />
+      <rect x="30" y="94" width="92" height="10" rx="5" fill="currentColor" opacity=".35" />
+      <rect x="196" y="66" width="94" height="34" rx="17" fill="currentColor" opacity=".28" />
+      <rect x="30" y="126" width="124" height="80" rx="12" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="166" y="126" width="124" height="80" rx="12" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 export function Check({ className = "" }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
